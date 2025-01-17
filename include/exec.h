@@ -17,18 +17,20 @@
 
 typedef struct s_player
 {
-	int x;
-	int y;
-} t_player;
+	int         x;
+	int         y;
+}               t_player;
 
-typedef struct s_data
+typedef struct s_game
 {
 	mlx_t       *mlx;
 	mlx_image_t *n;
 	mlx_image_t *s;
 	mlx_image_t *e;
 	mlx_image_t *w;
-	t_player *player_position;
-}               t_data;
+	t_player    *player_position;
+	int         *color_ceiling;
+	int         *color_floor;
+}               t_game;
 
 #endif //CUBE3D_EXEC_H
