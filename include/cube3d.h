@@ -13,4 +13,7 @@
 # ifndef CUBE3D_H
 # define CUBE3D_H
 
+# include "parsing.h"
+# include "exec.h"
+
 # endif
