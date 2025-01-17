@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:31:58 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/17 23:10:59 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 00:48:28 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 # define PARSING_H
 
 # include "../libft/libft/libft.h"
+# include "../libft/gnl/get_next_line.h"
 # include <stdbool.h>
+# include <stdio.h>
 
 typedef struct s_data
 {
