@@ -16,7 +16,7 @@ mlx_image_t *load_image(t_game *game, char *path)
 
 void init(t_game *game)
 {
-	game->mlx = mlx_init(600, 600, "Cube3d", true);
+	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3d", true);
 	game->n = load_image(game, game->data->no_texture);
 	game->s = load_image(game, game->data->so_texture);
 	game->e = load_image(game, game->data->ea_texture);

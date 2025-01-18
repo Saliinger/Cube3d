@@ -6,5 +6,7 @@ int exec(t_data *data)
 
 	game.data = data;
 	init(&game);
+	// add wasd listener
+	// add left_right listener
 	return (0);
 }

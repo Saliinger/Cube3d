@@ -16,6 +16,12 @@
 # include "parsing.h"
 # include "exec.h"
 
+# define WIN_WIDTH 640
+# define WIN_HEIGHT 480
+
+# define MOVESPEED 0.0125
+# define ROTSPEED 0.015
+
 void	ft_error(char *str);
 
 # endif
