@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:32:16 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 02:47:59 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 03:08:50 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,17 +178,56 @@ int	get_keys(char *file, t_data *data)
 	return (1);
 }
 
+int	get_map_size(char *file)
+{
+	char	*line;
+	int		fd;
+	int		started;
+	int		index;
+
+	index = 0;
+	started = 0;
+	fd = open(file, O_RDONLY);
+	while ((line = get_next_line(fd)) != NULL)
+	{
+		if (ft_strchr(" 01", line[0]))
+			started = 1;
+		if (started)
+			index++;
+		free(line);
+	}
+	return (index);
+}
+
 int	get_map(char *file, t_data *data)
 {
 	char	*line;
 	int		fd;
+	int		started;
+	int		index;
 
+	index = 0;
+	started = 0;
 	fd = open(file, O_RDONLY);
+	data->map = malloc(sizeof(char *) * get_map_size(file));
+	if (!data->map)
+		return (0);
 	while ((line = get_next_line(fd)) != NULL)
 	{
-		
+		if (ft_strchr(" 01", line[0]))
+			started = 1;
+		if (started)
+		{
+			if (line[ft_strlen(line) - 1] == '\n')
+				data->map[index] = ft_strndup(line, (ft_strlen(line) - 1));
+			else
+				data->map[index] = ft_strdup(line);
+			index++;
+		}
 		free(line);
 	}
+	data->map[index] = NULL;
+	return (1);
 }
 
 int	parsing(char **args, t_data *data)
@@ -199,8 +238,8 @@ int	parsing(char **args, t_data *data)
 		return (printf("Error: The file must have the .cub extension\n"), 0);
 	if (!get_keys(args[1], data))
 		return (printf("Error: Failed to recover keys\n"), 0);
-	// if (!get_map(args[1], data))
-	// 	return (printf("Error: failed to get map information"), 0);
+	if (!get_map(args[1], data))
+		return (printf("Error: failed to get map information"), 0);
 	return (1);
 }
 int	main(int argc, char **argv)
@@ -234,7 +273,7 @@ int	main(int argc, char **argv)
 
 		printf("Map:\n");
 		for (int i = 0; data.map[i] != NULL; i++)
-			printf("%s", data.map[i]);
+			printf("%s\n", data.map[i]);
 	}
 	else
 	{
