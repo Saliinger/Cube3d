@@ -48,7 +48,6 @@ void	init_map(t_game *game)
             else if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
 				mlx_image_to_window(game->mlx, game->e, j * TILE_SIZE, i
 					* TILE_SIZE);
-
 			j++;
 		}
 		i++;
@@ -58,12 +57,7 @@ void	init_map(t_game *game)
 void debug_player(t_game *game)
 {
 	mlx_image_t *image;
-//	mlx_texture_t *texture;
-//    char *path = "./assets/pillar.png";
 
-//	texture = mlx_load_png(path);
-//	if (!texture)
-//		ft_error("1Error\npng didn't load\n");
 	image = mlx_new_image(game->mlx, TILE_SIZE / 2, TILE_SIZE / 2);
 	if (!image)
 		ft_error("1Error\npng didn't load\n");
@@ -71,16 +65,15 @@ void debug_player(t_game *game)
     int j;
     i = 0;
     while (i < TILE_SIZE / 2)
-      {
-      j = 0;
-      while (j < TILE_SIZE / 2)
-      {
-        mlx_put_pixel(image, i, j, 0xFFFFFF);
-        j++;
-      }
-      i++;
-      }
-
+	{
+		j = 0;
+		while (j < TILE_SIZE / 2)
+		{
+			mlx_put_pixel(image, i, j, 0xFFFFFF);
+			j++;
+		}
+		i++;
+	}
     mlx_image_to_window(game->mlx, image, game->data->player_x, game->data->player_y);
     game->player_img = image;
 }

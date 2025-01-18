@@ -26,6 +26,8 @@ typedef struct s_player
 {
 	int         x;
 	int         y;
+	int         start_angle;
+	int         end_angle;
 	int         direction;
 }               t_player;
 
