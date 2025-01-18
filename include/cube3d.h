@@ -16,4 +16,6 @@
 # include "parsing.h"
 # include "exec.h"
 
+void	ft_error(char *str);
+
 # endif

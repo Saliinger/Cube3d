@@ -1,12 +1,24 @@
 NAME := cube3d
 CFLAGS := -Wall -Werror -Wextra
-CC := gcc
+CC := cc
 LIBRARY_DIRS := -L./libft/compiled -L./MLX42/build -Iinclude
 LIBRARIES   := -lgnl -lmlx42 -lglfw -lprintf -lft
 
-SRC = main.c
+EXEC_D = ./src/exec
+CONTROL_D = ./src/exec/control
+INIT_D = ./src/exec/init
+UTILS_D = ./src/utils
+PARSING_D = ./src/parsing
 
-OBJ = $(SRC%.c=.o)
+
+SRC=				$(wildcard *.c) \
+				  $(wildcard $(EXEC_D)/*.c) \
+				  $(wildcard $(CONTROL_D)/*.c) \
+				  $(wildcard $(INIT_D)/*.c) \
+				  $(wildcard $(PARSING_D)/*.c) \
+				  $(wildcard $(UTILS_D)/*.c)
+
+OBJ = $(SRC:.c=.o)
 
 
 CLR_RMV		:= \033[0m
@@ -18,7 +30,7 @@ CYAN 		:= \033[1;36m
 RM		    := rm -f
 RESET		:= \033[0m
 
-all:		clone_libft clone_mlx libft ${NAME}
+all:		clone_libft clone_mlx libmlx libft ${NAME}
 
 libft:
 	echo "Start LibFT"
@@ -51,14 +63,14 @@ clone_mlx:
 libmlx:
 			@cd MLX42 && cmake . -B build && make -C build -j4
 
-${NAME}:	${OBJS}
+${NAME}:	${OBJ}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 			${CC} ${CFLAGS} ${OBJ} ${LIBRARY_DIRS} ${LIBRARIES} -o ${NAME}
 			@echo "$(GREEN)$(NAME) created $(RESET)"
 
 clean:
 			@$(MAKE) -C ./libft clean
-			@ ${RM} $(OBJS)
+			@ ${RM} $(OBJ)
 			@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)objs"
 
 fclean:		clean

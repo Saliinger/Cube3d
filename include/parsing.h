@@ -29,4 +29,6 @@ typedef struct s_data
 	char	**map;
 }			t_data;
 
+int	parsing(char **args, t_data *data);
+
 #endif

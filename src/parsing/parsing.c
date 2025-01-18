@@ -169,13 +169,13 @@ int	parser(char *file, t_data *data)
 	return (1);
 }
 
-int	verif_parser(t_data *data)
-{
-	if (!data->ceiling || !data->floor || !data->no_texture || !data->so_texture
-		|| !data->ea_texture || !data->we_texture || !data->map)
-		return (1);
-	return (0);
-}
+//int	verif_parser(t_data *data)
+//{
+//	if (!data->ceiling || !data->floor || !data->no_texture || !data->so_texture
+//		|| !data->ea_texture || !data->we_texture || !data->map)
+//		return (1);
+//	return (0);
+//}
 
 int	parsing(char **args, t_data *data)
 {
@@ -185,61 +185,61 @@ int	parsing(char **args, t_data *data)
 		return (printf("Error: The file must have the .cub extension\n"), 1);
 	if (!parser(args[1], data))
 		return (printf("Error: the analysis could not be completed\n"), 1);
-	if (verif_parser(data))
-		return (printf("Error: the analysis could not be completed\n"), 1);
+//	if (verif_parser(data))
+//		return (printf("Error: the analysis could not be completed\n"), 1);
 	return (0);
 }
 
-int main(int argc, char **argv)
-{
-	t_data data;
-	int ret;
-
-	data.no_texture = NULL;
-	data.so_texture = NULL;
-	data.we_texture = NULL;
-	data.ea_texture = NULL;
-	data.map = NULL;
-
-	// Appel de la fonction parsing
-	ret = parsing(argv, &data);
-
-	if (ret == 0)
-	{
-		// Affichage des résultats de la parsing
-		printf("Parsing successful!\n");
-		printf("NO texture: %s\n", data.no_texture);
-		printf("SO texture: %s\n", data.so_texture);
-		printf("WE texture: %s\n", data.we_texture);
-		printf("EA texture: %s\n", data.ea_texture);
-		printf("Floor color: %d, %d, %d\n", data.floor[0], data.floor[1], data.floor[2]);
-		printf("Ceiling color: %d, %d, %d\n", data.ceiling[0], data.ceiling[1], data.ceiling[2]);
-
-		printf("Map:\n");
-		for (int i = 0; data.map[i] != NULL; i++)
-			printf("%s", data.map[i]);
-	}
-	else
-	{
-		// Affichage d'un message d'erreur en cas d'échec
-		printf("Parsing failed!\n");
-	}
-
-	// Libérer la mémoire allouée
-	if (data.no_texture)
-		free(data.no_texture);
-	if (data.so_texture)
-		free(data.so_texture);
-	if (data.we_texture)
-		free(data.we_texture);
-	if (data.ea_texture)
-		free(data.ea_texture);
-	if (data.map)
-	{
-		for (int i = 0; data.map[i] != NULL; i++)
-			free(data.map[i]);
-		free(data.map);
-	}
-
-	return 0;
-}
+//int main(int argc, char **argv)
+//{
+//	t_data data;
+//	int ret;
+//
+//	data.no_texture = NULL;
+//	data.so_texture = NULL;
+//	data.we_texture = NULL;
+//	data.ea_texture = NULL;
+//	data.map = NULL;
+//
+//	// Appel de la fonction parsing
+//	ret = parsing(argv, &data);
+//
+//	if (ret == 0)
+//	{
+//		// Affichage des résultats de la parsing
+//		printf("Parsing successful!\n");
+//		printf("NO texture: %s\n", data.no_texture);
+//		printf("SO texture: %s\n", data.so_texture);
+//		printf("WE texture: %s\n", data.we_texture);
+//		printf("EA texture: %s\n", data.ea_texture);
+//		printf("Floor color: %d, %d, %d\n", data.floor[0], data.floor[1], data.floor[2]);
+//		printf("Ceiling color: %d, %d, %d\n", data.ceiling[0], data.ceiling[1], data.ceiling[2]);
+//
+//		printf("Map:\n");
+//		for (int i = 0; data.map[i] != NULL; i++)
+//			printf("%s", data.map[i]);
+//	}
+//	else
+//	{
+//		// Affichage d'un message d'erreur en cas d'échec
+//		printf("Parsing failed!\n");
+//	}
+//
+//	// Libérer la mémoire allouée
+//	if (data.no_texture)
+//		free(data.no_texture);
+//	if (data.so_texture)
+//		free(data.so_texture);
+//	if (data.we_texture)
+//		free(data.we_texture);
+//	if (data.ea_texture)
+//		free(data.ea_texture);
+//	if (data.map)
+//	{
+//		for (int i = 0; data.map[i] != NULL; i++)
+//			free(data.map[i]);
+//		free(data.map);
+//	}
+//
+//	return 0;
+//}

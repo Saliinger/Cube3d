@@ -1,7 +1,3 @@
-//
-// Created by anoukan on 1/18/25.
-//
-
 #ifndef CUBE3D_EXEC_H
 #define CUBE3D_EXEC_H
 
@@ -11,6 +7,7 @@
 # include "../libft/gnl/get_next_line.h"
 # include "../libft/libft/libft.h"
 # include "../libft/printf/ft_printf.h"
+# include "parsing.h"
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdlib.h>
@@ -31,6 +28,10 @@ typedef struct s_game
 	t_player    *player_position;
 	int         *color_ceiling;
 	int         *color_floor;
+	t_data      *data;
 }               t_game;
+
+int exec(t_data *data);
+void init(t_game *game);
 
 #endif //CUBE3D_EXEC_H
