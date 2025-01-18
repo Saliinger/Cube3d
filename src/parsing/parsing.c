@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:32:16 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 18:56:02 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 19:20:47 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -333,8 +333,8 @@ int check_adjacent_spaces(t_data *data, int i, int j)
 
 int wall_map(t_data *data)
 {
-    int i;
-    int j;
+    size_t i;
+    size_t j;
     size_t max_len;
 
     // Trouver la longueur maximale des lignes
@@ -443,7 +443,7 @@ t_data	parsing(char **args)
         return (free_data(&result), exit(1), result);
     if (!valid_map(&result))
         return (free_data(&result), exit(1), result);
-	return (result);
+    return (result);
 }
 
 int main(int argc, char **argv)
