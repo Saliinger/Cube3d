@@ -8,7 +8,7 @@ int exec(t_data *data)
 	init(&game);
 	// add wasd listener
 	// add left_right listener
-	while (true)
-		;
+    mlx_key_hook(game.mlx,  ft_hook, &game);
+	mlx_loop(game.mlx);
 	return (0);
 }

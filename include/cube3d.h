@@ -22,6 +22,8 @@
 # define MOVESPEED 0.0125
 # define ROTSPEED 0.015
 
+# define TILE_SIZE 40
+
 void	ft_error(char *str);
 
 # endif

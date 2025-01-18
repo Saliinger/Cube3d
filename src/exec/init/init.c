@@ -24,9 +24,36 @@ void init_img(t_game *game)
 	game->w = load_image(game, game->data->we_texture);
 }
 
+void	init_map(t_game *game)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	char **map = game->data->map;
+	while (map[i])
+	{
+		j = 0;
+		while (map[i][j] && map[i][j] != '\n')
+		{
+			if (map[i][j] == '1')
+				mlx_image_to_window(game->mlx, game->n, j * TILE_SIZE, i
+					* TILE_SIZE);
+            else if (map[i][j] == '0')
+				mlx_image_to_window(game->mlx, game->e, j * TILE_SIZE, i
+					* TILE_SIZE);
+            else if (map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
+				mlx_image_to_window(game->mlx, game->w, j * TILE_SIZE, i
+					* TILE_SIZE);
+			j++;
+		}
+		i++;
+	}
+}
+
 void init(t_game *game)
 {
-	init_img(game);
+	init_img(game); // not gonna be used for now
 	// add img to window for map
-
+	init_map(game);
 }
