@@ -17,7 +17,7 @@ int main(int ac, char **av)
 	t_data data;
 
 	(void)ac;
-	if (parsing(av, &data))
+	if (!parsing(av, &data))
 		return (1);
 	if (exec(&data))
 		return (1);

@@ -14,7 +14,7 @@ mlx_image_t *load_image(t_game *game, char *path)
 	return (image);
 }
 
-void init(t_game *game)
+void init_img(t_game *game)
 {
 	printf("init\n%s\n%s\n%s\n%s\n", game->data->no_texture, game->data->so_texture, game->data->ea_texture, game->data->we_texture);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3d", true);
@@ -22,4 +22,11 @@ void init(t_game *game)
 	game->s = load_image(game, game->data->so_texture);
 	game->e = load_image(game, game->data->ea_texture);
 	game->w = load_image(game, game->data->we_texture);
+}
+
+void init(t_game *game)
+{
+	init_img(game);
+	// add img to window for map
+
 }

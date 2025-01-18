@@ -8,5 +8,7 @@ int exec(t_data *data)
 	init(&game);
 	// add wasd listener
 	// add left_right listener
+	while (true)
+		;
 	return (0);
 }
