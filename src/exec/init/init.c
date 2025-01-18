@@ -7,10 +7,16 @@ mlx_image_t *load_image(t_game *game, char *path)
 
 	texture = mlx_load_png(path);
 	if (!texture)
+    {
+         printf("path: %s\n", path);
 		ft_error("Error\npng didn't load\n");
+    }
 	image = mlx_texture_to_image(game->mlx, texture);
 	if (!image)
+	{
+        printf("path: %s\n", path);
 		ft_error("Error\npng didn't load\n");
+    }
 	return (image);
 }
 
@@ -39,16 +45,30 @@ void	init_map(t_game *game)
 			if (map[i][j] == '1')
 				mlx_image_to_window(game->mlx, game->n, j * TILE_SIZE, i
 					* TILE_SIZE);
-            else if (map[i][j] == '0')
+            else if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
 				mlx_image_to_window(game->mlx, game->e, j * TILE_SIZE, i
 					* TILE_SIZE);
-            else if (map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
-				mlx_image_to_window(game->mlx, game->w, j * TILE_SIZE, i
-					* TILE_SIZE);
+
 			j++;
 		}
 		i++;
 	}
+}
+
+void debug_player(t_game *game)
+{
+	mlx_image_t *image;
+	mlx_texture_t *texture;
+    char *path = "./assets/pillar.png";
+
+	texture = mlx_load_png(path);
+	if (!texture)
+		ft_error("1Error\npng didn't load\n");
+	image = mlx_texture_to_image(game->mlx, texture);
+	if (!image)
+		ft_error("1Error\npng didn't load\n");
+    mlx_image_to_window(game->mlx, image, game->data->player_x, game->data->player_y);
+    game->player_img = image;
 }
 
 void init(t_game *game)
@@ -56,4 +76,10 @@ void init(t_game *game)
 	init_img(game); // not gonna be used for now
 	// add img to window for map
 	init_map(game);
+    debug_player(game);
 }
+
+
+//else if (map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
+//				mlx_image_to_window(game->mlx, game->w, j * TILE_SIZE, i
+//					* TILE_SIZE);

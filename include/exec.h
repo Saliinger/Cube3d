@@ -12,16 +12,14 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
-enum e_direction {
-	w,
-	s,
-	a,
-	d
-};
-
 typedef struct s_ray
 {
-	int ray;
+	double      pos_x;
+	double      pos_y;
+	double      dir_x;
+	double      dir_y;
+	double		plane_x;
+	double		plane_y;
 } t_ray;
 
 typedef struct s_player
@@ -38,6 +36,7 @@ typedef struct s_game
 	mlx_image_t *s;
 	mlx_image_t *e;
 	mlx_image_t *w;
+	mlx_image_t *player_img; // debug
 	t_player    *player;
 	int         *color_ceiling;
 	int         *color_floor;
@@ -49,7 +48,7 @@ void init(t_game *game);
 
 // moves
 void left_right(t_game *game);
-void wasd(t_game *game, enum e_direction direction);
+void wasd(t_game *game, mlx_key_data_t key);
 void ft_hook(mlx_key_data_t keydata, void *param);
 void raycasting(t_game *game);
 
