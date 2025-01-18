@@ -10,5 +10,4 @@ void wasd(t_game *game, enum e_direction direction)
 		game->player->x -= 1;
 	else if (direction == d)
 		game->player->x += 1;
-
 }

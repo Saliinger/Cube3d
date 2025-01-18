@@ -5,5 +5,5 @@
 
 void raycasting(t_game *game)
 {
-
+	(void)game;
 }
