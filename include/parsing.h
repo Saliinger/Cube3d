@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:31:58 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 00:48:28 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 02:46:37 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_data
 	char	*so_texture;
 	char	*we_texture;
 	char	*ea_texture;
-	int		floor[3];
-	int		ceiling[3];
+	int		*floor;
+	int		*ceiling;
 	char	**map;
 }			t_data;
 
