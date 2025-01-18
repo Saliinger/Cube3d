@@ -133,13 +133,13 @@ int	parser(char *file, t_data *data)
 	while ((line = get_next_line(fd)) != NULL)
 	{
 		if (ft_strncmp(line, "NO ", 3) == 0)
-			data->no_texture = ft_strdup(line + 3);
+			data->no_texture = ft_strndup(line + 3, ft_strlen(line) - 4);
 		else if (ft_strncmp(line, "SO ", 3) == 0)
-			data->so_texture = ft_strdup(line + 3);
+			data->so_texture = ft_strndup(line + 3, ft_strlen(line) - 4);
 		else if (ft_strncmp(line, "WE ", 3) == 0)
-			data->we_texture = ft_strdup(line + 3);
+			data->we_texture = ft_strndup(line + 3, ft_strlen(line) - 4);
 		else if (ft_strncmp(line, "EA ", 3) == 0)
-			data->ea_texture = ft_strdup(line + 3);
+			data->ea_texture = ft_strndup(line + 3, ft_strlen(line) - 4);
 		else if (ft_strncmp(line, "F ", 2) == 0)
 		{
 			if (!parse_color(line + 2, data, 0))
