@@ -58,15 +58,29 @@ void	init_map(t_game *game)
 void debug_player(t_game *game)
 {
 	mlx_image_t *image;
-	mlx_texture_t *texture;
-    char *path = "./assets/pillar.png";
+//	mlx_texture_t *texture;
+//    char *path = "./assets/pillar.png";
 
-	texture = mlx_load_png(path);
-	if (!texture)
-		ft_error("1Error\npng didn't load\n");
-	image = mlx_texture_to_image(game->mlx, texture);
+//	texture = mlx_load_png(path);
+//	if (!texture)
+//		ft_error("1Error\npng didn't load\n");
+	image = mlx_new_image(game->mlx, TILE_SIZE / 2, TILE_SIZE / 2);
 	if (!image)
 		ft_error("1Error\npng didn't load\n");
+    int i;
+    int j;
+    i = 0;
+    while (i < TILE_SIZE / 2)
+      {
+      j = 0;
+      while (j < TILE_SIZE / 2)
+      {
+        mlx_put_pixel(image, i, j, 0xFFFFFF);
+        j++;
+      }
+      i++;
+      }
+
     mlx_image_to_window(game->mlx, image, game->data->player_x, game->data->player_y);
     game->player_img = image;
 }
