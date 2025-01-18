@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:32:16 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 03:08:50 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 14:13:48 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,62 @@ int	get_map(char *file, t_data *data)
 	return (1);
 }
 
+int	wall_map(t_data *data)
+{
+	int	i;
+	int	a;
+
+	// Vérifier la première ligne
+	i = 0;
+	while (data->map[0][i])
+	{
+		if (data->map[0][i] != '1' && data->map[0][i] != ' ')
+			return (0); // La map n'est pas bien entourée de murs
+		i++;
+	}
+
+	// Vérifier les lignes intermédiaires
+	i = 1;
+	while (data->map[i + 1]) // Exclure la dernière ligne
+	{
+		a = 0;
+		// Ignorer les espaces au début
+		while (data->map[i][a] && data->map[i][a] == ' ')
+			a++;
+		if (data->map[i][a] != '1') // Le premier mur
+			return (0);
+		// Aller à la fin en ignorant les espaces
+		while (data->map[i][a])
+			a++;
+		a--;
+		while (a >= 0 && data->map[i][a] == ' ')
+			a--;
+		if (data->map[i][a] != '1') // Le dernier mur
+			return (0);
+		i++;
+	}
+
+	// Vérifier la dernière ligne
+	a = 0;
+	while (data->map[i][a])
+	{
+		if (data->map[i][a] != '1' && data->map[i][a] != ' ')
+			return (0); // La map n'est pas bien entourée de murs
+		a++;
+	}
+
+	return (1); // La map est bien entourée de murs
+}
+
+
+
+int	verif_map(t_data *data)
+{
+	if (!wall_map(data))
+		return (0);
+	return (1);
+}
+
 int	parsing(char **args, t_data *data)
 {
 	if (!args[1])
@@ -240,6 +296,8 @@ int	parsing(char **args, t_data *data)
 		return (printf("Error: Failed to recover keys\n"), 0);
 	if (!get_map(args[1], data))
 		return (printf("Error: failed to get map information"), 0);
+	if (!verif_map(data))
+		return (printf("Error: the map is not valid"), 0);
 	return (1);
 }
 int	main(int argc, char **argv)
