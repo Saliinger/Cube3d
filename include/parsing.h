@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:31:58 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 15:24:36 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 16:49:18 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@
 # include <stdbool.h>
 # include <stdio.h>
 
+typedef struct s_key
+{
+	char	*key;
+	int		len;
+	char	**target_char;
+	int		**target_int;
+}		t_key;
+
+
 typedef struct s_data
 {
-	int		x;
-	int		y;
-	char	direction;
+	int		player_x;
+	int		player_y;
+	char	player_direction;
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
@@ -32,6 +41,6 @@ typedef struct s_data
 	char	**map;
 }			t_data;
 
-int	parsing(char **args, t_data *data);
+t_data		parsing(char **args);
 
 #endif
