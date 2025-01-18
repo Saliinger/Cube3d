@@ -28,7 +28,6 @@ typedef struct s_player
 	int         y;
 	int         start_angle;
 	int         end_angle;
-	int         direction;
 }               t_player;
 
 typedef struct s_game
@@ -43,6 +42,7 @@ typedef struct s_game
 	int         *color_ceiling;
 	int         *color_floor;
 	t_data      *data;
+	t_ray       *ray;
 }               t_game;
 
 int exec(t_data *data);

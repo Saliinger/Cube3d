@@ -1,5 +1,5 @@
 NAME := cube3d
-CFLAGS := -Wall -Werror -Wextra
+CFLAGS := -Wall -Werror -Wextra -g3
 CC := cc
 LIBRARY_DIRS := -L./libft/compiled -L./MLX42/build -Iinclude
 LIBRARIES   := -lgnl -lmlx42 -lglfw -lprintf -lft
