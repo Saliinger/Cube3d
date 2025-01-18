@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:32:16 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 14:13:48 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:47:06 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ bool	ft_isspace(char c)
 		|| c == '\r');
 }
 
-void	parsed_color(char *colors, t_data *data, int type)
+int	parsed_color(char *colors, t_data *data, int type)
 {
 	char	**values;
 	int		i;
@@ -65,11 +65,11 @@ void	parsed_color(char *colors, t_data *data, int type)
 
 	values = ft_split(colors, ',');
 	if (!values)
-		return ;
-	if (ft_split_count(values) != 3)
+		return (0);
+	if (ft_split_count(values) != 3 || values[2][0] == '\n')
 	{
 		free_split(values);
-		return ;
+		return (0);
 	}
 	if (type)
 		data->ceiling = malloc(sizeof(int) * 3);
@@ -78,11 +78,11 @@ void	parsed_color(char *colors, t_data *data, int type)
 	i = 0;
 	while (values[i])
 	{
-		if (ft_strlen(values[i]) > 3 || (val = ft_atoi(values[i])) < 0
-			|| val > 255)
+		val = ft_atoi(values[i]);
+		if (val < 0 || val > 255 || values[i][0] == '-')
 		{
 			free_split(values);
-			return ;
+			return (0);
 		}
 		if (type)
 			data->ceiling[i] = val;
@@ -91,6 +91,7 @@ void	parsed_color(char *colors, t_data *data, int type)
 		i++;
 	}
 	free_split(values);
+	return (1);
 }
 
 int	key_insert(char *type, t_data *data, char *line)
@@ -111,9 +112,15 @@ int	key_insert(char *type, t_data *data, char *line)
 	else if (ft_strcmp(type, "EA") == 0 && !data->ea_texture)
 		data->ea_texture = ft_strndup(line + i, (ft_strlen(line) - i - 1));
 	else if (ft_strcmp(type, "F") == 0 && !data->floor)
-		parsed_color(line + i, data, 0);
+	{
+		if (!parsed_color(line + i, data, 0))
+			return (0);
+	}
 	else if (ft_strcmp(type, "C") == 0 && !data->ceiling)
-		parsed_color(line + i, data, 1);
+	{
+		if (!parsed_color(line + i, data, 1))
+			return (0);
+	}
 	else
 		return (0);
 	return (1);
@@ -178,7 +185,7 @@ int	get_keys(char *file, t_data *data)
 	return (1);
 }
 
-int	get_map_size(char *file)
+int	get_map_size(char *file, t_data *data)
 {
 	char	*line;
 	int		fd;
@@ -196,6 +203,12 @@ int	get_map_size(char *file)
 			index++;
 		free(line);
 	}
+	if (index)
+	{
+		data->map = malloc(sizeof(char *) * index);
+		if (!data->map)
+			return (0);
+	}
 	return (index);
 }
 
@@ -209,8 +222,7 @@ int	get_map(char *file, t_data *data)
 	index = 0;
 	started = 0;
 	fd = open(file, O_RDONLY);
-	data->map = malloc(sizeof(char *) * get_map_size(file));
-	if (!data->map)
+	if (!get_map_size(file, data))
 		return (0);
 	while ((line = get_next_line(fd)) != NULL)
 	{
@@ -243,7 +255,6 @@ int	wall_map(t_data *data)
 			return (0); // La map n'est pas bien entourée de murs
 		i++;
 	}
-
 	// Vérifier les lignes intermédiaires
 	i = 1;
 	while (data->map[i + 1]) // Exclure la dernière ligne
@@ -264,7 +275,6 @@ int	wall_map(t_data *data)
 			return (0);
 		i++;
 	}
-
 	// Vérifier la dernière ligne
 	a = 0;
 	while (data->map[i][a])
@@ -273,15 +283,51 @@ int	wall_map(t_data *data)
 			return (0); // La map n'est pas bien entourée de murs
 		a++;
 	}
-
 	return (1); // La map est bien entourée de murs
 }
-
-
 
 int	verif_map(t_data *data)
 {
 	if (!wall_map(data))
+		return (0);
+	return (1);
+}
+
+int	verif_keys(t_data *data)
+{
+	if (!data->so_texture || !data->no_texture || !data->we_texture
+		|| !data->ea_texture || !data->floor || !data->ceiling)
+		return (0);
+	return (1);
+}
+
+int	get_position_player(t_data *data)
+{
+	int	i;
+	int	a;
+
+	i = 0;
+	while (data->map[i])
+	{
+		a = 0;
+		while (data->map[i][a])
+		{
+			if (ft_strchr("NSWE", data->map[i][a]))
+			{
+				if (!data->direction && data->x == -1 && data->y == -1)
+				{
+					data->direction = data->map[i][a];
+					data->y = i;
+					data->x = a;
+				}
+				else
+					return (0);
+			}
+			a++;
+		}
+		i++;
+	}
+	if (!data->direction)
 		return (0);
 	return (1);
 }
@@ -294,10 +340,14 @@ int	parsing(char **args, t_data *data)
 		return (printf("Error: The file must have the .cub extension\n"), 0);
 	if (!get_keys(args[1], data))
 		return (printf("Error: Failed to recover keys\n"), 0);
+	if (!verif_keys(data))
+		return (printf("Error: Failed to recover keys\n"), 0);
 	if (!get_map(args[1], data))
-		return (printf("Error: failed to get map information"), 0);
+		return (printf("Error: failed to get map information\n"), 0);
 	if (!verif_map(data))
-		return (printf("Error: the map is not valid"), 0);
+		return (printf("Error: the map is not valid\n"), 0);
+	if (!get_position_player(data))
+		return (printf("Error: problem retrieving player position\n"), 0);
 	return (1);
 }
 int	main(int argc, char **argv)
@@ -305,6 +355,9 @@ int	main(int argc, char **argv)
 	t_data data;
 	int ret;
 
+	data.x = -1;
+	data.y = -1;
+	data.direction = '\0';
 	data.no_texture = NULL;
 	data.so_texture = NULL;
 	data.we_texture = NULL;
@@ -320,6 +373,11 @@ int	main(int argc, char **argv)
 	{
 		// Affichage des résultats de la parsing
 		printf("Parsing successful!\n");
+
+		printf("PLAYER direction: %c\n", data.direction);
+		printf("PLAYER X: %d\n", data.x);
+		printf("PLAYER Y: %d\n", data.y);
+
 		printf("NO texture: %s\n", data.no_texture);
 		printf("SO texture: %s\n", data.so_texture);
 		printf("WE texture: %s\n", data.we_texture);

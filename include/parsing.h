@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:31:58 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 02:46:37 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/18 15:24:36 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@
 
 typedef struct s_data
 {
+	int		x;
+	int		y;
+	char	direction;
 	char	*no_texture;
 	char	*so_texture;
 	char	*we_texture;
