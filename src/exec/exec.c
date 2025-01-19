@@ -22,6 +22,7 @@ void loop_hook(void *param)
 		game->player->start_angle -= 1;
 		game->player->end_angle += 1;
 	}
+	//raycasting(game);
 }
 
 void player_init(t_game *game)
@@ -31,26 +32,41 @@ void player_init(t_game *game)
 	player = malloc(sizeof(t_player));
 	player->x = game->data->player_x;
 	player->y = game->data->player_y;
+
+	// Initialize direction based on input
 	if (game->data->player_direction == 'N')
 	{
-		player->start_angle = 315;
-		player->end_angle = 45;
+		player->dir_x = 0;  // Facing North
+		player->dir_y = -1;
 	}
 	else if (game->data->player_direction == 'S')
 	{
-		player->start_angle = 135;
-		player->end_angle = 225;
+		player->dir_x = 0;  // Facing South
+		player->dir_y = 1;
 	}
 	else if (game->data->player_direction == 'E')
 	{
-		player->start_angle = 45;
-		player->end_angle = 135;
+		player->dir_x = 1;  // Facing East
+		player->dir_y = 0;
 	}
 	else if (game->data->player_direction == 'W')
 	{
-		player->start_angle = 225;
-		player->end_angle = 315;
+		player->dir_x = -1; // Facing West
+		player->dir_y = 0;
 	}
+
+	// Initialize the camera plane perpendicular to the direction
+	if (game->data->player_direction == 'N' || game->data->player_direction == 'S')
+	{
+		game->ray->plane_x = 0.66;  // Slight FOV adjustment
+		game->ray->plane_y = 0;
+	}
+	else if (game->data->player_direction == 'E' || game->data->player_direction == 'W')
+	{
+		game->ray->plane_x = 0;
+		game->ray->plane_y = 0.66; // Slight FOV adjustment
+	}
+
 	game->player = player;
 }
 
@@ -59,13 +75,13 @@ int exec(t_data *data)
 	t_game game;
 
 	game.data = data;
-	game.map_w = 33;
-	game.map_h = 13;
+	game.map_w = 5;
+	game.map_h = 5;
 	player_init(&game);
 	init(&game);
-	raycasting(&game);
 	mlx_loop_hook(game.mlx, loop_hook, &game);
 	mlx_key_hook(game.mlx, ft_hook, &game);
+	raycasting(&game);
 	mlx_loop(game.mlx);
 	return (0);
 }

@@ -18,7 +18,6 @@ int main(int ac, char **av)
 
 	(void)ac;
 	data = parsing(av);
-	printf("data:\n	no:%s\n	so:%s\n	we:%s\n	ea:%s\n", data.no_texture, data.so_texture, data.we_texture, data.ea_texture);
 	if (exec(&data))
 		return (1);
 	return(0);
