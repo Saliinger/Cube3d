@@ -20,6 +20,23 @@ typedef struct s_ray
 	double      dir_y;
 	double		plane_x;
 	double		plane_y;
+	double      sidedist_x;
+	double      sidedist_y;
+	double      deltadist_x;
+	double      deltadist_y;
+	int         map_x;
+	int         map_y;
+	double      camera_x;
+	double      camera_y;
+	double      step_x;
+	double      step_y;
+	double      side;
+	double      wall_dist;
+	double      line_height;
+	double      draw_start;
+	double      draw_end;
+	double      wall_x;
+
 } t_ray;
 
 typedef struct s_player
@@ -41,6 +58,8 @@ typedef struct s_game
 	t_player    *player;
 	int         *color_ceiling;
 	int         *color_floor;
+	int         map_h;
+	int         map_w;
 	t_data      *data;
 	t_ray       *ray;
 }               t_game;
@@ -53,5 +72,9 @@ void left_right(t_game *game);
 void wasd(t_game *game, mlx_key_data_t key);
 void ft_hook(mlx_key_data_t keydata, void *param);
 void raycasting(t_game *game);
+
+
+int map_width(char **map);
+int map_height(char **map);
 
 #endif //CUBE3D_EXEC_H

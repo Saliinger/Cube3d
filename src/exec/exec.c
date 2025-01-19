@@ -22,7 +22,6 @@ void loop_hook(void *param)
 		game->player->start_angle -= 1;
 		game->player->end_angle += 1;
 	}
-	//raycasting(game);
 }
 
 void player_init(t_game *game)
@@ -60,10 +59,13 @@ int exec(t_data *data)
 	t_game game;
 
 	game.data = data;
+	game.map_w = 33;
+	game.map_h = 13;
 	player_init(&game);
 	init(&game);
-	//raycasting(&game);
+	raycasting(&game);
 	mlx_loop_hook(game.mlx, loop_hook, &game);
+	mlx_key_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
 	return (0);
 }

@@ -2,7 +2,7 @@ NAME := cube3d
 CFLAGS := -Wall -Werror -Wextra -g3
 CC := cc
 LIBRARY_DIRS := -L./libft/compiled -L./MLX42/build -Iinclude
-LIBRARIES   := -lgnl -lmlx42 -lglfw -lprintf -lft
+LIBRARIES   := -lgnl -lmlx42 -lglfw -lprintf -lft -lm
 
 EXEC_D = ./src/exec
 CONTROL_D = ./src/exec/control

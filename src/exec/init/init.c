@@ -22,7 +22,7 @@ mlx_image_t *load_image(t_game *game, char *path)
 
 void init_img(t_game *game)
 {
-	printf("init\n%s\n%s\n%s\n%s\n", game->data->no_texture, game->data->so_texture, game->data->ea_texture, game->data->we_texture);
+	//printf("init\n%s\n%s\n%s\n%s\n", game->data->no_texture, game->data->so_texture, game->data->ea_texture, game->data->we_texture);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3d", true);
 	game->n = load_image(game, game->data->no_texture);
 	game->s = load_image(game, game->data->so_texture);
