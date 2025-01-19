@@ -70,13 +70,17 @@ uint32_t rgb_to_hex(int red, int green, int blue) {
 	return hex;
 }
 
-void	init_map(t_game *game)
+void    init_map(t_game *game)
 {
-	int	i;
-	int	j;
-	mlx_image_t *white_img = cube(game, rgb_to_hex(255, 255, 255));
-	mlx_image_t *black_img = cube(game, rgb_to_hex(0, 0, 0));
+	int    i;
+	int    j;
+	int    border;
+	mlx_image_t *white_img;
+	mlx_image_t *black_img;
 
+	white_img = cube(game, rgb_to_hex(255, 255, 255));
+	black_img = cube(game, rgb_to_hex(0, 0, 0));
+	border = 2;
 	i = 0;
 	char **map = game->data->map;
 	while (map[i])
@@ -84,12 +88,12 @@ void	init_map(t_game *game)
 		j = 0;
 		while (map[i][j] && map[i][j] != '\n')
 		{
+			if (map[i][j] != ' ')
+				mlx_image_to_window(game->mlx, black_img, j * TILE_SIZE, i * TILE_SIZE);
 			if (map[i][j] == '1')
-				mlx_image_to_window(game->mlx, black_img, j * TILE_SIZE + 1, i
-					* TILE_SIZE + 1);
-            else if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
-				mlx_image_to_window(game->mlx, white_img, j * TILE_SIZE + 1, i
-					* TILE_SIZE + 1);
+				mlx_image_to_window(game->mlx, black_img, j * TILE_SIZE + border, i * TILE_SIZE + border);
+			else if (map[i][j] == '0' || map[i][j] == 'W' || map[i][j] == 'E' || map[i][j] == 'S' || map[i][j] == 'N')
+				mlx_image_to_window(game->mlx, white_img, j * TILE_SIZE + border, i * TILE_SIZE + border);
 			j++;
 		}
 		i++;

@@ -77,12 +77,14 @@ void raycasting(t_game *game)
 		if (draw_start < 0) draw_start = 0;
 		draw_end = line_height / 2 + WIN_HEIGHT / 2;
 		if (draw_end >= WIN_HEIGHT) draw_end = WIN_HEIGHT - 1;
-
+		//game->player_img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 		// Draw the pixel line on the screen for the specific x
 		// You can implement a draw function using an mlx_image_t
-		int color = (side == 1) ? 0xAAAAAA : 0xFFFFFF; // Lighter or darker color for sides
+		//int color = (side == 1) ? 0xAAAAAA : 0xFFFFFF; // Lighter or darker color for sides
 		for (int y = draw_start; y < draw_end; y++) {
-			mlx_put_pixel(game->player_img, x, y, color);
+			mlx_put_pixel(game->player_img, x, y, 0x00000);
 		}
+
 	}
+	printf("raycasting\n");
 }
