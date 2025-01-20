@@ -107,19 +107,6 @@ void debug_player(t_game *game)
 	image = mlx_new_image(game->mlx, WIN_WIDTH + 1, WIN_HEIGHT + 1);
 	if (!image)
 		ft_error("Error\npng didn't load\n");
-//    int i;
-//    int j;
-//    i = 0;
-//    while (i < TILE_SIZE / 2)
-//	{
-//		j = 0;
-//		while (j < TILE_SIZE / 2)
-//		{
-//			mlx_put_pixel(image, i, j, rgb_to_hex(255, 0, 0));
-//			j++;
-//		}
-//		i++;
-////	}
     mlx_image_to_window(game->mlx, image, game->data->player_x * TILE_SIZE,game->data->player_y * TILE_SIZE);
     game->player_img = image;
 }

@@ -16,6 +16,4 @@ void ft_hook(mlx_key_data_t keydata, void *param)
   t_game *game = (t_game *)param;
 
   key_handler(keydata, game);
-  printf("position : %d %d\n", game->player->x, game->player->y);
-  raycasting(game);
 }

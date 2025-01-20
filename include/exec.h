@@ -11,52 +11,43 @@
 # include <fcntl.h>
 # include <stdbool.h>
 # include <stdlib.h>
+# include <math.h>
 
-typedef struct s_ray {
-	// Ray position and direction
-	double pos_x;  // X-coordinate of ray's position
-	double pos_y;  // Y-coordinate of ray's position
-	double dir_x;  // X-direction of the ray
-	double dir_y;  // Y-direction of the ray
-
-	// Camera plane
-	double plane_x;  // X-component of the camera plane
-	double plane_y;  // Y-component of the camera plane
-
-	// Map grid position
-	int map_x;  // Current X grid position in the map
-	int map_y;  // Current Y grid position in the map
-
-	// Step and delta distances
-	double deltadist_x;  // Distance to move in X to hit the next grid line
-	double deltadist_y;  // Distance to move in Y to hit the next grid line
-	double sidedist_x;   // Initial side distance in X
-	double sidedist_y;   // Initial side distance in Y
-	int step_x;          // Step direction in X (+1 or -1)
-	int step_y;          // Step direction in Y (+1 or -1)
-
-	// Collision info
-	int side;         // 0 if X-axis wall hit, 1 if Y-axis wall hit
-	double wall_dist; // Perpendicular distance to the wall
-	double wall_x;    // Exact point the wall was hit (for texture calculation)
-
-	// Rendering info
-	int line_height;  // Height of the projected wall slice
-	int draw_start;   // Start pixel of wall slice
-	int draw_end;     // End pixel of wall slice
-
-	// Camera offset
-	double camera_x;  // Offset for the ray on the camera plane
-} t_ray;
+typedef struct s_ray
+{
+	double	camera_x;
+	double	dir_x;
+	double	dir_y;
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	double	sidedist_x;
+	double	sidedist_y;
+	double	deltadist_x;
+	double	deltadist_y;
+	double	wall_dist;
+	double	wall_x;
+	int		side;
+	int		line_height;
+	int		draw_start;
+	int		draw_end;
+	double  plane_x;
+	double plane_y;
+}	t_ray;
 
 typedef struct s_player
 {
 	int         x;
 	int         y;
-	int         dir_x;
-	int         dir_y;
 	int         start_angle;
 	int         end_angle;
+	double	pos_x;
+	double	pos_y;
+	double	dir_x;
+	double	dir_y;
+	double	plane_x;
+	double	plane_y;
 }               t_player;
 
 typedef struct s_game
