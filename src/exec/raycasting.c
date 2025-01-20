@@ -129,28 +129,21 @@ static void	calculate_line_height(t_ray *ray, t_player *player)
 	ray->wall_x -= floor(ray->wall_x);
 }
 
-/* Helper function to draw a line (ray) on the screen */
-static void draw_line_to_img(void *img, double x1, double y1, double x2, double y2, int color)
-{
-	double dx = x2 - x1;
-	double dy = y2 - y1;
-	double steps = fabs(dx) > fabs(dy) ? fabs(dx) : fabs(dy);
-	double x_inc = dx / steps;
-	double y_inc = dy / steps;
-	double x = x1;
-	double y = y1;
-
-	for (int i = 0; i <= steps; i++)
-	{
-		// Only draw the pixel if it is within screen bounds
-		if (x >= 0 && y >= 0 && x < WIN_WIDTH && y < WIN_HEIGHT)
-		{
-			mlx_put_pixel(img, (int)round(x), (int)round(y), color);
-		}
-		x += x_inc;
-		y += y_inc;
-	}
-}
+// fonction de lucas a tester
+//void    draw_line(t_cub3d *cub3d, double x_start, double y_start, double start_rad, unsigned int color)
+//{
+//	double    ray_len;
+//
+//	ray_len = 0;
+//	while (1)
+//	{
+//		mlx_put_pixel(cub3d->mlx_img, (int)round(x_start), (int)round(y_start), color);
+//		x_start += cos(start_rad);
+//		y_start -= sin(start_rad);
+//		ray_len++;
+//	}
+//	return ;
+//}
 
 /* Function to draw rays for visualizing player's FOV and wall collisions */
 void draw_rays(t_game *game)
@@ -187,7 +180,7 @@ void draw_rays(t_game *game)
 		                 game->player->pos_y * TILE_SIZE,
 		                 ray_end_x * TILE_SIZE,
 		                 ray_end_y * TILE_SIZE,
-		                 0xFFFFFF); // Ray color (white)
+		                 0x00000); // Ray color (white)
 		x++;
 	}
 }
