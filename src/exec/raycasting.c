@@ -29,16 +29,36 @@ void	init_ray(t_ray *ray)
 	ray->draw_end = 0;
 }
 
-static void	init_raycasting_info(int x, t_ray *ray, t_player *player)
+void init_raycasting_info(int x, t_ray *ray, t_player *player)
 {
 	init_ray(ray);
+
+	// Set up camera plane
 	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
+
 	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
 	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
+
+//	player->pos_x += player->x;
+//	player->pos_y += player->y;
+
 	ray->map_x = (int)player->pos_x;
 	ray->map_y = (int)player->pos_y;
-	ray->deltadist_x = fabs(1 / ray->dir_x);
-	ray->deltadist_y = fabs(1 / ray->dir_y);
+
+	// Safeguard against division by 0 when calculating delta distances
+	if (ray->dir_x != 0)
+		ray->deltadist_x = fabs(1 / ray->dir_x);
+	else
+		ray->deltadist_x = 1e30; // Large value to simulate "infinite" distance
+
+	if (ray->dir_y != 0)
+		ray->deltadist_y = fabs(1 / ray->dir_y);
+	else
+		ray->deltadist_y = 1e30;
+
+	// Debugging output
+	printf("Ray Init - camera_x: %f, dir_x: %f, dir_y: %f, map_x: %d, map_y: %d\n",
+	       ray->camera_x, ray->dir_x, ray->dir_y, ray->map_x, ray->map_y);
 }
 
 /*
@@ -130,87 +150,79 @@ static void	calculate_line_height(t_ray *ray, t_player *player)
 }
 
 // fonction de lucas a tester
-//void    draw_line(t_cub3d *cub3d, double x_start, double y_start, double start_rad, unsigned int color)
+//void    draw_line(t_game *game, double x_start, double y_start, double start_rad, unsigned int color)
 //{
 //	double    ray_len;
 //
 //	ray_len = 0;
-//	while (1)
+//	while (ray_len < game->ray->wall_dist)
 //	{
-//		mlx_put_pixel(cub3d->mlx_img, (int)round(x_start), (int)round(y_start), color);
+//		mlx_put_pixel(game->player_img, (int)round(x_start), (int)round(y_start), color);
 //		x_start += cos(start_rad);
 //		y_start -= sin(start_rad);
 //		ray_len++;
 //	}
-//	return ;
 //}
 
-/* Function to draw rays for visualizing player's FOV and wall collisions */
-void draw_rays(t_game *game)
+void draw_line(t_game *game, double x_start, double y_start, double start_rad, unsigned int color)
 {
-	t_ray   ray;
-	int     x;
+	double ray_len;
 
-	x = 0;
-	ray = *game->ray;
+	ray_len = 0;
 
-	// Ensure the game structures are initialized
-	if (!game || !game->player || !game->ray || !game->player_img)
+
+	// Check if the necessary structs and buffers are initialized
+	if (!game || !game->player_img)
 	{
-		fprintf(stderr, "Error: Missing game, player, ray, or player_img initialization.\n");
+		fprintf(stderr, "Error: game or player_img is not initialized\n");
 		return;
 	}
-
-	// Iterate over the width of the screen (FOV rendering)
-	while (x < WIN_WIDTH)
+	if (game->ray->ray)
+		mlx_delete_image(game->mlx, game->ray->ray);
+	game->ray->ray = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	while (ray_len < game->ray->wall_dist)
 	{
-		// Initialize raycasting variables
-		init_raycasting_info(x, &ray, game->player);
-		set_dda(&ray, game->player);
-		perform_dda(game->data, &ray);
-		calculate_line_height(&ray, game->player);
+		// Ensure x_start and y_start stay within valid buffer/screen bounds
+		int x_pos = (int)round(x_start) * TILE_SIZE;
+		int y_pos = (int)round(y_start) * TILE_SIZE;
+		if (x_pos < 0 || x_pos >= WIN_WIDTH || y_pos < 0 || y_pos >= WIN_HEIGHT)
+		{
+			break; // Exit if the drawing exceeds the screen boundaries
+		}
 
-		// Determine the endpoint of the ray (wall hit point)
-		double ray_end_x = game->player->pos_x + ray.dir_x * ray.wall_dist;
-		double ray_end_y = game->player->pos_y + ray.dir_y * ray.wall_dist;
-
-		// Draw the ray from player's position to the wall collision point
-		draw_line_to_img(game->player_img,
-		                 game->player->pos_x * TILE_SIZE,  // Scale position to match display
-		                 game->player->pos_y * TILE_SIZE,
-		                 ray_end_x * TILE_SIZE,
-		                 ray_end_y * TILE_SIZE,
-		                 0x00000); // Ray color (white)
-		x++;
+		mlx_put_pixel(game->ray->ray, x_pos, y_pos, color);
+		//printf("ray pixel : %d %d\n", x_pos, y_pos);
+		// Increment the start position by ray direction scaled by the ray length
+		x_start += cos(start_rad);
+		y_start -= sin(start_rad);
+		ray_len++;
 	}
+	mlx_image_to_window(game->mlx, game->ray->ray, 0, 0);
 }
+
 
 /* Updated raycasting function to include drawing */
 void raycasting(t_game *game)
 {
-	t_ray	ray;
 	int		x;
 
 	x = 0;
-	ray = *game->ray;
-
-	// Ensure the game structures are initialized
-	if (!game || !game->player || !game->ray || !game->player_img)
-	{
-		fprintf(stderr, "Error: Missing game, player, ray, or player_img initialization.\n");
-		return;
-	}
-
+	game->player->pos_x = 2.5;  // Start in the middle of the tile
+	game->player->pos_y = 2.5;
+	game->player->dir_x = 1.0;  // Facing east
+	game->player->dir_y = 0.0;
+	game->player->plane_x = 0.0;
+	game->player->plane_y = 0.66;
 	while (x < WIN_WIDTH)
 	{
-		init_raycasting_info(x, &ray, game->player);
-		set_dda(&ray, game->player);
-		perform_dda(game->data, &ray);
-		calculate_line_height(&ray, game->player);
-
+		printf("x : %d\npos_x: %f / pos_y %f\n", x, game->player->pos_x, game->player->pos_y);
+		init_raycasting_info(x, game->ray, game->player);
+		set_dda(game->ray, game->player);
+		perform_dda(game->data, game->ray);
+		calculate_line_height(game->ray, game->player);
+		draw_line(game, game->ray->wall_x, game->ray->map_y, game->ray->dir_x, 0xFFFFF);
+		//mlx_put_pixel(game->player_img, game->player->x * TILE_SIZE + x, game->player->y * TILE_SIZE, 0xFFFFF);
 		x++;
 	}
 
-	// Draw rays after raycasting is complete
-	draw_rays(game);
 }

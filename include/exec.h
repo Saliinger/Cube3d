@@ -15,6 +15,7 @@
 
 typedef struct s_ray
 {
+	mlx_image_t *ray;
 	double	camera_x;
 	double	dir_x;
 	double	dir_y;
