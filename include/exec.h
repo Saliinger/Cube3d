@@ -13,42 +13,24 @@
 # include <stdlib.h>
 # include <math.h>
 
+# define FOV 60 // used to calculate the angle of the ray
+
 typedef struct s_ray
 {
 	mlx_image_t *ray;
-	double	camera_x;
-	double	dir_x;
-	double	dir_y;
-	int		map_x;
-	int		map_y;
-	int		step_x;
-	int		step_y;
-	double	sidedist_x;
-	double	sidedist_y;
-	double	deltadist_x;
-	double	deltadist_y;
-	double	wall_dist;
-	double	wall_x;
-	int		side;
-	int		line_height;
-	int		draw_start;
-	int		draw_end;
-	double  plane_x;
-	double plane_y;
+	int inter_x;
+	int inter_y;
+	int step_x;
+	int step_y;
+	int wall_dist;
 }	t_ray;
 
 typedef struct s_player
 {
+	mlx_image_t *player_img; // debug
 	int         x;
 	int         y;
-	int         start_angle;
-	int         end_angle;
-	double	pos_x;
-	double	pos_y;
-	double	dir_x;
-	double	dir_y;
-	double	plane_x;
-	double	plane_y;
+	int			angl;
 }               t_player;
 
 typedef struct s_game
@@ -58,12 +40,8 @@ typedef struct s_game
 	mlx_image_t *s;
 	mlx_image_t *e;
 	mlx_image_t *w;
-	mlx_image_t *player_img; // debug
+	// those img are useless we only need one img and put pixel to render the game
 	t_player    *player;
-	int         *color_ceiling;
-	int         *color_floor;
-	int         map_h;
-	int         map_w;
 	t_data      *data;
 	t_ray       *ray;
 }               t_game;

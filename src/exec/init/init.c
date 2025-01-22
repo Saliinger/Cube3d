@@ -179,7 +179,7 @@ void debug_player(t_game *game)
 			game->data->player_y * TILE_SIZE
 	);
 
-	game->player_img = image;
+	game->player->player_img = image;
 
 	printf("Player debug image initialized successfully.\n");
 }
@@ -193,6 +193,10 @@ void init(t_game *game)
 
 	// Initialize the map and debug the player
 	init_map(game);
+	game->player = malloc(sizeof(t_player));
+	game->player->x = game->data->player_x;
+	game->player->y = game->data->player_y;
+	game->player->angl = M_1_PI;
 	debug_player(game);
 	// add the init of ray or it's not actualizing the data over the program
 	game->ray = malloc(sizeof(t_ray));

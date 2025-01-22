@@ -1,228 +1,44 @@
 #include "../../include/cube3d.h"
 
-/*
-We initialize the set up for the rays
-- camera_x -> Where is the camera (-1 = left, 0 = center, 1 = right)
-- dir_x/y = direction of the ray
-- map_x/y = current square of the ray
-- deltadist_x/y = distance to go to the next x or y.
-*/
+// doc
+// step_x / step_y = position of the wall
 
-void	init_ray(t_ray *ray)
+// one ray = line of the fov
+// fov = 60deg
+
+// S_W = win-w
+// s_h = win-h
+
+// the first ray is the far left one
+// so it goes from the left to the right
+
+// ray angle = player_angle on PI - FOV(60) + x
+// x is the n of the fov(60)
+
+// the inter is the hit of the tiles that i am in from the player to the wall of the tiles and depending of that we can calculate to line through the wall
+// height_inter = (player_y / TILE_SIZE) * TILE_SIZE
+// width_inter = player_x * (height_inter - player_y) / tan(ray_angle)
+// the ray angle is the angle that we're trying to cast so for exemple the far left one is 1deg from the camera angle
+
+// step_y = TILE_SIZE
+// step_x = TILESIZE / tan(ray_angle)
+
+void set_ray(t_game *game, int ray_angle)
 {
-	ray->camera_x = 0;
-	ray->dir_x = 0;
-	ray->dir_y = 0;
-	ray->map_x = 0;
-	ray->map_y = 0;
-	ray->step_x = 0;
-	ray->step_y = 0;
-	ray->sidedist_x = 0;
-	ray->sidedist_y = 0;
-	ray->deltadist_x = 0;
-	ray->deltadist_y = 0;
-	ray->wall_dist = 0;
-	ray->wall_x = 0;
-	ray->side = 0;
-	ray->line_height = 0;
-	ray->draw_start = 0;
-	ray->draw_end = 0;
+	int angl = game->player->angl - FOV + ray_angle;
+	game->ray->inter_x = game->player->x * (game->ray->inter_y - game->player->y) / tan(angl);
+	game->ray->inter_y = game->player->y;
+	game->ray->step_x = game->ray->inter_x / tan(angl);
+	game->ray->step_y = TILE_SIZE;
 }
 
-void init_raycasting_info(int x, t_ray *ray, t_player *player)
-{
-	init_ray(ray);
-
-	// Set up camera plane
-	ray->camera_x = 2 * x / (double)WIN_WIDTH - 1;
-
-	ray->dir_x = player->dir_x + player->plane_x * ray->camera_x;
-	ray->dir_y = player->dir_y + player->plane_y * ray->camera_x;
-
-//	player->pos_x += player->x;
-//	player->pos_y += player->y;
-
-	ray->map_x = (int)player->pos_x;
-	ray->map_y = (int)player->pos_y;
-
-	// Safeguard against division by 0 when calculating delta distances
-	if (ray->dir_x != 0)
-		ray->deltadist_x = fabs(1 / ray->dir_x);
-	else
-		ray->deltadist_x = 1e30; // Large value to simulate "infinite" distance
-
-	if (ray->dir_y != 0)
-		ray->deltadist_y = fabs(1 / ray->dir_y);
-	else
-		ray->deltadist_y = 1e30;
-
-	// Debugging output
-	printf("Ray Init - camera_x: %f, dir_x: %f, dir_y: %f, map_x: %d, map_y: %d\n",
-	       ray->camera_x, ray->dir_x, ray->dir_y, ray->map_x, ray->map_y);
-}
-
-/*
-- We are doing the initial set up for the dda
-- dda algorithm will jump one square in each loop eiter in a x or y direction
-- ray->sidedist_x or y = distance from the ray start position to the
-	next x or y position
-- if x or y < 0 go the next x or y to the left
-- if x or y > 0 go the next x or y to the right
-*/
-
-static void	set_dda(t_ray *ray, t_player *player)
-{
-	if (ray->dir_x < 0)
-	{
-		ray->step_x = -1;
-		ray->sidedist_x = (player->pos_x - ray->map_x) * ray->deltadist_x;
-	}
-	else
-	{
-		ray->step_x = 1;
-		ray->sidedist_x = (ray->map_x + 1.0 - player->pos_x) * ray->deltadist_x;
-	}
-	if (ray->dir_y < 0)
-	{
-		ray->step_y = -1;
-		ray->sidedist_y = (player->pos_y - ray->map_y) * ray->deltadist_y;
-	}
-	else
-	{
-		ray->step_y = 1;
-		ray->sidedist_y = (ray->map_y + 1.0 - player->pos_y) * ray->deltadist_y;
-	}
-}
-
-/*
-- We implement the DDA algorithm -> the loop will increment 1 square
--   until we hit a wall
-- If the sidedistx < sidedisty, x is the closest point from the ray
-*/
-
-static void	perform_dda(t_data *data, t_ray *ray)
-{
-	int	hit;
-
-	hit = 0;
-	while (hit == 0)
-	{
-		if (ray->sidedist_x < ray->sidedist_y)
-		{
-			ray->sidedist_x += ray->deltadist_x;
-			ray->map_x += ray->step_x;
-			ray->side = 0;
-		}
-		else
-		{
-			ray->sidedist_y += ray->deltadist_y;
-			ray->map_y += ray->step_y;
-			ray->side = 1;
-		}
-		if (ray->map_y < 0.25
-		    || ray->map_x < 0.25
-		    || ray->map_y > 5 - 0.25 // a modifie pour la taille de la map h
-		    || ray->map_x > 5 - 1.25)// a modifie pour la taille de la map w
-			break ;
-		else if (data->map[ray->map_y][ray->map_x] > '0')
-			hit = 1;
-	}
-}
-
-static void	calculate_line_height(t_ray *ray, t_player *player)
-{
-	if (ray->side == 0)
-		ray->wall_dist = (ray->sidedist_x - ray->deltadist_x);
-	else
-		ray->wall_dist = (ray->sidedist_y - ray->deltadist_y);
-	ray->line_height = (int)(WIN_HEIGHT / ray->wall_dist);
-	ray->draw_start = -(ray->line_height) / 2 + WIN_HEIGHT / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + WIN_HEIGHT  / 2;
-	if (ray->draw_end >= WIN_HEIGHT )
-		ray->draw_end = WIN_HEIGHT  - 1;
-	if (ray->side == 0)
-		ray->wall_x = player->pos_y + ray->wall_dist * ray->dir_y;
-	else
-		ray->wall_x = player->pos_x + ray->wall_dist * ray->dir_x;
-	ray->wall_x -= floor(ray->wall_x);
-}
-
-// fonction de lucas a tester
-//void    draw_line(t_game *game, double x_start, double y_start, double start_rad, unsigned int color)
-//{
-//	double    ray_len;
-//
-//	ray_len = 0;
-//	while (ray_len < game->ray->wall_dist)
-//	{
-//		mlx_put_pixel(game->player_img, (int)round(x_start), (int)round(y_start), color);
-//		x_start += cos(start_rad);
-//		y_start -= sin(start_rad);
-//		ray_len++;
-//	}
-//}
-
-void draw_line(t_game *game, double x_start, double y_start, double start_rad, unsigned int color)
-{
-	double ray_len;
-
-	ray_len = 0;
-
-
-	// Check if the necessary structs and buffers are initialized
-	if (!game || !game->player_img)
-	{
-		fprintf(stderr, "Error: game or player_img is not initialized\n");
-		return;
-	}
-	if (game->ray->ray)
-		mlx_delete_image(game->mlx, game->ray->ray);
-	game->ray->ray = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	while (ray_len < game->ray->wall_dist)
-	{
-		// Ensure x_start and y_start stay within valid buffer/screen bounds
-		int x_pos = (int)round(x_start) * TILE_SIZE;
-		int y_pos = (int)round(y_start) * TILE_SIZE;
-		if (x_pos < 0 || x_pos >= WIN_WIDTH || y_pos < 0 || y_pos >= WIN_HEIGHT)
-		{
-			break; // Exit if the drawing exceeds the screen boundaries
-		}
-
-		mlx_put_pixel(game->ray->ray, x_pos, y_pos, color);
-		//printf("ray pixel : %d %d\n", x_pos, y_pos);
-		// Increment the start position by ray direction scaled by the ray length
-		x_start += cos(start_rad);
-		y_start -= sin(start_rad);
-		ray_len++;
-	}
-	mlx_image_to_window(game->mlx, game->ray->ray, 0, 0);
-}
-
-
-/* Updated raycasting function to include drawing */
 void raycasting(t_game *game)
 {
-	int		x;
+	int x = 0;
 
-	x = 0;
-	game->player->pos_x = 2.5;  // Start in the middle of the tile
-	game->player->pos_y = 2.5;
-	game->player->dir_x = 1.0;  // Facing east
-	game->player->dir_y = 0.0;
-	game->player->plane_x = 0.0;
-	game->player->plane_y = 0.66;
-	while (x < WIN_WIDTH)
+	while (x < FOV)
 	{
-		printf("x : %d\npos_x: %f / pos_y %f\n", x, game->player->pos_x, game->player->pos_y);
-		init_raycasting_info(x, game->ray, game->player);
-		set_dda(game->ray, game->player);
-		perform_dda(game->data, game->ray);
-		calculate_line_height(game->ray, game->player);
-		draw_line(game, game->ray->wall_x, game->ray->map_y, game->ray->dir_x, 0xFFFFF);
-		//mlx_put_pixel(game->player_img, game->player->x * TILE_SIZE + x, game->player->y * TILE_SIZE, 0xFFFFF);
+		set_ray(game, x);
 		x++;
 	}
-
 }

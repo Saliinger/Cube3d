@@ -3,6 +3,7 @@ CFLAGS := -Wall -Werror -Wextra -g3 -fsanitize=address
 CC := cc
 LIBRARY_DIRS := -L./libft/compiled -L./MLX42/build -Iinclude
 LIBRARIES   := -lgnl -lmlx42 -lglfw -lprintf -lft -lm
+FRAMEWORKS  := -framework Cocoa -framework OpenGL -framework IOKit
 
 EXEC_D = ./src/exec
 CONTROL_D = ./src/exec/control
@@ -11,7 +12,7 @@ UTILS_D = ./src/utils
 PARSING_D = ./src/parsing
 
 
-SRC=				$(wildcard *.c) \
+SRC=			$(wildcard *.c) \
 				  $(wildcard $(EXEC_D)/*.c) \
 				  $(wildcard $(CONTROL_D)/*.c) \
 				  $(wildcard $(INIT_D)/*.c) \
@@ -66,6 +67,11 @@ libmlx:
 ${NAME}:	${OBJ}
 			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 			${CC} ${CFLAGS} ${OBJ} ${LIBRARY_DIRS} ${LIBRARIES} -o ${NAME}
+			@echo "$(GREEN)$(NAME) created $(RESET)"
+
+mac:		${OBJ}
+			@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
+			${CC} ${CFLAGS} ${FRAMEWORKS} ${OBJ} ${LIBRARY_DIRS} ${LIBRARIES} -o ${NAME}
 			@echo "$(GREEN)$(NAME) created $(RESET)"
 
 clean:
