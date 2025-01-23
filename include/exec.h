@@ -17,30 +17,28 @@
 
 typedef struct s_ray
 {
-	mlx_image_t *ray;
-	int inter_x;
-	int inter_y;
-	int step_x;
-	int step_y;
+	double inter_x;
+	double inter_y;
+	double step_x;
+	double step_y;
 	int wall_dist;
 }	t_ray;
 
 typedef struct s_player
 {
-	mlx_image_t *player_img; // debug
-	int         x;
+	int         x; //position in pixel
 	int         y;
-	int			angl;
+	int         tile_x;
+	int         tile_y;
+	double      direction; // direction is on pi
 }               t_player;
 
 typedef struct s_game
 {
+	//mlx_image_t *player_img; // debug
+	mlx_image_t *map_debug; // debug
+	mlx_image_t *fpv;
 	mlx_t       *mlx;
-	mlx_image_t *n;
-	mlx_image_t *s;
-	mlx_image_t *e;
-	mlx_image_t *w;
-	// those img are useless we only need one img and put pixel to render the game
 	t_player    *player;
 	t_data      *data;
 	t_ray       *ray;
@@ -58,5 +56,9 @@ void raycasting(t_game *game);
 
 int map_width(char **map);
 int map_height(char **map);
+
+// debug
+void init_map(t_game *game);
+void debug_player(t_game *game);
 
 #endif //CUBE3D_EXEC_H
