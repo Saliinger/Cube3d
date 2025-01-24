@@ -5,8 +5,8 @@
 
 // init the struct player
 void init_player(t_game *game) {
-	game->player->x = game->data->player_x * TILE_SIZE;
-	game->player->y = game->data->player_y * TILE_SIZE;
+	game->player->x = game->data->player_x * TILE_SIZE + TILE_SIZE / 2;
+	game->player->y = game->data->player_y * TILE_SIZE + TILE_SIZE / 2;
 	game->player->tile_x = game->data->player_x;
 	game->player->tile_y = game->data->player_y;
 
@@ -30,7 +30,7 @@ void init(t_game *game)
 	if (!game->ray)
 		return ; // add an exit + free all
 	// check and malloc complete
-
+	game->ray->fov_rd = (FOV * M_PI) / 180; // field of view in radians
 	// get map sizes
 	game->map_h = map_height(game->data->map);
 	game->map_w = map_width(game->data->map);

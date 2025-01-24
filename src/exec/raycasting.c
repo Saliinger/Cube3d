@@ -132,38 +132,36 @@ float inter_w(t_game *game) {
 	return (sqrt(pow(v_x - game->player->x, 2) + pow(v_y - game->player->y, 2))); // get the distance
 }
 
-void draw_ray(t_game *game)
+// Line drawing using Bresenham's Algorithm
+void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 {
-	float hit_x; // Intersection X coordinate
-	float hit_y; // Intersection Y coordinate
-	float h_inter = inter_h(game); // Horizontal wall distance
-	float v_inter = inter_w(game); // Vertical wall distance
+	int dx = abs(x1 - x0);
+	int dy = abs(y1 - y0);
+	int sx = x0 < x1 ? 1 : -1;
+	int sy = y0 < y1 ? 1 : -1;
+	int err = dx - dy;
 
-	// Determine the closer intersection point
-	if (v_inter <= h_inter)
+	while (1)
 	{
-		// Vertical wall hit
-		hit_x = floor(game->player->x / TILE_SIZE) * TILE_SIZE; // Adjusted vertical intersection X
-		hit_y = game->player->y + (hit_x - game->player->x) * tan(game->ray->ray_angle); // Corresponding Y
-	}
-	else
-	{
-		// Horizontal wall hit
-		hit_y = floor(game->player->y / TILE_SIZE) * TILE_SIZE; // Adjusted horizontal intersection Y
-		hit_x = game->player->x + (hit_y - game->player->y) / tan(game->ray->ray_angle); // Corresponding X
-	}
+		mlx_put_pixel(game->fpv, x0, y0, color); // Plot the point
 
-	// Draw the ray from player's position to the wall hit
-	float ray_x = game->player->x;
-	float ray_y = game->player->y;
+		if (x0 == x1 && y0 == y1) // Check if the endpoint is reached
+			break;
 
-	// Bresenham's line algorithm or per-pixel plotting
-	while ((int)ray_x != (int)hit_x || (int)ray_y != (int)hit_y) {
-		mlx_put_pixel(game->fpv, (int)ray_x, (int)ray_y, 0xFF0000); // Draw ray with a red color
-		ray_x += (hit_x - ray_x) * 0.01; // Increment along the ray direction
-		ray_y += (hit_y - ray_y) * 0.01;
+		int e2 = 2 * err;
+
+		// Adjust error and step in x-direction
+		if (e2 > -dy) {
+			err -= dy;
+			x0 += sx;
+		}
+
+		// Adjust error and step in y-direction
+		if (e2 < dx) {
+			err += dx;
+			y0 += sy;
+		}
 	}
-	printf("x: %f\ny: %f\n", hit_x, hit_y);
 }
 
 void raycasting(t_game *game)
@@ -176,6 +174,7 @@ void raycasting(t_game *game)
 	// fov is used to render the 2d top view the WIN_WIDTH will be used for the 2.5d render to scale it to the window
 	while (x < FOV)
 	{
+		printf("x: %d y: %d\n", game->player->x, game->player->y);
 		game->ray->flag = 0;
 		h_inter = inter_h(game);
 		v_inter = inter_w(game);
@@ -187,8 +186,14 @@ void raycasting(t_game *game)
 			game->ray->flag = 1;
 		}
 		// it's for the 2d debug need to make the texture rendering
-		draw_ray(game);
+		// Calculate the intersection point
+		float ray_x = game->player->x + cos(game->ray->ray_angle) * game->ray->wall_dist;
+		float ray_y = game->player->y + sin(game->ray->ray_angle) * game->ray->wall_dist;
+
+		// Visualize the ray using the draw_line function
+		int color = 0xFFFFFF; // You can set different colors for debugging
+		draw_line(game, game->player->x, game->player->y, ray_x, ray_y, color);
 		x++;
-		game->ray->ray_angle += (FOV / 2); // 1deg
+		game->ray->ray_angle += (game->ray->fov_rd / 2); // 1deg
 	}
 }
