@@ -10,6 +10,7 @@ CONTROL_D = ./src/exec/control
 INIT_D = ./src/exec/init
 UTILS_D = ./src/utils
 PARSING_D = ./src/parsing
+PUTILS_D = ./src/parsing/utils
 
 
 SRC=			$(wildcard *.c) \
@@ -17,6 +18,7 @@ SRC=			$(wildcard *.c) \
 				  $(wildcard $(CONTROL_D)/*.c) \
 				  $(wildcard $(INIT_D)/*.c) \
 				  $(wildcard $(PARSING_D)/*.c) \
+				  $(wildcard $(PUTILS_D)/*.c) \
 				  $(wildcard $(UTILS_D)/*.c)
 
 OBJ = $(SRC:.c=.o)

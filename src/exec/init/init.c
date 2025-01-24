@@ -31,8 +31,12 @@ void init(t_game *game)
 		return ; // add an exit + free all
 	// check and malloc complete
 
+	// get map sizes
+	game->map_h = map_height(game->data->map);
+	game->map_w = map_width(game->data->map);
+
 	init_player(game);
-	game->mlx = mlx_init(WIN_HEIGHT, WIN_WIDTH, "Cube3D", 0);
+	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", 1);
 	// debug 2d
 	init_map(game); // 2d map
 	//debug_player(game); // 2d player  ne need we'll render it virtually from the raycasting

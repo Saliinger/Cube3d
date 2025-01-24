@@ -17,11 +17,9 @@
 
 typedef struct s_ray
 {
-	double inter_x;
-	double inter_y;
-	double step_x;
-	double step_y;
-	int wall_dist;
+	double ray_angle;
+	double wall_dist;
+	int flag;
 }	t_ray;
 
 typedef struct s_player
@@ -39,6 +37,8 @@ typedef struct s_game
 	mlx_image_t *map_debug; // debug
 	mlx_image_t *fpv;
 	mlx_t       *mlx;
+	int			map_w;
+	int			map_h;
 	t_player    *player;
 	t_data      *data;
 	t_ray       *ray;

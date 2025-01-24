@@ -16,8 +16,8 @@
 # include "parsing.h"
 # include "exec.h"
 
-# define WIN_WIDTH 640
-# define WIN_HEIGHT 480
+# define WIN_WIDTH 1200
+# define WIN_HEIGHT 720
 
 # define MOVESPEED 0.0125
 # define ROTSPEED 0.015
