@@ -13,8 +13,8 @@
 #ifndef PARSING_H
 # define PARSING_H
 
-# include "../libft/libft/libft.h"
 # include "../libft/gnl/get_next_line.h"
+# include "../libft/libft/libft.h"
 # include <stdbool.h>
 # include <stdio.h>
 
@@ -24,8 +24,7 @@ typedef struct s_key
 	int		len;
 	char	**target_char;
 	int		**target_int;
-}		t_key;
-
+}			t_key;
 
 typedef struct s_data
 {
@@ -42,5 +41,23 @@ typedef struct s_data
 }			t_data;
 
 t_data		parsing(char **args);
+void		init_data(t_data *data);
+bool		valid_extension(char *file);
+bool		ft_str_is_numeric(char *str);
+int			ft_split_count(char **split);
+void		free_split(char **split);
+void		free_data(t_data *data);
+bool		ft_isspace(char c);
+void		trim(char *str);
+void		init_keys(t_key *keys, t_data *data);
+int			parsed_color(int **target, char *value);
+int			insert_key(char *value, char **target_char, int **target_int);
+bool		is_empty_line(char *line);
+int			verify_data(t_data *data, int print);
+int			alloc_map_size(char *file, t_data *data);
+int			valid_map(t_data *data);
+int			get_position_player(t_data *data);
+int			wall_map(t_data *data);
+int			parser(char *file, t_data *data);
 
 #endif
