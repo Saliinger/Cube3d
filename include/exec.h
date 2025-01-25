@@ -49,7 +49,7 @@ int exec(t_data *data);
 void init(t_game *game);
 
 // moves
-void left_right(t_game *game);
+void left_right(t_game *game, int i);
 void wasd(t_game *game, mlx_key_data_t key);
 void ft_hook(mlx_key_data_t keydata, void *param);
 void raycasting(t_game *game);

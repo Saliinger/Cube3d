@@ -32,7 +32,7 @@
 
 // draw the ray on the fpv img based on the player position
 
-float nor_angle(float angle) // normalize the angle
+float	nor_angle(float angle)	// normalize the angle
 {
 	if (angle < 0)
 		angle += (2 * M_PI);
@@ -205,6 +205,7 @@ void raycasting(t_game *game)
 		int color = 0xFFFFFF; // You can set different colors for debugging
 		draw_line(game, game->player->x, game->player->y, ray_x, ray_y, color);
 		x++;
+		printf("x: %f\n y: %f\n", ray_x, ray_y);
 		game->ray->ray_angle += (game->ray->fov_rd / WIN_WIDTH); // 1deg
 	}
 }

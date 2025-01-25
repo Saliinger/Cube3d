@@ -35,6 +35,8 @@ void init(t_game *game)
 	game->map_h = map_height(game->data->map);
 	game->map_w = map_width(game->data->map);
 
+	printf("map_h: %d\nmap_w: %d\n", game->map_h, game->map_w);
+
 	init_player(game);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", 1);
 	// debug 2d

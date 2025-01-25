@@ -16,13 +16,13 @@
 # include "parsing.h"
 # include "exec.h"
 
-# define WIN_WIDTH 1200
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1900
+# define WIN_HEIGHT 1000
 
-# define MOVESPEED 0.0125
-# define ROTSPEED 0.015
+# define ROTATION_SPEED 0.045 // rotation speed
+# define PLAYER_SPEED 4	// player speed
 
-# define TILE_SIZE 40
+# define TILE_SIZE 30
 
 void	ft_error(char *str);
 
