@@ -18,8 +18,8 @@
 typedef struct s_ray
 {
 	float fov_rd;
-	double ray_angle;
-	double wall_dist;
+	float ray_angle;
+	float wall_dist;
 	int flag;
 }	t_ray;
 
