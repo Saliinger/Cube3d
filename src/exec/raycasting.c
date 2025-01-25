@@ -32,6 +32,14 @@
 
 // draw the ray on the fpv img based on the player position
 
+float nor_angle(float angle) // normalize the angle
+{
+	if (angle < 0)
+		angle += (2 * M_PI);
+	if (angle > (2 * M_PI))
+		angle -= (2 * M_PI);
+	return (angle);
+}
 
 int	unit_circle(float angle, char c)	// check the unit circle
 {
@@ -94,13 +102,15 @@ float inter_h(t_game *game) {
 	float	x_step;
 	float	y_step;
 	int		pixel;
+	float	angle;
 
+	angle = nor_angle(game->ray->ray_angle);
 	y_step = TILE_SIZE;
-	x_step = TILE_SIZE / tan(game->ray->ray_angle);
+	x_step = TILE_SIZE / tan(angle);
 	h_y = floor(game->player->y / TILE_SIZE) * TILE_SIZE;
-	pixel = inter_check(game->ray->ray_angle, &h_y, &y_step, 1);
-	h_x = game->player->x + (h_y - game->player->y) / tan(game->ray->ray_angle);
-	if ((unit_circle(game->ray->ray_angle, 'y') && x_step > 0) || (!unit_circle(game->ray->ray_angle, 'y') && x_step < 0)) // check x_step value
+	pixel = inter_check(angle, &h_y, &y_step, 1);
+	h_x = game->player->x + (h_y - game->player->y) / tan(angle);
+	if ((unit_circle(angle, 'y') && x_step > 0) || (!unit_circle(angle, 'y') && x_step < 0)) // check x_step value
 		x_step *= -1;
 	while (wall_hit(h_x, h_y - pixel, game)) // check the wall hit whit the pixel value
 	{
@@ -116,13 +126,15 @@ float inter_w(t_game *game) {
 	float	x_step;
 	float	y_step;
 	int		pixel;
+	float	angle;
 
+	angle = nor_angle(game->ray->ray_angle);
 	x_step = TILE_SIZE;
-	y_step = TILE_SIZE * tan(game->ray->ray_angle);
+	y_step = TILE_SIZE * tan(angle);
 	v_x = floor(game->player->x / TILE_SIZE) * TILE_SIZE;
 	pixel = inter_check(game->ray->ray_angle, &v_x, &x_step, 0); // check the intersection and get the pixel value
-	v_y = game->player->y + (v_x - game->player->y) * tan(game->ray->ray_angle);
-	if ((unit_circle(game->ray->ray_angle, 'x') && y_step < 0) || (!unit_circle(game->ray->ray_angle, 'x') && y_step > 0)) // check y_step value
+	v_y = game->player->y + (v_x - game->player->y) * tan(angle);
+	if ((unit_circle(angle, 'x') && y_step < 0) || (!unit_circle(angle, 'x') && y_step > 0)) // check y_step value
 		y_step *= -1;
 	while (wall_hit(v_x - pixel, v_y, game)) // check the wall hit whit the pixel value
 	{
@@ -170,11 +182,10 @@ void raycasting(t_game *game)
 	float h_inter;
 	float v_inter;
 
-	game->ray->ray_angle = game->player->direction - (FOV / 2);
+	game->ray->ray_angle = game->player->direction - (game->ray->fov_rd / 2);
 	// fov is used to render the 2d top view the WIN_WIDTH will be used for the 2.5d render to scale it to the window
-	while (x < FOV)
+	while (x < WIN_WIDTH)
 	{
-		printf("x: %d y: %d\n", game->player->x, game->player->y);
 		game->ray->flag = 0;
 		h_inter = inter_h(game);
 		v_inter = inter_w(game);
@@ -194,6 +205,6 @@ void raycasting(t_game *game)
 		int color = 0xFFFFFF; // You can set different colors for debugging
 		draw_line(game, game->player->x, game->player->y, ray_x, ray_y, color);
 		x++;
-		game->ray->ray_angle += (game->ray->fov_rd / 2); // 1deg
+		game->ray->ray_angle += (game->ray->fov_rd / WIN_WIDTH); // 1deg
 	}
 }
