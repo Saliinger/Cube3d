@@ -27,22 +27,23 @@ void wasd(t_game *game, mlx_key_data_t key)
 
 	if (key.key == MLX_KEY_W)
 	{
-		move_x = sin(game->player->direction) * PLAYER_SPEED;
-		move_y = cos(game->player->direction) * PLAYER_SPEED;
+		move_x = cos(game->player->direction) * PLAYER_SPEED;
+		move_y = sin(game->player->direction) * PLAYER_SPEED;
 	}
 	else if (key.key == MLX_KEY_A)
 	{
-		move_x = -sin(game->player->direction) * PLAYER_SPEED;
-		move_y = cos(game->player->direction) * PLAYER_SPEED;
+		move_x = sin(game->player->direction) * PLAYER_SPEED;
+		move_y = -cos(game->player->direction) * PLAYER_SPEED;
 	}
 	else if (key.key == MLX_KEY_S)
 	{
-		move_x = -sin(game->player->direction) * PLAYER_SPEED;
-		move_y = -cos(game->player->direction) * PLAYER_SPEED;
+		move_x = -cos(game->player->direction) * PLAYER_SPEED;
+		move_y = -sin(game->player->direction) * PLAYER_SPEED;
 	}
-	else if (key.key == MLX_KEY_D) {
-		move_x = sin(game->player->direction) * PLAYER_SPEED;
-		move_y = -cos(game->player->direction) * PLAYER_SPEED;
+	else if (key.key == MLX_KEY_D)
+	{
+		move_x = -sin(game->player->direction) * PLAYER_SPEED;
+		move_y = cos(game->player->direction) * PLAYER_SPEED;
 	}
 	move_player(game, move_x, move_y);
 }

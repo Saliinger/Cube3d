@@ -20,6 +20,5 @@ static void	key_handler(mlx_key_data_t keydata, t_game *data)
 void ft_hook(mlx_key_data_t keydata, void *param)
 {
   t_game *game = (t_game *)param;
-
   key_handler(keydata, game);
 }
