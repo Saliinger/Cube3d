@@ -12,13 +12,13 @@ void init_player(t_game *game) {
 
 	// init start direction on pi
 	if (game->data->player_direction == 'N')
-		game->player->direction = M_PI;
+		game->player->direction = (3 * M_PI) / 2;
 	else if (game->data->player_direction == 'S')
 		game->player->direction = M_PI / 2;
 	else if (game->data->player_direction == 'E')
-		game->player->direction = M_PI / 4;
+		game->player->direction = 0;
 	else if (game->data->player_direction == 'W')
-		game->player->direction = M_PI * 3 / 4;
+		game->player->direction = M_PI;
 }
 
 void init(t_game *game)
