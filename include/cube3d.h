@@ -19,8 +19,8 @@
 # define WIN_WIDTH 1900
 # define WIN_HEIGHT 1000
 
-# define ROTATION_SPEED 0.045 // rotation speed
-# define PLAYER_SPEED 4	// player speed
+# define ROTATION_SPEED 0.020 // rotation speed
+# define PLAYER_SPEED 1	// player speed
 
 # define TILE_SIZE 30
 

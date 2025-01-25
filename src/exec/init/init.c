@@ -42,7 +42,7 @@ void init(t_game *game)
 	printf("map_h: %d\nmap_w: %d\n", game->map_h, game->map_w);
 
 	init_player(game);
-	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", 1);
+	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", 0);
 	// debug 2d
 	init_map(game); // 2d map
 	//debug_player(game); // 2d player  ne need we'll render it virtually from the raycasting

@@ -6,8 +6,8 @@
 // one ray = line of the fov
 // fov = 60deg
 
-// S_W = win-w
-// s_h = win-h
+// WIN_WIDTH = win-w
+// WIN_HEIGHT = win-h
 
 // the first ray is the far left one
 // so it goes from the left to the right
@@ -41,6 +41,82 @@ float	nor_angle(float angle)	// normalize the angle
 	return (angle);
 }
 
+// test render wall
+
+
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color)	// put the pixel
+{
+	if (x < 0) // check the x position
+		return ;
+	else if (x >= WIN_WIDTH)
+		return ;
+	if (y < 0) // check the y position
+		return ;
+	else if (y >= WIN_HEIGHT)
+		return ;
+	mlx_put_pixel(game->fpv, x, y, color); // put the pixel
+}
+
+void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
+{
+	int		i;
+
+	i = b_pix;
+	while (i < WIN_HEIGHT)
+		my_mlx_pixel_put(game, ray, i++, 0xB99470FF); // floor
+	i = 0;
+	while (i < t_pix)
+		my_mlx_pixel_put(game, ray, i++, 0x89CFF3FF); // ceiling
+}
+
+int	get_color(t_game *game, int flag)	// get the color of the wall
+{
+	game->ray->ray_angle = nor_angle(game->ray->ray_angle); // normalize the angle
+	if (flag == 0)
+	{
+		if (game->ray->ray_angle > M_PI / 2 && game->ray->ray_angle < 3 * (M_PI / 2))
+			return (0xB5B5B5FF); // west wall
+		else
+			return (0xB5B5B5FF); // east wall
+	}
+	else
+	{
+		if (game->ray->ray_angle > 0 && game->ray->ray_angle < M_PI)
+			return (0xF5F5F5FF); // south wall
+		else
+			return (0xF5F5F5FF); // north wall
+	}
+}
+
+void	draw_wall(t_game *game, int ray, int t_pix, int b_pix)	// draw the wall
+{
+	int color;
+
+	color = get_color(game, game->ray->flag);
+	while (t_pix < b_pix)
+		my_mlx_pixel_put(game, ray, t_pix++, color);
+}
+
+void	render_wall(t_game *game, int ray)	// render the wall
+{
+	double	wall_h;
+	double	b_pix;
+	double	t_pix;
+
+	game->ray->wall_dist *= cos(nor_angle(game->ray->ray_angle - game->player->direction)); // fix the fisheye
+	wall_h = (TILE_SIZE / game->ray->wall_dist) * ((WIN_WIDTH / 2) / tan(game->ray->fov_rd / 2)); // get the wall height
+	b_pix = (WIN_HEIGHT / 2) + (wall_h / 2); // get the bottom pixel
+	t_pix = (WIN_HEIGHT / 2) - (wall_h / 2); // get the top pixel
+	if (b_pix > WIN_HEIGHT) // check the bottom pixel
+		b_pix = WIN_HEIGHT;
+	if (t_pix < 0) // check the top pixel
+		t_pix = 0;
+	draw_wall(game, ray, t_pix, b_pix); // draw the wall
+	draw_floor_ceiling(game, ray, t_pix, b_pix); // draw the floor and the ceiling
+}
+
+// test render wall
+
 int	unit_circle(float angle, char c)	// check the unit circle
 {
 	if (c == 'x')
@@ -56,9 +132,9 @@ int	unit_circle(float angle, char c)	// check the unit circle
 	return (0);
 }
 
-int	inter_check(float angle, float *inter, float *step, int is_horizon)	// check the intersection
+int	inter_check(float angle, float *inter, float *step, int iWIN_HEIGHTorizon)	// check the intersection
 {
-	if (is_horizon)
+	if (iWIN_HEIGHTorizon)
 	{
 		if (angle > 0 && angle < M_PI)
 		{
@@ -193,14 +269,15 @@ void raycasting(t_game *game) {
             game->ray->flag = 1;
         }
 
-        // Visualize the ray for debugging
-        float ray_x = game->player->x + cos(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
-        float ray_y = game->player->y + sin(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
-        draw_line(game, game->player->x, game->player->y, ray_x, ray_y, 0xFFFFFF);
-
-        // Debugging output
-        printf("Ray %d: Angle=%.2f, Dist=%.2f, RayX=%.2f, RayY=%.2f\n",
-               x, game->ray->ray_angle, game->ray->wall_dist, ray_x, ray_y);
+        // // Visualize the ray for debugging
+        // float ray_x = game->player->x + cos(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
+        // float ray_y = game->player->y + sin(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
+        // draw_line(game, game->player->x, game->player->y, ray_x, ray_y, 0xFFFFFF);
+        //
+        // // Debugging output
+        // printf("Ray %d: Angle=%.2f, Dist=%.2f, RayX=%.2f, RayY=%.2f\n",
+        //        x, game->ray->ray_angle, game->ray->wall_dist, ray_x, ray_y);
+    	render_wall(game, x);
 
         // Increment ray angle
         game->ray->ray_angle = nor_angle(game->ray->ray_angle + (game->ray->fov_rd / WIN_WIDTH));
