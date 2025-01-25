@@ -30,11 +30,13 @@ typedef struct s_player
 	int         tile_x;
 	int         tile_y;
 	double      direction; // direction is on pi
+	int         move_ws;
+	int         move_ad;
+	int         move_lr;
 }               t_player;
 
 typedef struct s_game
 {
-	//mlx_image_t *player_img; // debug
 	mlx_image_t *map_debug; // debug
 	mlx_image_t *fpv;
 	mlx_t       *mlx;

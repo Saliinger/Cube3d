@@ -19,6 +19,10 @@ void init_player(t_game *game) {
 		game->player->direction = 0;
 	else if (game->data->player_direction == 'W')
 		game->player->direction = M_PI;
+
+	game->player->move_ad = 0;
+	game->player->move_lr = 0;
+	game->player->move_ws = 0;
 }
 
 void init(t_game *game)
