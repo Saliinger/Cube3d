@@ -9,8 +9,6 @@ void init_player(t_game *game) {
 	game->player->y = game->data->player_y * TILE_SIZE + TILE_SIZE / 2;
 	game->player->tile_x = game->data->player_x;
 	game->player->tile_y = game->data->player_y;
-
-	// init start direction on pi
 	if (game->data->player_direction == 'N')
 		game->player->direction = (3 * M_PI) / 2;
 	else if (game->data->player_direction == 'S')
@@ -19,11 +17,15 @@ void init_player(t_game *game) {
 		game->player->direction = 0;
 	else if (game->data->player_direction == 'W')
 		game->player->direction = M_PI;
-
 	game->player->move_ad = 0;
 	game->player->move_lr = 0;
 	game->player->move_ws = 0;
 }
+
+// void init_texture(t_game *game) {
+// 	mlx_p
+// 	game->texture->ea = mlx_load_png(game->data->ea_texture);
+// }
 
 void init(t_game *game)
 {
@@ -32,6 +34,9 @@ void init(t_game *game)
 		return ; // add an exit + free all
 	game->ray = malloc(sizeof(t_ray));
 	if (!game->ray)
+		return ; // add an exit + free all
+	game->texture = malloc(sizeof(t_texture));
+	if (!game->texture)
 		return ; // add an exit + free all
 	// check and malloc complete
 	game->ray->fov_rd = (FOV * M_PI) / 180; // field of view in radians

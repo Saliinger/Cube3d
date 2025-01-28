@@ -15,6 +15,13 @@
 
 # define FOV 60 // used to calculate the angle of the ray
 
+typedef struct s_texture {
+	mlx_image_t *no;
+	mlx_image_t *so;
+	mlx_image_t *we;
+	mlx_image_t *ea;
+}	t_texture;
+
 typedef struct s_ray
 {
 	float fov_rd;
@@ -45,6 +52,7 @@ typedef struct s_game
 	t_player    *player;
 	t_data      *data;
 	t_ray       *ray;
+	t_texture   *texture;
 }               t_game;
 
 int exec(t_data *data);
@@ -54,7 +62,7 @@ void init(t_game *game);
 void left_right(t_game *game, int i);
 void wasd(t_game *game, mlx_key_data_t key);
 void ft_hook(mlx_key_data_t keydata, void *param);
-void raycasting(t_game *game);
+
 
 
 int map_width(char **map);
@@ -63,5 +71,16 @@ int map_height(char **map);
 // debug
 void init_map(t_game *game);
 void debug_player(t_game *game);
+
+// raycasting
+void raycasting(t_game *game);
+float	nor_angle(float angle);
+
+// render
+void	render_wall(t_game *game, int ray);
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color);
+int	get_color(t_game *game, int flag);
+void	draw_wall(t_game *game, int ray, int t_pix, int b_pix);
+void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix);
 
 #endif //CUBE3D_EXEC_H
