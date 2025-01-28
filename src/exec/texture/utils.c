@@ -13,43 +13,23 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)	// put the pixel
 	mlx_put_pixel(game->fpv, x, y, color); // put the pixel
 }
 
-int	get_color(t_game *game, int flag)	// get the color of the wall
+// get the texture of the wall by checking the flag to know if it's a north/sud or east west wall then use a furmula to choose wich one it's'
+mlx_texture_t *get_texture(t_game *game, int flag)
 {
-	game->ray->ray_angle = nor_angle(game->ray->ray_angle); // normalize the angle
+  	int angle = nor_angle(game->ray->ray_angle);
 	if (flag == 0)
 	{
-		if (game->ray->ray_angle > M_PI / 2 && game->ray->ray_angle < 3 * (M_PI / 2))
-			return (0xB5B5B5FF); // west wall
-		else
-			return (0xB5B5B5FF); // east wall
+		if (angle > M_PI / 2 && angle < 3 * (M_PI / 2))
+           return (game->texture->ea);
+        else
+          return (game->texture->we);
 	}
 	else
 	{
-		if (game->ray->ray_angle > 0 && game->ray->ray_angle < M_PI)
-			return (0xF5F5F5FF); // south wall
+		if (angle > 0 && angle < M_PI)
+			return (game->texture->so);
 		else
-			return (0xF5F5F5FF); // north wall
+			return (game->texture->no);
 	}
-}
-
-void	draw_wall(t_game *game, int ray, int t_pix, int b_pix)	// draw the wall
-{
-	int color;
-
-	color = get_color(game, game->ray->flag);
-	while (t_pix < b_pix)
-		my_mlx_pixel_put(game, ray, t_pix++, color);
-}
-
-void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)	// draw the floor and the ceiling
-{
-	int		i;
-
-	i = b_pix;
-	while (i < WIN_HEIGHT)
-		my_mlx_pixel_put(game, ray, i++, 0xB99470FF); // floor
-	i = 0;
-	while (i < t_pix)
-		my_mlx_pixel_put(game, ray, i++, 0x89CFF3FF); // ceiling
 }
 

@@ -106,7 +106,8 @@ float inter_h(t_game *game) {
         h_x += x_step;
         h_y += y_step;
     }
-
+	game->ray->vert_x = h_x;
+	game->ray->vert_y = h_y;
     return sqrt(pow(h_x - game->player->x, 2) + pow(h_y - game->player->y, 2));
 }
 
@@ -130,39 +131,40 @@ float inter_w(t_game *game) {
         v_x += x_step;
         v_y += y_step;
     }
-
+	game->ray->horiz_x = v_x;
+	game->ray->horiz_y = v_y;
     return sqrt(pow(v_x - game->player->x, 2) + pow(v_y - game->player->y, 2));
 }
-
-void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color) {
-    // Clip coordinates to screen bounds
-    if (x0 < 0 || x0 >= WIN_WIDTH || y0 < 0 || y0 >= WIN_HEIGHT ||
-        x1 < 0 || x1 >= WIN_WIDTH || y1 < 0 || y1 >= WIN_HEIGHT)
-        return;
-
-    int dx = abs(x1 - x0);
-    int dy = abs(y1 - y0);
-    int sx = x0 < x1 ? 1 : -1;
-    int sy = y0 < y1 ? 1 : -1;
-    int err = dx - dy;
-
-    while (1) {
-        mlx_put_pixel(game->fpv, x0, y0, color);
-
-        if (x0 == x1 && y0 == y1)
-            break;
-
-        int e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            x0 += sx;
-        }
-        if (e2 < dx) {
-            err += dx;
-            y0 += sy;
-        }
-    }
-}
+//
+// void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color) {
+//     // Clip coordinates to screen bounds
+//     if (x0 < 0 || x0 >= WIN_WIDTH || y0 < 0 || y0 >= WIN_HEIGHT ||
+//         x1 < 0 || x1 >= WIN_WIDTH || y1 < 0 || y1 >= WIN_HEIGHT)
+//         return;
+//
+//     int dx = abs(x1 - x0);
+//     int dy = abs(y1 - y0);
+//     int sx = x0 < x1 ? 1 : -1;
+//     int sy = y0 < y1 ? 1 : -1;
+//     int err = dx - dy;
+//
+//     while (1) {
+//         mlx_put_pixel(game->fpv, x0, y0, color);
+//
+//         if (x0 == x1 && y0 == y1)
+//             break;
+//
+//         int e2 = 2 * err;
+//         if (e2 > -dy) {
+//             err -= dy;
+//             x0 += sx;
+//         }
+//         if (e2 < dx) {
+//             err += dx;
+//             y0 += sy;
+//         }
+//     }
+// }
 
 void raycasting(t_game *game) {
     int x = 0;

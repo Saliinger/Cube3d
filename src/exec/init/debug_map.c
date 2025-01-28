@@ -1,6 +1,6 @@
 #include "../../../include/cube3d.h"
 
-uint32_t rgb_to_hex(int red, int green, int blue) {
+static uint32_t rgb_to_hex(int red, int green, int blue) {
 	// Vérification que les valeurs sont dans la plage valide
 	if (red < 0 || red > 255 ||
 	    green < 0 || green > 255 ||
