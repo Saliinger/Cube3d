@@ -55,11 +55,9 @@ double	get_x_o(mlx_texture_t	*texture, t_game *game)
 	double	x_o;
 
 	if (game->ray->flag == 1)
-		x_o = (int)fmodf((game->ray->horiz_x * \
-		(texture->width / TILE_SIZE)), texture->width);
+		x_o = (int)fmodf((game->ray->horiz_x * (texture->width / TILE_SIZE)), texture->width);
 	else
-		x_o = (int)fmodf((game->ray->vert_y * \
-		(texture->width / TILE_SIZE)), texture->width);
+		x_o = (int)fmodf((game->ray->vert_y * (texture->width / TILE_SIZE)), texture->width);
 	return (x_o);
 }
 
@@ -80,7 +78,8 @@ void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 		y_o = 0;
 	while (t_pix < b_pix)
 	{
-		my_mlx_pixel_put(game, game->ray->index, t_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+		my_mlx_pixel_put(game, game->ray->index, t_pix, arr[(int)y_o * texture->width + (int)x_o]);
+        //display_color(arr[(int)y_o * texture->width + (int)x_o]);
 		y_o += factor;
 		t_pix++;
 	}

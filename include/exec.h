@@ -86,5 +86,7 @@ void			render_wall(t_game *game, int ray);
 void			my_mlx_pixel_put(t_game *game, int x, int y, int color);
 int				get_color(t_game *game, int flag);
 mlx_texture_t	*get_texture(t_game *game, int flag);
+int	reverse_bytes(int c)
+;
 
 #endif //CUBE3D_EXEC_H

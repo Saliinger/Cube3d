@@ -186,19 +186,18 @@ void raycasting(t_game *game) {
             game->ray->wall_dist = h_inter;
             game->ray->flag = 1;
         }
-
-        // // Visualize the ray for debugging
-        // float ray_x = game->player->x + cos(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
-        // float ray_y = game->player->y + sin(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
-        // draw_line(game, game->player->x, game->player->y, ray_x, ray_y, 0xFFFFFF);
-        //
-        // // Debugging output
-        // printf("Ray %d: Angle=%.2f, Dist=%.2f, RayX=%.2f, RayY=%.2f\n",
-        //        x, game->ray->ray_angle, game->ray->wall_dist, ray_x, ray_y);
     	render_wall(game, x);
-
-        // Increment ray angle
         game->ray->ray_angle = nor_angle(game->ray->ray_angle + (game->ray->fov_rd / WIN_WIDTH));
         x++;
     }
 }
+
+
+// // Visualize the ray for debugging
+// float ray_x = game->player->x + cos(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
+// float ray_y = game->player->y + sin(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
+// draw_line(game, game->player->x, game->player->y, ray_x, ray_y, 0xFFFFFF);
+//
+// // Debugging output
+// printf("Ray %d: Angle=%.2f, Dist=%.2f, RayX=%.2f, RayY=%.2f\n",
+//        x, game->ray->ray_angle, game->ray->wall_dist, ray_x, ray_y);
