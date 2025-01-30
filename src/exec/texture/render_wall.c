@@ -78,7 +78,7 @@ void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 		y_o = 0;
 	while (t_pix < b_pix)
 	{
-		my_mlx_pixel_put(game, game->ray->index, t_pix, arr[(int)y_o * texture->width + (int)x_o]);
+		my_mlx_pixel_put(game, game->ray->index, t_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
         //display_color(arr[(int)y_o * texture->width + (int)x_o]);
 		y_o += factor;
 		t_pix++;
