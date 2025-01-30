@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:25:45 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/30 19:36:34 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/30 20:02:47 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int	handle_key_match(char *line, t_key *keys, int keys_i)
 	return (1);
 }
 
-static int	cleanup_and_exit(t_data *data, char *line, char *dup_line, int fd)
+static int	cleanup_and_exit(char *line, char *dup_line, int fd)
 {
 	free(line);
 	free(dup_line);
@@ -73,7 +73,7 @@ int	parser(char *file, t_data *data)
 		dup_line = ft_strdup(line);
 		trim(line);
 		if (*line != '\0' && !process_line(data, line, dup_line, &p_data))
-			return (cleanup_and_exit(data, line, dup_line, fd));
+			return (cleanup_and_exit(line, dup_line, fd));
 		free(line);
 		free(dup_line);
 		line = get_next_line(fd);
