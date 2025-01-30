@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          #+#  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-23 16:35:49 by jalbiser          #+#    #+#             */
-/*   Updated: 2025-01-23 16:35:49 by jalbiser         ###   ########.fr       */
+/*   Created: 2025/01/23 16:35:49 by jalbiser          #+#    #+#             */
+/*   Updated: 2025/01/30 19:18:12 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	trim(char *str)
 {
-	int length;
-	int start;
-	int end;
+	int	length;
+	int	start;
+	int	end;
 
 	start = 0;
 	end = ft_strlen(str) - 1;

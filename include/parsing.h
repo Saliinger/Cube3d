@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 22:31:58 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/18 16:49:18 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/01/30 19:36:43 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,12 @@ typedef struct s_data
 	char	**map;
 }			t_data;
 
+typedef struct s_parser_data
+{
+	t_key	keys[6];
+	int		z;
+}			t_parser_data;
+
 t_data		parsing(char **args);
 void		init_data(t_data *data);
 bool		valid_extension(char *file);
@@ -59,5 +65,9 @@ int			valid_map(t_data *data);
 int			get_position_player(t_data *data);
 int			wall_map(t_data *data);
 int			parser(char *file, t_data *data);
+int			process_line(t_data *data, char *line, char *dup_line,
+				t_parser_data *p_data);
+int			handle_key_match(char *line, t_key *keys, int keys_i);
+int			process_map_line(t_data *data, char *line, char *dup_line, int *z);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          #+#  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-23 15:06:01 by jalbiser          #+#    #+#             */
-/*   Updated: 2025-01-23 15:06:01 by jalbiser         ###   ########.fr       */
+/*   Created: 2025/01/23 15:06:01 by jalbiser          #+#    #+#             */
+/*   Updated: 2025/01/30 19:15:04 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ t_data	parsing(char **args)
 	if (!args[1])
 		return (printf("Error: No file provided\n"), exit(1), result);
 	if (!valid_extension(args[1]))
-		return (printf("Error: The file must have the .cub extension\n"), exit(1), result);
+		return (printf("Error: The file must have the .cub extension\n"),
+			exit(1), result);
 	if (!parser(args[1], &result))
 		return (free_data(&result), exit(1), result);
 	if (!wall_map(&result))

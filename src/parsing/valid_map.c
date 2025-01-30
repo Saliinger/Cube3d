@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   valid_map.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          #+#  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025-01-24 15:09:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025-01-24 15:09:59 by jalbiser         ###   ########.fr       */
+/*   Created: 2025/01/24 15:09:59 by jalbiser          #+#    #+#             */
+/*   Updated: 2025/01/30 19:14:21 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	valid_map(t_data *data)
 {
-	int i;
-	int a;
+	int	i;
+	int	a;
 
 	i = 0;
 	while (data->map[i])

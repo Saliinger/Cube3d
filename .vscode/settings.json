@@ -3,5 +3,8 @@
 		"get_next_line.h": "c",
 		"parsing.h": "c",
 		"cstdlib": "c"
-	}
+	},
+	"42header.username": "jalbiser",
+	"42header.email": "jalbiser@student.42.fr",
+	"editor.insertSpaces": false
 }
