@@ -79,7 +79,6 @@ void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 	while (t_pix < b_pix)
 	{
 		my_mlx_pixel_put(game, game->ray->index, t_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
-        //display_color(arr[(int)y_o * texture->width + (int)x_o]);
 		y_o += factor;
 		t_pix++;
 	}
@@ -100,6 +99,6 @@ void	render_wall(t_game *game, int ray)	// render the wall
 		b_pix = WIN_HEIGHT;
 	if (t_pix < 0) // check the top pixel
 		t_pix = 0;
-	draw_wall(game, ray, t_pix, b_pix); // draw the wall
 	draw_floor_ceiling(game, ray, t_pix, b_pix); // draw the floor and the ceiling
+	draw_wall(game, ray, t_pix, b_pix); // draw the wall
 }

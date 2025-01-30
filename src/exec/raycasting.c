@@ -106,8 +106,9 @@ float inter_h(t_game *game) {
         h_x += x_step;
         h_y += y_step;
     }
-	game->ray->vert_x = h_x;
-	game->ray->vert_y = h_y;
+
+	game->ray->horiz_x = h_x;
+	game->ray->horiz_y = h_y;
     return sqrt(pow(h_x - game->player->x, 2) + pow(h_y - game->player->y, 2));
 }
 
@@ -131,11 +132,11 @@ float inter_w(t_game *game) {
         v_x += x_step;
         v_y += y_step;
     }
-	game->ray->horiz_x = v_x;
-	game->ray->horiz_y = v_y;
+	game->ray->vert_x = v_x;
+	game->ray->vert_y = v_y;
     return sqrt(pow(v_x - game->player->x, 2) + pow(v_y - game->player->y, 2));
 }
-//
+
 // void draw_line(t_game *game, int x0, int y0, int x1, int y1, int color) {
 //     // Clip coordinates to screen bounds
 //     if (x0 < 0 || x0 >= WIN_WIDTH || y0 < 0 || y0 >= WIN_HEIGHT ||
@@ -180,9 +181,10 @@ void raycasting(t_game *game) {
         v_inter = inter_w(game);
 
         // Use the shortest intersection distance
-        if (v_inter <= h_inter) {
+        if (v_inter <= h_inter)
             game->ray->wall_dist = v_inter;
-        } else {
+        else
+        {
             game->ray->wall_dist = h_inter;
             game->ray->flag = 1;
         }
