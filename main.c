@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42mulhouse.fr>    +#+  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 21:07:51 by anoukan           #+#    #+#             */
-/*   Updated: 2025/01/17 21:08:28 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/02/20 22:39:40 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./include/cube3d.h"
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	t_data data;
+	t_data	data;
 
 	(void)ac;
 	data = parsing(av);
 	if (exec(&data))
 		return (1);
-	return(0);
+	return (0);
 }
