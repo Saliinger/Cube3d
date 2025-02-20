@@ -6,13 +6,12 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:18:19 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/02/20 22:39:07 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/02/20 22:46:17 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/cube3d.h"
 
-// put the angle on 0 to 180
 int	unit_circle(float angle, char c)
 {
 	if (c == 'x')
@@ -28,8 +27,6 @@ int	unit_circle(float angle, char c)
 	return (0);
 }
 
-// check intersection
-// increase the inter if the angle is is in tolerance and remove one step
 int	inter_check(float angle, float *inter, float *step, int is_horizon)
 {
 	if (is_horizon)
@@ -53,7 +50,6 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	return (1);
 }
 
-// check if the ray hit a wall
 int	wall_hit(float x, float y, t_game *game)
 {
 	int	x_m;
@@ -165,7 +161,6 @@ float	inter_w(t_game *game)
 // 	}
 // }
 
-// the raycasting iterate through each pixel of the window width to get every wall distance
 void	raycasting(t_game *game)
 {
 	int		x;
@@ -193,9 +188,6 @@ void	raycasting(t_game *game)
 	}
 }
 
-// // Visualize the ray for debugging
-
-//
 // // Debugging output
 // printf("Ray %d: Angle=%.2f, Dist=%.2f, RayX=%.2f, RayY=%.2f\n",
 //        x, game->ray->ray_angle, game->ray->wall_dist, ray_x, ray_y);

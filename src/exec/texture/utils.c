@@ -6,26 +6,25 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:37:15 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/02/20 22:37:17 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/02/20 22:49:56 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/cube3d.h"
 
-void	my_mlx_pixel_put(t_game *game, int x, int y, int color) // put the pixel
+void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 {
-	if (x < 0) // check the x position
+	if (x < 0)
 		return ;
 	else if (x >= WIN_WIDTH)
 		return ;
-	if (y < 0) // check the y position
+	if (y < 0)
 		return ;
 	else if (y >= WIN_HEIGHT)
 		return ;
-	mlx_put_pixel(game->fpv, x, y, color); // put the pixel
+	mlx_put_pixel(game->fpv, x, y, color);
 }
 
-// get the texture of the wall by checking the flag to know if it's a north/sud or east west wall then use a furmula to choose wich one it's'
 mlx_texture_t	*get_texture(t_game *game, int flag)
 {
 	int	angle;

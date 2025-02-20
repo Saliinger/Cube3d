@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:17:45 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/02/20 22:36:59 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/02/20 22:43:20 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 static uint32_t	rgb_to_hex(int red, int green, int blue)
 {
+	uint32_t	hex;
+
 	if (red < 0 || red > 255 || green < 0 || green > 255 || blue < 0
 		|| blue > 255)
 	{
@@ -21,31 +23,26 @@ static uint32_t	rgb_to_hex(int red, int green, int blue)
 			"Erreur: Les valeurs RGB doivent être entre 0 et 255\n");
 		return (0);
 	}
-	uint32_t hex = ((uint32_t)red << 24) | // Rouge dans les bits 31-24
-		((uint32_t)green << 16) |          // Vert dans les bits 23-16
-		((uint32_t)blue << 8) |            // Bleu dans les bits 15-8
-		0xFF;                              // Alpha (255) dans les bits 7-0
+	hex = ((uint32_t)red << 24) | ((uint32_t)green << 16) | ((uint32_t)blue << 8) | 0xFF;
 	return (hex);
 }
 
 void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
-// draw the floor and the ceiling
 {
-	int i;
-	int floor;
-	int ceiling;
+	int	i;
+	int	floor;
+	int	ceiling;
 
 	floor = rgb_to_hex(game->data->floor[0], game->data->floor[1],
 			game->data->floor[2]);
 	ceiling = rgb_to_hex(game->data->ceiling[0], game->data->ceiling[1],
 			game->data->ceiling[2]);
 	i = b_pix;
-
 	while (i < WIN_HEIGHT)
-		my_mlx_pixel_put(game, ray, i++, floor); // floor
+		my_mlx_pixel_put(game, ray, i++, floor);
 	i = 0;
 	while (i < t_pix)
-		my_mlx_pixel_put(game, ray, i++, ceiling); // ceiling
+		my_mlx_pixel_put(game, ray, i++, ceiling);
 }
 
 int	reverse_bytes(int c)
@@ -97,27 +94,23 @@ void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 	}
 }
 
-void	render_wall(t_game *game, int ray) // render the wall
+void	render_wall(t_game *game, int ray)
 {
-	double wall_h;
-	double b_pix;
-	double t_pix;
+	double	wall_h;
+	double	b_pix;
+	double	t_pix;
 
 	game->ray->wall_dist *= cos(nor_angle(game->ray->ray_angle
-				- game->player->direction));       // fix the fisheye
+				- game->player->direction));
 	wall_h = (TILE_SIZE / game->ray->wall_dist) * ((WIN_WIDTH / 2)
-			/ tan(game->ray->fov_rd / 2)); // get the wall height
+			/ tan(game->ray->fov_rd / 2));
 	b_pix = (WIN_HEIGHT / 2) + (wall_h / 2);
-	// get the bottom pixel
 	t_pix = (WIN_HEIGHT / 2) - (wall_h / 2);
-	// get the top pixel
 	if (b_pix > WIN_HEIGHT)
-		// check the bottom pixel
 		b_pix = WIN_HEIGHT;
-	if (t_pix < 0) // check the top pixel
+	if (t_pix < 0)
 		t_pix = 0;
 	game->ray->index = ray;
 	draw_floor_ceiling(game, ray, t_pix, b_pix);
-	// draw the floor and the ceiling
-	draw_wall(game, t_pix, b_pix, wall_h); // draw the wall
+	draw_wall(game, t_pix, b_pix, wall_h);
 }

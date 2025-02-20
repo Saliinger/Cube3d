@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:18:15 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/02/20 22:37:34 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/02/20 22:45:14 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,74 +16,67 @@ void	rotate_player(t_game *game, int i)
 {
 	if (i == 1)
 	{
-		game->player->direction += ROTATION_SPEED; // rotate right
+		game->player->direction += ROTATION_SPEED;
 		if (game->player->direction > 2 * M_PI)
 			game->player->direction -= 2 * M_PI;
 	}
 	else
 	{
-		game->player->direction -= ROTATION_SPEED; // rotate left
+		game->player->direction -= ROTATION_SPEED;
 		if (game->player->direction < 0)
 			game->player->direction += 2 * M_PI;
 	}
 }
 
 void	move_player(t_game *game, double move_x, double move_y)
-// move the player
 {
-	int map_grid_y;
-	int map_grid_x;
-	int new_x;
-	int new_y;
+	int	map_grid_y;
+	int	map_grid_x;
+	int	new_x;
+	int	new_y;
 
 	new_x = roundf(game->player->x + move_x);
-	// get the new x position
 	new_y = roundf(game->player->y + move_y);
-	// get the new y position
 	map_grid_x = (new_x / TILE_SIZE);
-	// get the x position in the map
 	map_grid_y = (new_y / TILE_SIZE);
-	// get the y position in the map
 	if (game->data->map[map_grid_y][map_grid_x] != '1'
 		&& (game->data->map[map_grid_y][game->player->x / TILE_SIZE] != '1'
 			&& game->data->map[game->player->y / TILE_SIZE][map_grid_x] != '1'))
-	// check the wall hit and the diagonal wall hit
 	{
-		game->player->x = new_x; // move the player
-		game->player->y = new_y; // move the player
+		game->player->x = new_x;
+		game->player->y = new_y;
 	}
 }
 
 void	move(t_game *game, float move_x, float move_y)
 {
-	if (game->player->move_lr == 1) // rotate right
+	if (game->player->move_lr == 1)
 		rotate_player(game, 1);
-	if (game->player->move_lr == -1) // rotate left
+	if (game->player->move_lr == -1)
 		rotate_player(game, 0);
-	if (game->player->move_ad == 1) // move right
+	if (game->player->move_ad == 1)
 	{
 		move_x = -sin(game->player->direction) * PLAYER_SPEED;
 		move_y = cos(game->player->direction) * PLAYER_SPEED;
 	}
-	if (game->player->move_ad == -1) // move left
+	if (game->player->move_ad == -1)
 	{
 		move_x = sin(game->player->direction) * PLAYER_SPEED;
 		move_y = -cos(game->player->direction) * PLAYER_SPEED;
 	}
-	if (game->player->move_ws == 1) // move up
+	if (game->player->move_ws == 1)
 	{
 		move_x = cos(game->player->direction) * PLAYER_SPEED;
 		move_y = sin(game->player->direction) * PLAYER_SPEED;
 	}
-	if (game->player->move_ws == -1) // move down
+	if (game->player->move_ws == -1)
 	{
 		move_x = -cos(game->player->direction) * PLAYER_SPEED;
 		move_y = -sin(game->player->direction) * PLAYER_SPEED;
 	}
-	move_player(game, move_x, move_y); // move the player
+	move_player(game, move_x, move_y);
 }
 
-// loop will be use as a refresh on each move and will render everything
 void	loop_hook(void *param)
 {
 	t_game	*game;
