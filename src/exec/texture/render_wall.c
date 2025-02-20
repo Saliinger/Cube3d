@@ -78,9 +78,9 @@ void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 		y_o = 0;
 	while (t_pix < b_pix)
 	{
-		my_mlx_pixel_put(game, game->ray->index, t_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
+		my_mlx_pixel_put(game, (int)game->ray->index, t_pix, reverse_bytes(arr[(int)y_o * texture->width + (int)x_o]));
 		y_o += factor;
-		t_pix++;
+        t_pix++;
 	}
 }
 
@@ -90,7 +90,6 @@ void	render_wall(t_game *game, int ray)	// render the wall
 	double	b_pix;
 	double	t_pix;
 
-    game->ray->index = ray;
 	game->ray->wall_dist *= cos(nor_angle(game->ray->ray_angle - game->player->direction)); // fix the fisheye
 	wall_h = (TILE_SIZE / game->ray->wall_dist) * ((WIN_WIDTH / 2) / tan(game->ray->fov_rd / 2)); // get the wall height
 	b_pix = (WIN_HEIGHT / 2) + (wall_h / 2); // get the bottom pixel
@@ -99,6 +98,7 @@ void	render_wall(t_game *game, int ray)	// render the wall
 		b_pix = WIN_HEIGHT;
 	if (t_pix < 0) // check the top pixel
 		t_pix = 0;
+	game->ray->index = ray;
 	draw_floor_ceiling(game, ray, t_pix, b_pix); // draw the floor and the ceiling
-	draw_wall(game, ray, t_pix, b_pix); // draw the wall
+	draw_wall(game, t_pix, b_pix, wall_h); // draw the wall
 }

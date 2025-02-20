@@ -85,13 +85,6 @@ int exec(t_data *data)
 	game.data = data;
 	init(&game);
 	mlx_loop_hook(game.mlx, loop_hook, &game);
-	game.fpv = mlx_new_image(game.mlx, TILE_SIZE, TILE_SIZE);
-	// for (int i = 0; i < TILE_SIZE; i++)
-		// my_mlx_pixel_put(&game, 10, 10, rgb_to_hex(game.texture->ea->pixels[0], game.texture->ea->pixels[1], game.texture->ea->pixels[2]));
-	//printf("%u\n",rgb_to_hex(game.texture->ea->pixels[0], game.texture->ea->pixels[1], game.texture->ea->pixels[2]));
-	//mlx_image_to_window(game.mlx, game.fpv, 0, 0);
-	// game.map_debug = mlx_texture_to_image(game.mlx, game.texture->ea);
-	// mlx_image_to_window(game.mlx, game.map_debug, 0, 0);
 	mlx_key_hook(game.mlx, ft_hook, &game);
 	mlx_loop(game.mlx);
 	return (0);
