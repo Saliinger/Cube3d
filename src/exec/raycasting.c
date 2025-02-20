@@ -75,8 +75,8 @@ float	inter_h(t_game *game)
 {
 	int		pixel;
 	float	angle;
-	float	v_x;
-	float	v_y;
+	float	h_x;
+	float	h_y;
 	float	x_step;
 	float	y_step;
 
