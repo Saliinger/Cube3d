@@ -74,7 +74,7 @@ float inter_h(t_game *game) {
     pixel = inter_check(angle, &h_y, &y_step, 1);
     h_x = game->player->x + (h_y - game->player->y) / tan(angle);
     if ((unit_circle(angle, 'y') && x_step > 0) || (!unit_circle(angle, 'y') && x_step < 0))
-        x_step *= -1;
+    	x_step *= -1;
 	while (wall_hit(h_x, h_y - pixel, game))
     {
         h_x += x_step;
