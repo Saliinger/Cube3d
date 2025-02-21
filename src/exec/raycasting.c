@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/20 22:18:19 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/02/20 22:46:17 by jalbiser         ###   ########.fr       */
+/*   Created: 2025/02/21 14:49:40 by anoukan           #+#    #+#             */
+/*   Updated: 2025/02/21 14:49:41 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,12 +67,10 @@ int	wall_hit(float x, float y, t_game *game)
 	return (1);
 }
 
-float	inter_h(t_game *game)
+float	inter_h(t_game *game, float h_x, float h_y)
 {
 	int		pixel;
 	float	angle;
-	float	h_x;
-	float	h_y;
 	float	x_step;
 	float	y_step;
 
@@ -96,12 +94,10 @@ float	inter_h(t_game *game)
 				2)));
 }
 
-float	inter_w(t_game *game)
+float	inter_w(t_game *game, float v_x, float v_y)
 {
 	int		pixel;
 	float	angle;
-	float	v_x;
-	float	v_y;
 	float	x_step;
 	float	y_step;
 
@@ -124,6 +120,10 @@ float	inter_w(t_game *game)
 	return (sqrt(pow(v_x - game->player->x, 2) + pow(v_y - game->player->y,
 				2)));
 }
+
+// creer 2 fonction avec flag pour le faire qu'une seule
+// fois si w x_step = Tile size && y_step = TILE_SIZE * tan(angle);
+// et si h l'inverse pareille pour le calcul de vy vx hy hx
 
 // void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 // {
@@ -172,8 +172,8 @@ void	raycasting(t_game *game)
 	while (x < WIN_WIDTH)
 	{
 		game->ray->flag = 0;
-		h_inter = inter_h(game);
-		v_inter = inter_w(game);
+		h_inter = inter_h(game, 0, 0);
+		v_inter = inter_w(game, 0, 0);
 		if (v_inter <= h_inter)
 			game->ray->wall_dist = v_inter;
 		else
