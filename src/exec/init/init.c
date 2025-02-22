@@ -58,6 +58,8 @@ void	init(t_game *game)
 	game->map_w = map_width(game->data->map);
 	init_player(game);
 	game->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", 0);
+	init_map(game); // 2d map
+
 }
 
 // debug 2d

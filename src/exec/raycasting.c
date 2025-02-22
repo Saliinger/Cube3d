@@ -66,11 +66,12 @@ int	wall_hit(float x, float y, t_game *game)
 			return (0);
 	return (1);
 }
-
-float	inter_h(t_game *game, float h_x, float h_y)
+float	inter_h(t_game *game)
 {
 	int		pixel;
 	float	angle;
+	float	h_x;
+	float	h_y;
 	float	x_step;
 	float	y_step;
 
@@ -94,10 +95,12 @@ float	inter_h(t_game *game, float h_x, float h_y)
 				2)));
 }
 
-float	inter_w(t_game *game, float v_x, float v_y)
+float	inter_w(t_game *game)
 {
 	int		pixel;
 	float	angle;
+	float	v_x;
+	float	v_y;
 	float	x_step;
 	float	y_step;
 
@@ -125,41 +128,41 @@ float	inter_w(t_game *game, float v_x, float v_y)
 // fois si w x_step = Tile size && y_step = TILE_SIZE * tan(angle);
 // et si h l'inverse pareille pour le calcul de vy vx hy hx
 
-// void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
-// {
-// 	int	dx;
-// 	int	dy;
-// 	int	sx;
-// 	int	sy;
-// 	int	err;
-// 	int	e2;
+void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
+{
+	int	dx;
+	int	dy;
+	int	sx;
+	int	sy;
+	int	err;
+	int	e2;
 
-// 	if (x0 < 0 || x0 >= WIN_WIDTH || y0 < 0 || y0 >= WIN_HEIGHT || x1 < 0
-// 		|| x1 >= WIN_WIDTH || y1 < 0 || y1 >= WIN_HEIGHT)
-// 		return ;
-// 	dx = abs(x1 - x0);
-// 	dy = abs(y1 - y0);
-// 	sx = x0 < x1 ? 1 : -1;
-// 	sy = y0 < y1 ? 1 : -1;
-// 	err = dx - dy;
-// 	while (1)
-// 	{
-// 		mlx_put_pixel(game->fpv, x0, y0, color);
-// 		if (x0 == x1 && y0 == y1)
-// 			break ;
-// 		e2 = 2 * err;
-// 		if (e2 > -dy)
-// 		{
-// 			err -= dy;
-// 			x0 += sx;
-// 		}
-// 		if (e2 < dx)
-// 		{
-// 			err += dx;
-// 			y0 += sy;
-// 		}
-// 	}
-// }
+	if (x0 < 0 || x0 >= WIN_WIDTH || y0 < 0 || y0 >= WIN_HEIGHT || x1 < 0
+		|| x1 >= WIN_WIDTH || y1 < 0 || y1 >= WIN_HEIGHT)
+		return ;
+	dx = abs(x1 - x0);
+	dy = abs(y1 - y0);
+	sx = x0 < x1 ? 1 : -1;
+	sy = y0 < y1 ? 1 : -1;
+	err = dx - dy;
+	while (1)
+	{
+		mlx_put_pixel(game->fpv, x0, y0, color);
+		if (x0 == x1 && y0 == y1)
+			break ;
+		e2 = 2 * err;
+		if (e2 > -dy)
+		{
+			err -= dy;
+			x0 += sx;
+		}
+		if (e2 < dx)
+		{
+			err += dx;
+			y0 += sy;
+		}
+	}
+}
 
 void	raycasting(t_game *game)
 {
@@ -172,8 +175,9 @@ void	raycasting(t_game *game)
 	while (x < WIN_WIDTH)
 	{
 		game->ray->flag = 0;
-		h_inter = inter_h(game, 0, 0);
-		v_inter = inter_w(game, 0, 0);
+		h_inter = inter_h(game);
+		v_inter = inter_w(game);
+		// printf("%.2f %.2f\n", h_inter, v_inter);
 		if (v_inter <= h_inter)
 			game->ray->wall_dist = v_inter;
 		else
@@ -181,7 +185,10 @@ void	raycasting(t_game *game)
 			game->ray->wall_dist = h_inter;
 			game->ray->flag = 1;
 		}
-		render_wall(game, x);
+		// render_wall(game, x);
+		float ray_x = game->player->x + cos(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
+		float ray_y = game->player->y + sin(nor_angle(game->ray->ray_angle)) * game->ray->wall_dist;
+		draw_line(game, game->player->x, game->player->y, ray_x, ray_y, 0xFFFFFF);
 		game->ray->ray_angle = game->ray->ray_angle + (game->ray->fov_rd
 				/ WIN_WIDTH);
 		x++;
