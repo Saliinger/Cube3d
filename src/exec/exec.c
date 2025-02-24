@@ -45,15 +45,6 @@ void	move_player(t_game *game, double move_x, double move_y)
 	{
 		game->player->x = new_x;
 		game->player->y = new_y;
-		if (game->data->map[map_grid_y][map_grid_x + 1] == '1'
-			|| game->data->map[map_grid_y + 1][map_grid_x] == '1'
-			|| (game->data->map[map_grid_y][game->player->x / TILE_SIZE
-				+ 1] == '1' || game->data->map[game->player->y / TILE_SIZE
-				+ 1][map_grid_x] == '1'))
-		{
-			game->player->x -= 10;
-			game->player->y -= 10;
-		}
 	}
 }
 

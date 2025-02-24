@@ -67,7 +67,7 @@
  	printf("Initializing the map visuals...\n");
  	white_img = cube(game, rgb_to_hex(255, 255, 255));
  	black_img = cube(game, rgb_to_hex(0, 0, 0));
- 	border = 2;
+ 	border = 0;
  	i = 0;
  	map = game->data->map;
  	printf("Map layout:\n");
