@@ -32,10 +32,10 @@ mlx_texture_t	*get_texture(t_game *game, int flag)
 	angle = nor_angle(game->ray->ray_angle);
 	if (flag == 0)
 	{
-		if (angle > M_PI / 2 && angle < 3 * (M_PI / 2))
-			return (game->texture->ea);
-		else
-			return (game->texture->we);
+    if (game->ray->vert_x > game->player->x) // Ray went right
+        return (game->texture->we);
+    else
+        return (game->texture->ea);
 	}
 	else
 	{
