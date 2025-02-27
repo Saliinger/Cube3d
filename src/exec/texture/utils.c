@@ -27,9 +27,9 @@ void	my_mlx_pixel_put(t_game *game, int x, int y, int color)
 
 mlx_texture_t	*get_texture(t_game *game, int flag)
 {
-	int	angle;
-
-	angle = nor_angle(game->ray->ray_angle);
+//	int	angle;
+//
+//	angle = nor_angle(game->ray->ray_angle);
 	if (flag == 0)
 	{
     if (game->ray->vert_x > game->player->x) // Ray went right
@@ -39,9 +39,9 @@ mlx_texture_t	*get_texture(t_game *game, int flag)
 	}
 	else
 	{
-		if (angle > 0 && angle < M_PI)
-			return (game->texture->so);
-		else
-			return (game->texture->no);
+        if (game->ray->horiz_y > game->player->y) // Ray went down, hits north
+            return (game->texture->no);
+        else // Ray went up, hits south
+            return (game->texture->so);
 	}
 }
