@@ -12,6 +12,7 @@
 
 #include "../../include/cube3d.h"
 
+// set a checker si je suis bien dans le cercle trigo
 int	unit_circle(float angle, char c)
 {
 	if (c == 'x')
@@ -27,6 +28,7 @@ int	unit_circle(float angle, char c)
 	return (0);
 }
 
+// set a determiner dans quel parti du cercle trigo je suis et a set mon step et mon inter
 int	inter_check(float angle, float *inter, float *step, int is_horizon)
 {
 	if (is_horizon)
@@ -50,6 +52,9 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	return (1);
 }
 
+// on arrondi x_m & y_m a l'unite basse
+// pour avoir les coordonne dans le tableau de la map pour detecter le mur
+// il y a une securite pour voir si on est pas endehors de la map et  une pour savoir si c'est bien un mur
 int	wall_hit(float x, float y, t_game *game)
 {
 	int	x_m;
@@ -66,6 +71,8 @@ int	wall_hit(float x, float y, t_game *game)
 			return (0);
 	return (1);
 }
+
+// calcul de l'intersection dans la largeur
 float	inter_h(t_game *game)
 {
 	int		pixel;
@@ -95,6 +102,11 @@ float	inter_h(t_game *game)
 				2)));
 }
 
+// sqrt racine carre
+// pow power of
+
+
+// calcul de l'intersection dans la largeur
 float	inter_w(t_game *game)
 {
 	int		pixel;
@@ -123,6 +135,12 @@ float	inter_w(t_game *game)
 	return (sqrt(pow(v_x - game->player->x, 2) + pow(v_y - game->player->y,
 				2)));
 }
+
+// les intersections utilise la meme formule mais la valeurs des steps sont inverse en fonction de si cela est en largeur ou en hauteur
+// pour ce calcule on verifie la partie du cerlce trigo dans laquelle on est pour savoit si le step x/y est negatif ou positif
+// ensuite on utilise une boucle avec wallhit pour avancer pas a pas vers le murs
+//
+
 
 // creer 2 fonction avec flag pour le faire qu'une seule
 // fois si w x_step = Tile size && y_step = TILE_SIZE * tan(angle);

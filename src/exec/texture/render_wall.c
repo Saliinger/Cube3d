@@ -27,6 +27,7 @@ static uint32_t	rgb_to_hex(int red, int green, int blue)
 	return (hex);
 }
 
+// dessine le plafon et le sol
 void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
 {
 	int	i;
@@ -45,6 +46,7 @@ void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
 		my_mlx_pixel_put(game, ray, i++, ceiling);
 }
 
+// recupere la couleur en foncion du binainre stocke dans le tableau *pixel de la structure texture
 int	reverse_bytes(int c)
 {
 	unsigned int	b;
@@ -57,6 +59,7 @@ int	reverse_bytes(int c)
 	return (b);
 }
 
+// fonction pour savoir si je suis dans la largeur ou la hauteur pour la recuperation de la couleur dans la texture
 double	get_x_o(mlx_texture_t *texture, t_game *game)
 {
 	double	x_o;
@@ -69,6 +72,13 @@ double	get_x_o(mlx_texture_t *texture, t_game *game)
 				texture->width);
 	return (x_o);
 }
+
+// dessine le mur
+// t_pix = le pixel de depart en haut
+// b_pix = le pixel le plus bas
+// formule pour recuperer la couleur
+// arr[y_o * texture->width + x_o]
+// cela correspond a y_o nombre de ligne * la argeur d'une ligne + x la position de la couleur sur cette ligne donc en soit la colonne si on le prend comme un tableau a double entreer
 
 void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 {
@@ -93,6 +103,8 @@ void	draw_wall(t_game *game, int t_pix, int b_pix, double wall_h)
 		t_pix++;
 	}
 }
+
+
 
 void	render_wall(t_game *game, int ray)
 {
