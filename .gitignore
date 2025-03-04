@@ -3,3 +3,4 @@
 *.o
 ./.a.out
 cube3d
+.vscode

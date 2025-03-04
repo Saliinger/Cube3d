@@ -25,76 +25,55 @@
 # include <stdlib.h>
 
 # define FOV 60 // used to calculate the angle of the ray
+# define WIN_WIDTH 1900
+# define WIN_HEIGHT 1000
 
-typedef struct s_texture
-{
-	mlx_texture_t	*no;
-	mlx_texture_t	*so;
-	mlx_texture_t	*we;
-	mlx_texture_t	*ea;
-}					t_texture;
+# define ROTATION_SPEED 0.020 // rotation speed
+# define PLAYER_SPEED 5       // player speed
 
-typedef struct s_ray
-{
-	float			fov_rd;
-	float			ray_angle;
-	float			wall_dist;
-	int				flag;
-	int				index;
-	float			vert_x;
-	float			vert_y;
-	float			horiz_x;
-	float			horiz_y;
-}					t_ray;
+# define TILE_SIZE 32
 
-typedef struct s_player
+typedef struct	s_texture
 {
-	int				x;
-	int				y;
-	int				tile_x;
-	int				tile_y;
-	double			direction;
-	int				move_ws;
-	int				move_ad;
-	int				move_lr;
-}					t_player;
+	mlx_texture_t *nord;
+	mlx_texture_t *sud;
+	mlx_texture_t *est;
+	mlx_texture_t *ouest;
+}				t_texture;
 
-typedef struct s_game
+typedef struct	s_rayon
 {
-	mlx_image_t		*fpv;
-	mlx_t			*mlx;
-	int				map_w;
-	int				map_h;
-	t_player		*player;
-	t_data			*data;
-	t_ray			*ray;
-	t_texture		*texture;
-}					t_game;
+}				t_rayon;
+
+typedef struct	s_window
+{
+	mlx_image_t *img;
+	mlx_t		*mlx;
+}				t_window;
+
+typedef struct	s_player {
+	float		angle;
+	float		x;
+	float		y;
+}				t_player;
+
+typedef struct	s_game
+{
+	t_texture	*texture;
+	t_rayon		*rayon;
+	t_window	*window;
+	t_player	*player;
+	t_data		*data;
+}				t_game;
 
 int					exec(t_data *data);
-void				init(t_game *game);
 
-// moves
-void				left_right(t_game *game, int i);
-void				wasd(t_game *game, mlx_key_data_t key);
-void				ft_hook(mlx_key_data_t keydata, void *param);
+// 1) initialisation
+int					init(t_game *game);
+int	init_texture(t_game *game);
+int					init_window(t_game *game);
+int init_player(t_game *game);
+int init_ray(t_game *game);
 
-int					map_width(char **map);
-int					map_height(char **map);
-
-// debug
-void				init_map(t_game *game);
-void				debug_player(t_game *game);
-
-// raycasting
-void				raycasting(t_game *game);
-float				nor_angle(float angle);
-
-// render
-void				render_wall(t_game *game, int ray);
-void				my_mlx_pixel_put(t_game *game, int x, int y, int color);
-int					get_color(t_game *game, int flag);
-mlx_texture_t		*get_texture(t_game *game, int flag);
-int					reverse_bytes(int c);
 
 #endif
