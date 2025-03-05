@@ -9,7 +9,7 @@ int init_player(t_game *game)
     return (1);
   player->x = game->data->player_x;
   player->y = game->data->player_y;
-  player->angle = game->data->player_direction;
+  player->angle = M_PI / 2; // need to add a selector
   game->player = player;
   return (0);
 }

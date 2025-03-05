@@ -43,12 +43,19 @@ typedef struct	s_texture
 
 typedef struct	s_rayon
 {
+	float	wall_distance;
+	float	angle;
 }				t_rayon;
 
 typedef struct	s_window
 {
-	mlx_image_t *img;
+	mlx_image_t *fpv;
+	mlx_image_t *map_2d;
 	mlx_t		*mlx;
+	int			map_width;
+	int			map_height;
+	char		**map;
+
 }				t_window;
 
 typedef struct	s_player {
@@ -64,16 +71,32 @@ typedef struct	s_game
 	t_window	*window;
 	t_player	*player;
 	t_data		*data;
+	float		fov_rad;
 }				t_game;
 
 int					exec(t_data *data);
 
 // 1) initialisation
-int					init(t_game *game);
-int	init_texture(t_game *game);
-int					init_window(t_game *game);
-int init_player(t_game *game);
-int init_ray(t_game *game);
+void					init(t_game *game);
+int						init_texture(t_game *game);
+int						init_window(t_game *game);
+int						init_player(t_game *game);
+int						init_ray(t_game *game);
+
+// 2) Raycasting
+void raycasting(t_game *game);
+float normalize_angle(float angle);
+float inter_x(t_rayon *ray);
+float inter_y(t_rayon *ray);
+int wall_hit(char **map, float x, float y);
+
+
+// 2d debug
+void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+
+// utils
+int	map_height(char **map);
+int	map_width(char **map);
 
 
 #endif
