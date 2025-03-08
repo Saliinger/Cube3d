@@ -86,9 +86,9 @@ int						init_ray(t_game *game);
 // 2) Raycasting
 void raycasting(t_game *game);
 float normalize_angle(float angle);
-float inter_x(t_rayon *ray);
-float inter_y(t_rayon *ray);
-int wall_hit(char **map, float x, float y);
+float inter_x(t_game *game, t_rayon *ray);
+float inter_y(t_game *game, t_rayon *ray);
+int wall_hit(t_game *game, char **map, float x, float y);
 
 
 // 2d debug

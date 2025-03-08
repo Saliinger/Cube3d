@@ -12,8 +12,8 @@ void raycasting(t_game *game)
   game->rayon->angle = normalize_angle(game->player->angle - game->fov_rad / 2);
   while (x < WIN_WIDTH)
   {
-    wall_x = inter_x(game->rayon);
-    wall_y = inter_y(game->rayon);
+    wall_x = inter_x(game, game->rayon);
+    wall_y = inter_y(game, game->rayon);
 
     if (wall_y <= wall_x)
       game->rayon->wall_distance = wall_x;
