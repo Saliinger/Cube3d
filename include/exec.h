@@ -45,6 +45,10 @@ typedef struct	s_rayon
 {
 	float	wall_distance;
 	float	angle;
+	float	x_x;
+	float	x_y;
+	float	y_y;
+	float	y_x;
 }				t_rayon;
 
 typedef struct	s_window
@@ -86,8 +90,8 @@ int						init_ray(t_game *game);
 // 2) Raycasting
 void raycasting(t_game *game);
 float normalize_angle(float angle);
-float inter_x(t_rayon *ray);
-float inter_y(t_rayon *ray);
+float inter_x(t_game *game, t_rayon *ray);
+float inter_x(t_game *game, t_rayon *ray);
 int wall_hit(char **map, float x, float y);
 
 
