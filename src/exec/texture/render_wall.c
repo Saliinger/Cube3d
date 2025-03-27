@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:47:49 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/27 20:48:03 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/27 21:00:36 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,4 +14,8 @@
 
 void render_wall(t_game *game)
 {
+    mlx_texture_t *texture;
+
+    texture = get_texture(game);
+
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/02/21 14:47:44 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/03/27 21:00:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@
 
 # define TILE_SIZE 32
 
+# define X_AXIS 0
+# define Y_AXIS 1
+
 typedef struct	s_texture
 {
 	mlx_texture_t *nord;
@@ -49,7 +52,10 @@ typedef struct	s_rayon
 	float	x_y;
 	float	y_y;
 	float	y_x;
+	int		axis;
 }				t_rayon;
+
+// axis is 0 or 1 
 
 typedef struct	s_window
 {
@@ -97,6 +103,8 @@ int wall_hit(char **map, float x, float y);
 // 3 exec
 void game_loop(void *param);
 void		start_game(t_game *game);
+void		render(t_game *game);
+mlx_texture_t	*get_texture(t_game *game);
 
 
 // 2d debug

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/27 20:49:33 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/27 20:55:39 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,13 @@ void raycasting(t_game *game)
     if (wall_y <= wall_x)
       game->rayon->wall_distance = wall_x;
     else
+    {
       game->rayon->wall_distance = wall_y;
+      game->rayon->axis = 1;
+    }
 
     // add the wall render there
+    render_wall(game);
     x++;
     game->rayon->angle += game->fov_rad / WIN_WIDTH;
   }
