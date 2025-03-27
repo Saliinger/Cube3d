@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   2d_debug.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 20:40:32 by anoukan           #+#    #+#             */
+/*   Updated: 2025/03/27 20:40:33 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/exec.h"
 
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
@@ -36,8 +48,22 @@ void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
  	}
  }
 
-
-void map(t_game *game)
+static mlx_image_t *draw_cube(t_game *game, int color)
 {
+  mlx_image_t *cube = mlx_new_image(game->window->mlx, 64, 64);
 
+  for (int y = 0; y < 64; y++)
+    for (int x = 0; x < 64; x++)
+      mlx_put_pixel(cube, x, y, color);
+  return (cube);
+}
+
+
+void map_debug(t_game *game)
+{
+	mlx_image_t *wall = draw_cube(game, 6111187);
+   	for (int y = 0; game->window->map[y]; y++)
+          for (int x = 0; game->window->map[y][x]; x++)
+            if (game->window->map[y][x] == 1)
+              mlx_image_to_window(game->window->mlx, wall, x * 64, y * 64);
 }

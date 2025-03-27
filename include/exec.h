@@ -94,9 +94,14 @@ float inter_x(t_game *game, t_rayon *ray);
 float inter_x(t_game *game, t_rayon *ray);
 int wall_hit(char **map, float x, float y);
 
+// 3 exec
+void game_loop(void *param);
+void		start_game(t_game *game);
+
 
 // 2d debug
 void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color);
+void map_debug(t_game *game);
 
 // utils
 int	map_height(char **map);

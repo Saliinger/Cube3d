@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   intersection.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/27 20:49:26 by anoukan           #+#    #+#             */
+/*   Updated: 2025/03/27 20:49:27 by anoukan          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../../include/exec.h"
 
 static void init_delta(t_game *game, float *delta_x, float *delta_y, char flag)
@@ -22,24 +34,15 @@ float inter_x(t_game *game, t_rayon *ray)
   float step_y;
 
   init_delta(game, &delta_x, &delta_y, 'x');
-<<<<<<< HEAD
   step_x = TILE_SIZE / tan(ray->angle);
   step_y = TILE_SIZE;
   while (wall_hit(game->window->map, delta_x, delta_y))
-=======
-  step_x = TILE_SIZE;
-  step_y = TILE_SIZE / tan(ray->angle);
-  while(wall_hit(game, game->window->map, step_x, step_y))
->>>>>>> 625534bd5667920def00baa02f7300752d0fe39c
   {
     delta_x += step_x;
     delta_y += step_y;
   }
-<<<<<<< HEAD
   ray->x_x = delta_x;
   ray->x_y = delta_y;
-=======
->>>>>>> 625534bd5667920def00baa02f7300752d0fe39c
   return (sqrt(pow(delta_x - game->player->x, 2) + pow(delta_y - game->player->y, 2)));
 }
 
@@ -51,25 +54,15 @@ float inter_y(t_game *game, t_rayon *ray)
   float step_y;
 
   init_delta(game, &delta_x, &delta_y, 'y');
-<<<<<<< HEAD
   step_x = TILE_SIZE;
   step_y = TILE_SIZE / tan(ray->angle);
   while (wall_hit(game->window->map, delta_x, delta_y))
-=======
-  step_x = TILE_SIZE / tan(ray->angle);
-  step_y = TILE_SIZE;
-
-  while(wall_hit(game, game->window->map, step_x, step_y))
->>>>>>> 625534bd5667920def00baa02f7300752d0fe39c
   {
     delta_x += step_x;
     delta_y += step_y;
   }
-<<<<<<< HEAD
   ray->y_x = delta_x;
   ray->y_y = delta_y;
-=======
->>>>>>> 625534bd5667920def00baa02f7300752d0fe39c
   return (sqrt(pow(delta_x - game->player->x, 2) + pow(delta_y - game->player->y, 2)));
 }
 
