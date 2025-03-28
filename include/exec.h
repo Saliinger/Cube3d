@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/03/28 16:17:56 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/28 21:55:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ mlx_texture_t		*get_texture(t_game *game);
 void				draw_floor_ceiling(t_game *game, int ray, int t_pix,
 						int b_pix);
 void				draw_wall(t_game *game, int ray, double top_pixel,
-						double bottom_pixel);
+						double bottom_pixel, double wall_h);
 
 // 2d debug
 void				draw_line(t_game *game, int x0, int y0, int x1, int y1,
@@ -119,5 +119,6 @@ void				map_debug(t_game *game);
 // utils
 int					map_height(char **map);
 int					map_width(char **map);
+uint32_t			rgb_to_hex(uint8_t r, uint8_t g, uint8_t b);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:48:50 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 16:18:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/28 21:57:29 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
 			game->data->ceiling[2]);
 	i = b_pix;
 	while (i < WIN_HEIGHT)
-		my_mlx_pixel_put(game, ray, i++, floor);
+		mlx_put_pixel(game->window->fpv, ray, i++, floor);
 	i = 0;
 	while (i < t_pix)
-		my_mlx_pixel_put(game, ray, i++, ceiling);
+		mlx_put_pixel(game->window->fpv, ray, i++, ceiling);
 }

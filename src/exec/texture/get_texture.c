@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:39 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 16:18:53 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/28 22:00:34 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,5 @@ mlx_texture_t	*get_texture(t_game *game)
 		else
 			return (game->texture->sud);
 	}
+	return (NULL);
 }

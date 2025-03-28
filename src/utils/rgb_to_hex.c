@@ -1,21 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   start_game.c                                       :+:      :+:    :+:   */
+/*   rgb_to_hex.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 16:18:22 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 22:01:37 by anoukan          ###   ########.fr       */
+/*   Created: 2025/03/28 21:44:12 by anoukan           #+#    #+#             */
+/*   Updated: 2025/03/28 21:44:27 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/exec.h"
+#include "../../include/exec.h"
 
-void	start_game(t_game *game)
+uint32_t	rgb_to_hex(uint8_t r, uint8_t g, uint8_t b)
 {
-	// loop for movement there
-	// loop for rendering
-	mlx_loop_hook(game->window->mlx, game_loop, game);
-	mlx_loop(game->window->mlx);
+    return ((r << 16) | (g << 8) | b);
 }
