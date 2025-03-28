@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 14:49:59 by anoukan           #+#    #+#             */
-/*   Updated: 2025/02/21 14:49:59 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/28 16:19:07 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	map_height(char **map)
 
 int	map_width(char **map)
 {
-	int	i;
-	int	j;
-	int	max_w;
-	int	vide;
+	int i;
+	int j;
+	int max_w;
+	int vide;
 
 	i = 0;
 	max_w = 0;

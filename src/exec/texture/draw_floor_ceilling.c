@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   draw_floor_ceilling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 20:40:21 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 16:18:05 by anoukan          ###   ########.fr       */
+/*   Created: 2025/03/28 15:48:50 by anoukan           #+#    #+#             */
+/*   Updated: 2025/03/28 16:18:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-void	game_loop(void *param)
+void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
 {
-	t_game	*game;
+	int i;
+	int floor;
+	int ceiling;
 
-	game = (t_game *)param;
-	mlx_delete_image(game->window->mlx, game->window->fpv);
-	game->window->fpv = mlx_new_image(game->window->mlx, WIN_WIDTH, WIN_HEIGHT);
-	raycasting(game);
-	mlx_image_to_window(game->window->mlx, game->window->fpv, 0, 0);
+	floor = rgb_to_hex(game->data->floor[0], game->data->floor[1],
+			game->data->floor[2]);
+	ceiling = rgb_to_hex(game->data->ceiling[0], game->data->ceiling[1],
+			game->data->ceiling[2]);
+	i = b_pix;
+	while (i < WIN_HEIGHT)
+		my_mlx_pixel_put(game, ray, i++, floor);
+	i = 0;
+	while (i < t_pix)
+		my_mlx_pixel_put(game, ray, i++, ceiling);
 }

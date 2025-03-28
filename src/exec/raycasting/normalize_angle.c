@@ -6,13 +6,13 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:30 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/27 20:49:31 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/28 16:18:42 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-float normalize_angle(float angle)
+float	normalize_angle(float angle)
 {
 	if (angle < 0)
 		angle += (2 * M_PI);
