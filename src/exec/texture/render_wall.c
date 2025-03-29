@@ -114,8 +114,7 @@ void	render_wall(t_game *game, int ray)
 
 	game->ray->wall_dist *= cos(nor_angle(game->ray->ray_angle
 				- game->player->direction));
-	wall_h = (TILE_SIZE / game->ray->wall_dist) * ((WIN_WIDTH / 2)
-			/ tan(game->ray->fov_rd / 2));
+	wall_h = (TILE_SIZE / game->ray->wall_dist) * ((WIN_WIDTH / 2) / tan(game->ray->fov_rd / 2));
 	b_pix = (WIN_HEIGHT / 2) + (wall_h / 2);
 	t_pix = (WIN_HEIGHT / 2) - (wall_h / 2);
 	if (b_pix > WIN_HEIGHT)
