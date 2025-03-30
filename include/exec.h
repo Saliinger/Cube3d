@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/03/30 00:08:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/30 19:49:45 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@
 # define PLAYER_SPEED 5       // player speed
 
 # define TILE_SIZE 32
+
+# define DEBUG 1
 
 # define X_AXIS 1
 # define Y_AXIS 0
@@ -121,5 +123,11 @@ void				map_debug(t_game *game);
 int					map_height(char **map);
 int					map_width(char **map);
 uint32_t			rgb_to_hex(uint8_t r, uint8_t g, uint8_t b);
+
+// delta
+float				delta_x_x(t_game *game, float delta_y);
+float				delta_x_y(t_game *game);
+float				delta_y_x(t_game *game);
+float				delta_y_y(t_game *game, float delta_x);
 
 #endif
