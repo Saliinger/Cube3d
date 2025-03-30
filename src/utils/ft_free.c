@@ -47,5 +47,6 @@ void	ft_free(t_game *game)
 	free_rayon(game->rayon);
 	free_window(game->window);
 	free_player(game->player);
+	free_data(game->data);
 	// free(game);
 }

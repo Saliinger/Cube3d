@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/03/30 19:49:45 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/31 01:03:58 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,5 +129,8 @@ float				delta_x_x(t_game *game, float delta_y);
 float				delta_x_y(t_game *game);
 float				delta_y_x(t_game *game);
 float				delta_y_y(t_game *game, float delta_x);
+
+// step
+
 
 #endif
