@@ -1,29 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 20:40:21 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/29 22:45:17 by anoukan          ###   ########.fr       */
+/*   Created: 2025/03/30 00:19:56 by anoukan           #+#    #+#             */
+/*   Updated: 2025/03/30 00:28:33 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-void	game_loop(void *param)
+void	move(void *param)
 {
-	t_game	*game;
-
-	game = (t_game *)param;
-	mlx_delete_image(game->window->mlx, game->window->fpv);
-	game->window->fpv = mlx_new_image(game->window->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!game->window->fpv)
-	{
-		ft_printf("Error: mlx_new_image failed\n");
-		exit(1);
-	}
-	raycasting(game);
-	mlx_image_to_window(game->window->mlx, game->window->fpv, 0, 0);
 }

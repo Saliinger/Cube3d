@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:39 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 22:00:34 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:10:38 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,18 @@
 
 mlx_texture_t	*get_texture(t_game *game)
 {
-	if (game->rayon->axis == X_AXIS)
+	if (game->rayon->axis == Y_AXIS)
 	{
 		if (game->rayon->x_x > game->player->x)
 			return (game->texture->ouest);
 		else
 			return (game->texture->est);
 	}
-	else if (game->rayon->axis == Y_AXIS)
+	else
 	{
 		if (game->rayon->y_y > game->player->y)
 			return (game->texture->nord);
 		else
 			return (game->texture->sud);
 	}
-	return (NULL);
 }

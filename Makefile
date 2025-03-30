@@ -12,10 +12,13 @@ UTILS_D = ./src/utils
 PARSING_D = ./src/parsing
 PUTILS_D = ./src/parsing/utils
 TEX_D = ./src/exec/texture
-
+GAME_D = ./src/exec/game
+RAY_D = ./src/exec/raycasting
 
 SRC=			$(wildcard *.c) \
 				  $(wildcard $(EXEC_D)/*.c) \
+				  $(wildcard $(GAME_D)/*.c) \
+				  $(wildcard $(RAY_D)/*.c) \
 				  $(wildcard $(TEX_D)/*.c) \
 				  $(wildcard $(CONTROL_D)/*.c) \
 				  $(wildcard $(INIT_D)/*.c) \

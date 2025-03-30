@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:47:49 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 21:55:31 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/03/30 00:07:40 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	render(t_game *game, int ray)
 	double	wall_height;
 
 	game->rayon->wall_distance *= cos(game->rayon->angle - game->player->angle);
-	wall_height = (TILE_SIZE / game->rayon->wall_distance) * (WIN_WIDTH / 2)
-		/ tan(game->fov_rad / 2);
+	wall_height = (TILE_SIZE / game->rayon->wall_distance) * ((WIN_WIDTH / 2) / tan(game->fov_rad / 2));
 	top_pixel = (WIN_HEIGHT / 2) - (wall_height / 2);
 	bottom_pixel = (WIN_HEIGHT / 2) + (wall_height / 2);
+	if (top_pixel < 0)
+		top_pixel = 0;
+	if (bottom_pixel > WIN_HEIGHT)
+		bottom_pixel = WIN_HEIGHT;
 	draw_floor_ceiling(game, ray, top_pixel, bottom_pixel);
 	draw_wall(game, ray, top_pixel, bottom_pixel, wall_height);
 }
