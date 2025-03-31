@@ -6,7 +6,7 @@ LIBRARIES   := -lgnl -lmlx42 -lglfw -lprintf -lft -lm
 FRAMEWORKS  := -framework Cocoa -framework OpenGL -framework IOKit
 
 EXEC_D = ./src/exec
-CONTROL_D = ./src/exec/control
+CONTROL_D = ./src/exec/movement
 INIT_D = ./src/exec/init
 UTILS_D = ./src/utils
 PARSING_D = ./src/parsing
