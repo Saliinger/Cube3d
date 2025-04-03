@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/31 05:52:04 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/03 22:34:06 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	raycasting(t_game *game)
 				+ sin(normalize_angle(game->rayon->angle))
 				* game->rayon->wall_distance;
 			draw_line(game, game->player->x, game->player->y, ray_x, ray_y,
-				0x11FF);
+				rgb_to_hex(255, 0, 0));
 		}
 		else
 			render(game, x);

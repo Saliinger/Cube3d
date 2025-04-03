@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:40:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/30 18:00:11 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/01 17:19:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,14 @@ void	draw_line(t_game *game, int x0, int y0, int x1, int y1, int color)
 	}
 }
 
-mlx_image_t	*make_cube(t_game *game)
+mlx_image_t	*make_cube(t_game *game, int color)
 {
 	mlx_image_t	*cube;
 
 	cube = mlx_new_image(game->window->mlx, TILE_SIZE, TILE_SIZE);
 	for (int i = 0; i < TILE_SIZE; i++)
 		for (int j = 0; j < TILE_SIZE; j++)
-			mlx_put_pixel(cube, i, j, 0xFFFFFF);
+			mlx_put_pixel(cube, i, j, color);
 	return (cube);
 }
 
@@ -66,7 +66,10 @@ void	map_debug(t_game *game)
 
 	i = 0;
 	j = 0;
-	game->window->map_2d = make_cube(game);
+	int gap = 0;
+	
+	mlx_image_t	*bg = make_cube(game,  rgb_to_hex(120, 120, 120));
+	game->window->map_2d = make_cube(game, rgb_to_hex(255, 0, 255));
 	while (game->window->map[i])
 	{
 		j = 0;
@@ -76,6 +79,9 @@ void	map_debug(t_game *game)
 			if (game->window->map[i][j] == '1')
 				mlx_image_to_window(game->window->mlx, game->window->map_2d, j
 					* TILE_SIZE, i * TILE_SIZE);
+			else
+				mlx_image_to_window(game->window->mlx, bg, j * TILE_SIZE,
+					i * TILE_SIZE);
 			j++;
 		}
 		i++;
