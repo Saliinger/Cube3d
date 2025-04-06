@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:03:44 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/30 00:15:25 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/06 15:34:01 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ double	get_x_o(mlx_texture_t *texture, t_game *game)
 	double	x_o;
 
 	if (game->rayon->axis == 1)
-		x_o = (int)fmodf((game->rayon->y_x * (texture->width / TILE_SIZE)),
+		x_o = (int)fmodf((game->rayon->x_x * (texture->width / TILE_SIZE)),
 				texture->width);
 	else
-		x_o = (int)fmodf((game->rayon->x_y * (texture->width / TILE_SIZE)),
+		x_o = (int)fmodf((game->rayon->y_y * (texture->width / TILE_SIZE)),
 				texture->width);
 	return (x_o);
 }

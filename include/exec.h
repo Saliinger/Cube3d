@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/01 17:11:50 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/06 15:12:13 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@
 
 # define TILE_SIZE 32
 
-# define DEBUG 1
+# define DEBUG 0
 
 # define X_AXIS 1
 # define Y_AXIS 0
