@@ -6,11 +6,11 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/10 15:05:57 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:16:39 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 18:07:27 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/exec.h"
+#include "../../include/exec.h"
 
 void	ft_exit(t_game *game, int status, char *str)
 {
