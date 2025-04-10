@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:30 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 16:18:42 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 22:56:29 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,3 @@ float	normalize_angle(float angle)
 		angle -= (2 * M_PI);
 	return (angle);
 }
-
-// mets l'angle entre 0 et 2 * pi

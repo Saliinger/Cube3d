@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 07:02:16 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/31 08:59:05 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 22:56:21 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,9 @@ float	step_y_x(t_game *game)
 
 float	step_y_y(t_game *game)
 {
-	float step;
+	float	step;
 
 	step = TILE_SIZE * tan(game->rayon->angle);
-
 	if ((game->rayon->angle > (M_PI / 2) && game->rayon->angle < (3 * M_PI) / 2)
 		&& step < 0)
 		return (-step);

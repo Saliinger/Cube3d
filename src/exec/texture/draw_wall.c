@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:03:44 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:15:26 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 22:52:32 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ int	reverse_bytes(int c)
 void	draw_wall(t_game *game, int ray, double top_pixel, double bottom_pixel,
 		double wall_h)
 {
-	mlx_texture_t *texture;
-	uint32_t *pixels;
-	double factor;
-	double x_o;
-	double y_o;
+	mlx_texture_t	*texture;
+	uint32_t		*pixels;
+	double			factor;
+	double			x_o;
+	double			y_o;
 
 	texture = get_texture(game);
 	pixels = (uint32_t *)texture->pixels;
