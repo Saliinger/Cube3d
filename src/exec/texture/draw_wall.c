@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:03:44 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/06 21:53:33 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:15:26 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	draw_wall(t_game *game, int ray, double top_pixel, double bottom_pixel,
 		y_o = 0;
 	while (top_pixel < bottom_pixel)
 	{
-		mlx_put_pixel(game->window->fpv, ray, top_pixel, reverse_bytes(pixels[(int)y_o
-			* texture->width + (int)x_o]));
+		mlx_put_pixel(game->window->fpv, ray, top_pixel,
+			reverse_bytes(pixels[(int)y_o * texture->width + (int)x_o]));
 		y_o += factor;
 		top_pixel++;
 	}

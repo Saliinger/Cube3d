@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:12:59 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:17:12 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static float	init_angle(t_game *game)
 
 int	init_player(t_game *game)
 {
-	t_player *player;
+	t_player	*player;
 
 	player = malloc(sizeof(t_player));
 	if (!player)

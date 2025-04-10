@@ -6,14 +6,12 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/06 15:11:46 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:18:10 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-
-// set a checker si je suis bien dans le cercle trigo
 int	unit_circle(float angle, char c)
 {
 	if (c == 'x')
@@ -29,7 +27,6 @@ int	unit_circle(float angle, char c)
 	return (0);
 }
 
-// set a determiner dans quel parti du cercle trigo je suis et a set mon step et mon inter
 int	inter_check(float angle, float *inter, float *step, int is_horizon)
 {
 	if (is_horizon)
@@ -53,7 +50,6 @@ int	inter_check(float angle, float *inter, float *step, int is_horizon)
 	return (1);
 }
 
-// calcul de l'intersection dans la largeur
 float	inter_h(t_game *game)
 {
 	int		pixel;
@@ -83,11 +79,6 @@ float	inter_h(t_game *game)
 				2)));
 }
 
-// sqrt racine carre
-// pow power of
-
-
-// calcul de l'intersection dans la largeur
 float	inter_w(t_game *game)
 {
 	int		pixel;
@@ -117,12 +108,11 @@ float	inter_w(t_game *game)
 				2)));
 }
 
-
 void	raycasting(t_game *game)
 {
-	int x;
-	float wall_x;
-	float wall_y;
+	int		x;
+	float	wall_x;
+	float	wall_y;
 
 	x = 0;
 	wall_x = 0;
@@ -134,7 +124,6 @@ void	raycasting(t_game *game)
 		game->rayon->axis = 0;
 		wall_x = inter_h(game);
 		wall_y = inter_w(game);
-
 		if (wall_y <= wall_x)
 			game->rayon->wall_distance = wall_y;
 		else
@@ -142,19 +131,7 @@ void	raycasting(t_game *game)
 			game->rayon->wall_distance = wall_x;
 			game->rayon->axis = X_AXIS;
 		}
-		if (DEBUG)
-		{
-			float ray_x = game->player->x
-				+ cos(normalize_angle(game->rayon->angle))
-				* game->rayon->wall_distance;
-			float ray_y = game->player->y
-				+ sin(normalize_angle(game->rayon->angle))
-				* game->rayon->wall_distance;
-			draw_line(game, game->player->x, game->player->y, ray_x, ray_y,
-				rgb_to_hex(255, 0, 0));
-		}
-		else
-			render(game, x);
+		render(game, x);
 		x++;
 		game->rayon->angle += game->fov_rad / WIN_WIDTH;
 	}

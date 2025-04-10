@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:48:50 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/29 22:42:51 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:15:43 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
 {
-	int i;
-	int floor;
-	int ceiling;
+	int	i;
+	int	floor;
+	int	ceiling;
 
 	floor = rgb_to_hex(game->data->floor[0], game->data->floor[1],
 			game->data->floor[2]);

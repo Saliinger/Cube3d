@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:20 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:13:22 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:16:46 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	init(t_game *game)
 {
-	int error;
+	int	error;
 
 	error = init_texture(game);
 	error += init_window(game);
