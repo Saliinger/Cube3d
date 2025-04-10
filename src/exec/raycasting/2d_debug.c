@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:40:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/01 17:19:01 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:12:03 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ mlx_image_t	*make_cube(t_game *game, int color)
 	mlx_image_t	*cube;
 
 	cube = mlx_new_image(game->window->mlx, TILE_SIZE, TILE_SIZE);
+	if (!cube)
+		ft_exit(game, EXIT_FAILURE, "Error: mlx_new_image failed");
 	for (int i = 0; i < TILE_SIZE; i++)
 		for (int j = 0; j < TILE_SIZE; j++)
 			mlx_put_pixel(cube, i, j, color);

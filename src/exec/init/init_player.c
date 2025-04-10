@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/30 18:06:08 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:12:59 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	init_player(t_game *game)
 
 	player = malloc(sizeof(t_player));
 	if (!player)
-		return (1);
+		ft_exit(game, 1, "Error: player not found");
 	player->x = game->data->player_x * TILE_SIZE;
 	player->y = game->data->player_y * TILE_SIZE;
 	player->angle = init_angle(game);

@@ -1,26 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   game_loop.c                                        :+:      :+:    :+:   */
+/*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/27 20:40:21 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:11:43 by anoukan          ###   ########.fr       */
+/*   Created: 2025/04/10 15:05:57 by anoukan           #+#    #+#             */
+/*   Updated: 2025/04/10 15:09:19 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-void	game_loop(void *param)
+void ft_exit(t_game *game, int status, char *str)
 {
-	t_game	*game;
-
-	game = (t_game *)param;
-	mlx_delete_image(game->window->mlx, game->window->fpv);
-	game->window->fpv = mlx_new_image(game->window->mlx, WIN_WIDTH, WIN_HEIGHT);
-	if (!game->window->fpv)
-		ft_exit(game, EXIT_FAILURE, "Error: mlx_new_image failed");
-	raycasting(game);
-	mlx_image_to_window(game->window->mlx, game->window->fpv, 0, 0);
+    ft_free(game);
+    if (str)
+        ft_printf("%s\n", str);
+    exit(status);
 }

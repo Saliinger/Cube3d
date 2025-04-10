@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/06 15:12:13 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/10 15:08:46 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,8 @@ void				map_debug(t_game *game);
 int					map_height(char **map);
 int					map_width(char **map);
 uint32_t			rgb_to_hex(int r, int g, int b);
+void				ft_free(t_game *game);
+void				ft_exit(t_game *game, int status, char *str);
 
 // delta
 float				delta_x_x(t_game *game, float delta_y);

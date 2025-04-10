@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:03:44 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/06 15:34:01 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/06 21:53:33 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,18 @@ double	get_x_o(mlx_texture_t *texture, t_game *game)
 		x_o = (int)fmodf((game->rayon->y_y * (texture->width / TILE_SIZE)),
 				texture->width);
 	return (x_o);
+}
+
+int	reverse_bytes(int c)
+{
+	unsigned int	b;
+
+	b = 0;
+	b |= (c & 0xFF) << 24;
+	b |= (c & 0xFF00) << 8;
+	b |= (c & 0xFF0000) >> 8;
+	b |= (c & 0xFF000000) >> 24;
+	return (b);
 }
 
 void	draw_wall(t_game *game, int ray, double top_pixel, double bottom_pixel,
@@ -43,8 +55,8 @@ void	draw_wall(t_game *game, int ray, double top_pixel, double bottom_pixel,
 		y_o = 0;
 	while (top_pixel < bottom_pixel)
 	{
-		mlx_put_pixel(game->window->fpv, ray, top_pixel, pixels[(int)y_o
-			* texture->width + (int)x_o]);
+		mlx_put_pixel(game->window->fpv, ray, top_pixel, reverse_bytes(pixels[(int)y_o
+			* texture->width + (int)x_o]));
 		y_o += factor;
 		top_pixel++;
 	}
