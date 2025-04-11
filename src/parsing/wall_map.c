@@ -32,10 +32,10 @@ static int	check_remaining_line(t_data *data, size_t i, size_t j,
 {
 	while (j < max_len)
 	{
-		if (i > 0 && data->map[i - 1][j] && data->map[i - 1][j] != ' '
+		if (i > 0 && j < ft_strlen(data->map[i - 1]) && data->map[i - 1][j] != ' '
 			&& data->map[i - 1][j] != '1')
 			return (0);
-		if (data->map[i + 1] && data->map[i + 1][j] && data->map[i
+		if (data->map[i + 1] && j < ft_strlen(data->map[i + 1]) && data->map[i
 			+ 1][j] != ' ' && data->map[i + 1][j] != '1')
 			return (0);
 		j++;
