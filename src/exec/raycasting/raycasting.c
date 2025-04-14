@@ -6,51 +6,13 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 18:08:39 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 22:11:37 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-int	unit_circle(float angle, char c)
-{
-	if (c == 'x')
-	{
-		if (angle > 0 && angle < M_PI)
-			return (1);
-	}
-	else if (c == 'y')
-	{
-		if (angle > (M_PI / 2) && angle < (3 * M_PI) / 2)
-			return (1);
-	}
-	return (0);
-}
-
-int	inter_check(float angle, float *inter, float *step, int is_horizon)
-{
-	if (is_horizon)
-	{
-		if (angle > 0 && angle < M_PI)
-		{
-			*inter += TILE_SIZE;
-			return (-1);
-		}
-		*step *= -1;
-	}
-	else
-	{
-		if (!(angle > M_PI / 2 && angle < 3 * M_PI / 2))
-		{
-			*inter += TILE_SIZE;
-			return (-1);
-		}
-		*step *= -1;
-	}
-	return (1);
-}
-
-float	inter_h(t_game *game)
+float	inter_y(t_game *game)
 {
 	int		pixel;
 	float	angle;
@@ -79,7 +41,7 @@ float	inter_h(t_game *game)
 				2)));
 }
 
-float	inter_w(t_game *game)
+float	inter_x(t_game *game)
 {
 	int		pixel;
 	float	angle;
@@ -122,8 +84,8 @@ void	raycasting(t_game *game)
 	while (x < WIN_WIDTH)
 	{
 		game->rayon->axis = 0;
-		wall_y = inter_y(game, game->rayon);
-		wall_x = inter_x(game, game->rayon);
+		wall_y = inter_y(game);
+		wall_x = inter_x(game);
 		if (wall_x <= wall_y)
 			game->rayon->wall_distance = wall_x;
 		else

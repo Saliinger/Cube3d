@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/14 17:10:47 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 22:55:51 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,10 @@
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
-# define ROTATION_SPEED 0.020 
+# define ROTATION_SPEED 0.020
 # define PLAYER_SPEED 5
 
 # define TILE_SIZE 32
-
-
 
 # define X_AXIS 1
 # define Y_AXIS 0
@@ -96,9 +94,10 @@ int					init_ray(t_game *game);
 // 2) Raycasting
 void				raycasting(t_game *game);
 float				normalize_angle(float angle);
-float				inter_x(t_game *game, t_rayon *ray);
-float				inter_y(t_game *game, t_rayon *ray);
 int					wall_hit(float x, float y, t_game *game);
+int					unit_circle(float angle, char c);
+int					inter_check(float angle, float *inter, float *step,
+						int is_horizon);
 
 // 3 exec
 void				game_loop(void *param);
@@ -110,6 +109,7 @@ void				draw_floor_ceiling(t_game *game, int ray, int t_pix,
 void				draw_wall(t_game *game, int ray, double top_pixel,
 						double bottom_pixel, double wall_h);
 void				game_loop(void *param);
+void				move(void *param);
 
 // utils
 int					map_height(char **map);
@@ -117,18 +117,5 @@ int					map_width(char **map);
 uint32_t			rgb_to_hex(int r, int g, int b);
 void				ft_free(t_game *game);
 void				ft_exit(t_game *game, int status, char *str);
-
-// delta
-float				delta_x_x(t_game *game);
-float				delta_x_y(t_game *game, float delta_x);
-float				delta_y_x(t_game *game, float delta_y);
-float				delta_y_y(t_game *game);
-
-// step
-float				step_x_x(t_game *game);
-float				step_x_y(t_game *game);
-float				step_y_x(t_game *game);
-float				step_y_y(t_game *game);
-void				move(void *param);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   wall_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 19:16:08 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/30 19:16:09 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/14 22:14:36 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ static int	check_remaining_line(t_data *data, size_t i, size_t j,
 {
 	while (j < max_len)
 	{
-		if (i > 0 && j < ft_strlen(data->map[i - 1]) && data->map[i - 1][j] != ' '
-			&& data->map[i - 1][j] != '1')
+		if (i > 0 && j < ft_strlen(data->map[i - 1]) && data->map[i
+				- 1][j] != ' ' && data->map[i - 1][j] != '1')
 			return (0);
 		if (data->map[i + 1] && j < ft_strlen(data->map[i + 1]) && data->map[i
-			+ 1][j] != ' ' && data->map[i + 1][j] != '1')
+				+ 1][j] != ' ' && data->map[i + 1][j] != '1')
 			return (0);
 		j++;
 	}
