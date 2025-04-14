@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/10 15:08:46 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:44:52 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
-# define FOV 60 // used to calculate the angle of the ray
+# define FOV 60
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 
-# define ROTATION_SPEED 0.020 // rotation speed
-# define PLAYER_SPEED 5       // player speed
+# define ROTATION_SPEED 0.020 
+# define PLAYER_SPEED 5
 
 # define TILE_SIZE 32
 
-# define DEBUG 0
+
 
 # define X_AXIS 1
 # define Y_AXIS 0
@@ -62,7 +62,6 @@ typedef struct s_rayon
 typedef struct s_window
 {
 	mlx_image_t		*fpv;
-	mlx_image_t		*map_2d;
 	mlx_t			*mlx;
 	int				map_width;
 	int				map_height;
@@ -113,11 +112,6 @@ void				draw_floor_ceiling(t_game *game, int ray, int t_pix,
 void				draw_wall(t_game *game, int ray, double top_pixel,
 						double bottom_pixel, double wall_h);
 void				game_loop(void *param);
-
-// 2d debug
-void				draw_line(t_game *game, int x0, int y0, int x1, int y1,
-						int color);
-void				map_debug(t_game *game);
 
 // utils
 int					map_height(char **map);
