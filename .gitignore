@@ -1,7 +1,7 @@
-./MLX42
-./libft
+MLX42
+libft
 *.o
-./.a.out
+a.out
 cube3d
 .vscode
 .idea
