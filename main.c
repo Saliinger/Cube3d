@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/17 21:07:51 by anoukan           #+#    #+#             */
-/*   Updated: 2025/03/28 16:19:10 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 19:34:27 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	(void)ac;
+if (ac != 2)
+{	printf("nique ta grang mere la pute"); return (0);}
 	data = parsing(av);
 	if (exec(&data))
 		return (1);
