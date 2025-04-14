@@ -26,6 +26,8 @@ int	valid_map(t_data *data)
 			if (!ft_strchr(" 01NSWE", data->map[i][a]))
 				return (printf("Error: invalid character in map => %c\n",
 						data->map[i][a]), 0);
+			if (data->map[i][a] == ' ')
+				data->map[i][a] = '0';
 			a++;
 		}
 		i++;
