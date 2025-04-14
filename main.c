@@ -16,8 +16,11 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-if (ac != 2)
-{	printf("nique ta grang mere la pute"); return (0);}
+	if (ac != 2)
+	{
+		printf("Erreur Pizza 14: Argument no valide\n");
+		return (1);
+	}
 	data = parsing(av);
 	if (exec(&data))
 		return (1);
