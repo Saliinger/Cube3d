@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/14 16:44:52 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 17:10:47 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,6 @@ typedef struct s_rayon
 	float			y_x;
 	int				axis;
 }					t_rayon;
-
-// axis is 0 or 1
 
 typedef struct s_window
 {
@@ -121,10 +119,10 @@ void				ft_free(t_game *game);
 void				ft_exit(t_game *game, int status, char *str);
 
 // delta
-float				delta_x_x(t_game *game, float delta_y);
-float				delta_x_y(t_game *game);
-float				delta_y_x(t_game *game);
-float				delta_y_y(t_game *game, float delta_x);
+float				delta_x_x(t_game *game);
+float				delta_x_y(t_game *game, float delta_x);
+float				delta_y_x(t_game *game, float delta_y);
+float				delta_y_y(t_game *game);
 
 // step
 float				step_x_x(t_game *game);

@@ -122,14 +122,14 @@ void	raycasting(t_game *game)
 	while (x < WIN_WIDTH)
 	{
 		game->rayon->axis = 0;
-		wall_x = inter_h(game);
-		wall_y = inter_w(game);
-		if (wall_y <= wall_x)
-			game->rayon->wall_distance = wall_y;
+		wall_y = inter_h(game);
+		wall_x = inter_w(game);
+		if (wall_x <= wall_y)
+			game->rayon->wall_distance = wall_x;
 		else
 		{
-			game->rayon->wall_distance = wall_x;
-			game->rayon->axis = X_AXIS;
+			game->rayon->wall_distance = wall_y;
+			game->rayon->axis = 1;
 		}
 		render(game, x);
 		x++;

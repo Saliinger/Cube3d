@@ -17,22 +17,22 @@ float	step_x_x(t_game *game)
 {
 	float	step;
 
-	step = TILE_SIZE / tan(game->rayon->angle);
-	if ((game->rayon->angle > 0 && game->rayon->angle < M_PI) && step < 0)
-		return (-step);
-	if (!(game->rayon->angle > 0 && game->rayon->angle < M_PI) && step > 0)
-		return (-step);
-	return (step);
+	step = TILE_SIZE;
+	if (!(game->rayon->angle > M_PI / 2 && game->rayon->angle < 3 * M_PI / 2))
+		return (step);
+	return (-step);
 }
 
 float	step_x_y(t_game *game)
 {
 	float	step;
 
-	step = TILE_SIZE;
-	if (game->rayon->angle > 0 && game->rayon->angle < M_PI)
-		return (step);
-	return (-step);
+	step = TILE_SIZE * tan(game->rayon->angle);
+	if ((game->rayon->angle > 0 && game->rayon->angle < M_PI) && step < 0) // step_y
+		step *= -1;
+	else if (!(game->rayon->angle > 0 && game->rayon->angle < M_PI) && step > 0)
+		step *= -1;
+	return (step);
 }
 
 // Y_AXIS
