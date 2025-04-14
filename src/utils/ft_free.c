@@ -28,8 +28,8 @@ static void	free_window(t_window *window)
 		return ;
 	if (window->fpv)
 		mlx_delete_image(window->mlx, window->fpv);
-	if (window->map_2d)
-		mlx_delete_image(window->mlx, window->map_2d);
+	// if (window->map_2d)
+	// 	mlx_delete_image(window->mlx, window->map_2d);
 	mlx_terminate(window->mlx);
 	free(window);
 }
