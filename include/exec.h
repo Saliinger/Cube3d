@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/14 22:55:51 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 23:18:36 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ typedef struct s_player
 	float			angle;
 	float			x;
 	float			y;
+	int				player_speed;
 }					t_player;
 
 typedef struct s_game
@@ -79,6 +80,7 @@ typedef struct s_game
 	t_window		*window;
 	t_player		*player;
 	t_data			*data;
+	int				cursor;
 	float			fov_rad;
 }					t_game;
 

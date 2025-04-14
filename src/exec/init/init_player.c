@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/14 19:19:13 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 23:20:19 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	init_player(t_game *game)
 		ft_exit(game, 1, "Error: player not found");
 	player->x = (game->data->player_x * TILE_SIZE) + (TILE_SIZE / 2);
 	player->y = (game->data->player_y * TILE_SIZE) + (TILE_SIZE / 2);
+	player->player_speed = 5;
 	player->angle = init_angle(game);
 	game->player = player;
 	return (0);

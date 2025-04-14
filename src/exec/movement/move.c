@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 06:34:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/14 22:32:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/14 23:19:28 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	handler_move(t_game *game, float *next_x, float *next_y)
 {
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A))
 	{
-		*next_x = game->player->x + sin(game->player->angle) * PLAYER_SPEED;
-		*next_y = game->player->y - cos(game->player->angle) * PLAYER_SPEED;
+		*next_x = game->player->x + sin(game->player->angle) * game->player->player_speed;
+		*next_y = game->player->y - cos(game->player->angle) * game->player->player_speed;
 	}
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_LEFT))
 	{
@@ -61,18 +61,18 @@ void	move(void *param)
 	game = (t_game *)param;
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W))
 	{
-		next_x = game->player->x + cos(game->player->angle) * PLAYER_SPEED;
-		next_y = game->player->y + sin(game->player->angle) * PLAYER_SPEED;
+		next_x = game->player->x + cos(game->player->angle) * game->player->player_speed;
+		next_y = game->player->y + sin(game->player->angle) * game->player->player_speed;
 	}
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S))
 	{
-		next_x = game->player->x - cos(game->player->angle) * PLAYER_SPEED;
-		next_y = game->player->y - sin(game->player->angle) * PLAYER_SPEED;
+		next_x = game->player->x - cos(game->player->angle) * game->player->player_speed;
+		next_y = game->player->y - sin(game->player->angle) * game->player->player_speed;
 	}
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D))
 	{
-		next_x = game->player->x - sin(game->player->angle) * PLAYER_SPEED;
-		next_y = game->player->y + cos(game->player->angle) * PLAYER_SPEED;
+		next_x = game->player->x - sin(game->player->angle) * game->player->player_speed;
+		next_y = game->player->y + cos(game->player->angle) * game->player->player_speed;
 	}
 	handler_move(game, &next_x, &next_y);
 }

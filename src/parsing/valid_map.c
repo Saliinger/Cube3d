@@ -6,7 +6,7 @@
 /*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:09:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/30 19:14:21 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/14 23:00:29 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	valid_map(t_data *data)
 				return (printf("Error: invalid character in map => %c\n",
 						data->map[i][a]), 0);
 			if (data->map[i][a] == ' ')
-				data->map[i][a] = '0';
+				data->map[i][a] = '1';
 			a++;
 		}
 		i++;
