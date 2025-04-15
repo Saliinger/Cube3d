@@ -1,21 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rgb_to_hex.c                                       :+:      :+:    :+:   */
+/*   is_wall.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/28 21:44:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/15 18:36:01 by anoukan          ###   ########.fr       */
+/*   Created: 2025/04/15 18:27:54 by anoukan           #+#    #+#             */
+/*   Updated: 2025/04/15 18:28:14 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/exec.h"
+#include "../../../include/exec.h"
 
-uint32_t	rgb_to_hex(uint32_t red, uint32_t green, uint32_t blue)
+int	is_wall(float x, float y, t_game *game)
 {
-	uint32_t	hex;
+	int	map_x;
+	int	map_y;
 
-	hex = (red << 24) | (green << 16) | (blue << 8) | 0xFF;
-	return (hex);
+	map_x = (int)(x / TILE_SIZE);
+	map_y = (int)(y / TILE_SIZE);
+	if (map_x < 0 || map_x >= game->window->map_width || map_y < 0
+		|| map_y >= game->window->map_height)
+		return (1);
+	return (game->window->map[map_y][map_x] == '1');
 }

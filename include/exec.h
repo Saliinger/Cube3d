@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/14 23:18:36 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:36:13 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ typedef struct s_rayon
 	float			y_y;
 	float			y_x;
 	int				axis;
+	float			top_pixel;
+	float			bottom_pixel;
+	float			wall_height;
 }					t_rayon;
 
 typedef struct s_window
@@ -106,17 +109,17 @@ void				game_loop(void *param);
 void				start_game(t_game *game);
 void				render(t_game *game, int ray);
 mlx_texture_t		*get_texture(t_game *game);
-void				draw_floor_ceiling(t_game *game, int ray, int t_pix,
-						int b_pix);
-void				draw_wall(t_game *game, int ray, double top_pixel,
-						double bottom_pixel, double wall_h);
+void				draw_floor_ceiling(t_game *game, float ray, float t_pix,
+						float b_pix);
+void				draw_wall(t_game *game, int ray);
 void				game_loop(void *param);
 void				move(void *param);
+int					is_wall(float x, float y, t_game *game);
 
 // utils
 int					map_height(char **map);
 int					map_width(char **map);
-uint32_t			rgb_to_hex(int r, int g, int b);
+uint32_t			rgb_to_hex(uint32_t red, uint32_t green, uint32_t blue);
 void				ft_free(t_game *game);
 void				ft_exit(t_game *game, int status, char *str);
 

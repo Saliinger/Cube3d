@@ -6,22 +6,21 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/14 23:48:48 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:23:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-float	inter_y(t_game *game)
+float	inter_y(t_game *game, float angle)
 {
 	int		pixel;
-	float	angle;
 	float	h_x;
 	float	h_y;
 	float	x_step;
 	float	y_step;
 
-	angle = normalize_angle(game->rayon->angle);
+	angle = normalize_angle(angle);
 	y_step = TILE_SIZE;
 	x_step = TILE_SIZE / tan(angle);
 	h_y = floor(game->player->y / TILE_SIZE) * TILE_SIZE;
@@ -41,16 +40,15 @@ float	inter_y(t_game *game)
 				2)));
 }
 
-float	inter_x(t_game *game)
+float	inter_x(t_game *game, float angle)
 {
 	int		pixel;
-	float	angle;
 	float	v_x;
 	float	v_y;
 	float	x_step;
 	float	y_step;
 
-	angle = normalize_angle(game->rayon->angle);
+	angle = normalize_angle(angle);
 	x_step = TILE_SIZE;
 	y_step = TILE_SIZE * tan(angle);
 	v_x = floor(game->player->x / TILE_SIZE) * TILE_SIZE;
@@ -84,8 +82,8 @@ void	raycasting(t_game *game)
 	while (x < WIN_WIDTH)
 	{
 		game->rayon->axis = 0;
-		wall_y = inter_y(game);
-		wall_x = inter_x(game);
+		wall_y = inter_y(game, game->rayon->angle);
+		wall_x = inter_x(game, game->rayon->angle);
 		if (wall_x <= wall_y)
 			game->rayon->wall_distance = wall_x;
 		else

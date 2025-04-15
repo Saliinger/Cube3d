@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:47:49 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 22:54:38 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:33:46 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,17 @@
 
 void	render(t_game *game, int ray)
 {
-	double	top_pixel;
-	double	bottom_pixel;
-	double	wall_height;
-
 	game->rayon->wall_distance *= cos(game->rayon->angle - game->player->angle);
-	wall_height = (TILE_SIZE / game->rayon->wall_distance) * ((WIN_WIDTH / 2)
-			/ tan(game->fov_rad / 2));
-	top_pixel = (WIN_HEIGHT / 2) - (wall_height / 2);
-	bottom_pixel = (WIN_HEIGHT / 2) + (wall_height / 2);
-	if (top_pixel < 0)
-		top_pixel = 0;
-	if (bottom_pixel > WIN_HEIGHT)
-		bottom_pixel = WIN_HEIGHT;
-	draw_floor_ceiling(game, ray, top_pixel, bottom_pixel);
-	draw_wall(game, ray, top_pixel, bottom_pixel, wall_height);
+	game->rayon->wall_height = (TILE_SIZE / game->rayon->wall_distance)
+		* ((WIN_WIDTH / 2) / tan(game->fov_rad / 2));
+	game->rayon->top_pixel = (WIN_HEIGHT / 2) - (game->rayon->wall_height / 2);
+	game->rayon->bottom_pixel = (WIN_HEIGHT / 2) + (game->rayon->wall_height
+			/ 2);
+	if (game->rayon->top_pixel < 0)
+		game->rayon->top_pixel = 0;
+	if (game->rayon->bottom_pixel > WIN_HEIGHT)
+		game->rayon->bottom_pixel = WIN_HEIGHT;
+	draw_floor_ceiling(game, ray, game->rayon->top_pixel,
+		game->rayon->bottom_pixel);
+	draw_wall(game, ray);
 }

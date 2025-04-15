@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:03:44 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 22:52:32 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:32:26 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,7 @@ int	reverse_bytes(int c)
 	return (b);
 }
 
-void	draw_wall(t_game *game, int ray, double top_pixel, double bottom_pixel,
-		double wall_h)
+void	draw_wall(t_game *game, int ray)
 {
 	mlx_texture_t	*texture;
 	uint32_t		*pixels;
@@ -48,16 +47,17 @@ void	draw_wall(t_game *game, int ray, double top_pixel, double bottom_pixel,
 
 	texture = get_texture(game);
 	pixels = (uint32_t *)texture->pixels;
-	factor = (double)texture->height / wall_h;
+	factor = (double)texture->height / game->rayon->wall_height;
 	x_o = get_x_o(texture, game);
-	y_o = (top_pixel - (WIN_HEIGHT / 2) + (wall_h / 2)) * factor;
+	y_o = (game->rayon->top_pixel - (WIN_HEIGHT / 2) + (game->rayon->wall_height
+				/ 2)) * factor;
 	if (y_o < 0)
 		y_o = 0;
-	while (top_pixel < bottom_pixel)
+	while (game->rayon->top_pixel < game->rayon->bottom_pixel)
 	{
-		mlx_put_pixel(game->window->fpv, ray, top_pixel,
+		mlx_put_pixel(game->window->fpv, ray, game->rayon->top_pixel,
 			reverse_bytes(pixels[(int)y_o * texture->width + (int)x_o]));
 		y_o += factor;
-		top_pixel++;
+		game->rayon->top_pixel++;
 	}
 }

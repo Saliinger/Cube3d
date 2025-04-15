@@ -6,13 +6,13 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:48:50 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:15:43 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:33:17 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/exec.h"
 
-void	draw_floor_ceiling(t_game *game, int ray, int t_pix, int b_pix)
+void	draw_floor_ceiling(t_game *game, float ray, float t_pix, float b_pix)
 {
 	int	i;
 	int	floor;
