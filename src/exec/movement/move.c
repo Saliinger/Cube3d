@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 06:34:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/15 18:28:06 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/16 16:22:21 by jalbiser         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,14 @@ static void	up_down(t_game *game, float *next_x, float *next_y)
 {
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_W))
 	{
-		*next_x = game->player->x + cos(game->player->angle) * PLAYER_SPEED;
-		*next_y = game->player->y + sin(game->player->angle) * PLAYER_SPEED;
+		*next_x = game->player->x + cos(game->player->angle) * game->player->player_speed;
+		*next_y = game->player->y + sin(game->player->angle) * game->player->player_speed;
 		update_player(game, *next_x, *next_y);
 	}
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_S))
 	{
-		*next_x = game->player->x - cos(game->player->angle) * PLAYER_SPEED;
-		*next_y = game->player->y - sin(game->player->angle) * PLAYER_SPEED;
+		*next_x = game->player->x - cos(game->player->angle) * game->player->player_speed;
+		*next_y = game->player->y - sin(game->player->angle) * game->player->player_speed;
 		update_player(game, *next_x, *next_y);
 	}
 }
@@ -40,14 +40,14 @@ static void	left_right(t_game *game, float *next_x, float *next_y)
 {
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_D))
 	{
-		*next_x = game->player->x - sin(game->player->angle) * PLAYER_SPEED;
-		*next_y = game->player->y + cos(game->player->angle) * PLAYER_SPEED;
+		*next_x = game->player->x - sin(game->player->angle) * game->player->player_speed;
+		*next_y = game->player->y + cos(game->player->angle) * game->player->player_speed;
 		update_player(game, *next_x, *next_y);
 	}
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_A))
 	{
-		*next_x = game->player->x + sin(game->player->angle) * PLAYER_SPEED;
-		*next_y = game->player->y - cos(game->player->angle) * PLAYER_SPEED;
+		*next_x = game->player->x + sin(game->player->angle) * game->player->player_speed;
+		*next_y = game->player->y - cos(game->player->angle) * game->player->player_speed;
 		update_player(game, *next_x, *next_y);
 	}
 }
