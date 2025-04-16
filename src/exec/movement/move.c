@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/31 06:34:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/16 16:23:52 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:04:04 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ static void	rotate(t_game *game)
 		game->player->angle -= ROTATION_SPEED;
 	if (mlx_is_key_down(game->window->mlx, MLX_KEY_RIGHT))
 		game->player->angle += ROTATION_SPEED;
+	if (game->player->angle > 2 * M_PI)
+		game->player->angle -= 2 * M_PI;
+	else if (game->player->angle < 0)
+		game->player->angle += 2 * M_PI;
 }
 
 void	move(void *param)
