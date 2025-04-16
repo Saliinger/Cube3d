@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:16 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:17:09 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/16 21:23:42 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,8 @@
 
 int	init_ray(t_game *game)
 {
-	t_rayon	*ray;
-
-	ray = (t_rayon *)malloc(sizeof(t_rayon));
-	if (!ray)
+	game->ray = (t_rayon *)malloc(sizeof(t_rayon));
+	if (!game->ray)
 		ft_exit(game, 1, "Error: ray not found");
-	game->rayon = ray;
 	return (0);
 }

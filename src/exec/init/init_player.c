@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:12 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/14 23:20:19 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/16 21:23:16 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,12 @@ static float	init_angle(t_game *game)
 
 int	init_player(t_game *game)
 {
-	t_player	*player;
-
-	player = malloc(sizeof(t_player));
-	if (!player)
+	game->player = malloc(sizeof(t_player));
+	if (!game->player)
 		ft_exit(game, 1, "Error: player not found");
-	player->x = (game->data->player_x * TILE_SIZE) + (TILE_SIZE / 2);
-	player->y = (game->data->player_y * TILE_SIZE) + (TILE_SIZE / 2);
-	player->player_speed = 5;
-	player->angle = init_angle(game);
-	game->player = player;
+	game->player->x = (game->data->player_x * TILE_SIZE) + (TILE_SIZE / 2);
+	game->player->y = (game->data->player_y * TILE_SIZE) + (TILE_SIZE / 2);
+	game->player->player_speed = 5;
+	game->player->angle = init_angle(game);
 	return (0);
 }
