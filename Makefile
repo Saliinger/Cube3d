@@ -111,7 +111,7 @@ ${NAME}:    ${OBJ}
 		${CC} ${CFLAGS} ${OBJ} ${LIBRARY_DIRS} ${LIBRARIES} -o ${NAME}
 		@echo "$(GREEN)$(NAME) created $(RESET)"
 
-mac:        libft ${OBJ}
+mac:      clone_libft clone_mlx libmlx libft ${OBJ}
 		@echo "$(GREEN)Compilation ${CLR_RMV}of ${YELLOW}$(NAME) ${CLR_RMV}..."
 		${CC} ${CFLAGS} ${FRAMEWORKS} ${OBJ} ${LIBRARY_DIRS} ${LIBRARIES} -o ${NAME}
 		@echo "$(GREEN)$(NAME) created $(RESET)"

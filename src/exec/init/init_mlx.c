@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:06 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/16 21:22:37 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 01:47:37 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	init_window(t_game *game)
 	game->window = malloc(sizeof(t_window));
 	if (!game->window)
 		ft_exit(game, 1, "Error: window not found");
-	game->window->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D JALBISER
-			/ ANOUKAN", 1);
+	game->window->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT,
+		 "Cub3D JALBISER / ANOUKAN", 1);
 	if (!game->window->mlx)
 		ft_exit(game, 1, "Error: window not found");
-	game->window->fpv = mlx_new_image(window->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->window->fpv = mlx_new_image(game->window->mlx, WIN_WIDTH, WIN_HEIGHT);
 	if (!game->window->fpv)
 		ft_exit(game, 1, "Error: window not found");
 	game->window->map = game->data->map;
-	game->window->map_width = map_width(window->map);
-	game->window->map_height = map_height(window->map);
+	game->window->map_width = map_width(game->window->map);
+	game->window->map_height = map_height(game->window->map);
 	return (0);
 }
