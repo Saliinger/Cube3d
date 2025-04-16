@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:06 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 15:17:17 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/16 16:25:58 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	init_window(t_game *game)
 	window = malloc(sizeof(t_window));
 	if (!window)
 		ft_exit(game, 1, "Error: window not found");
-	window->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cube3D", 1);
+	window->mlx = mlx_init(WIN_WIDTH, WIN_HEIGHT, "Cub3D JALBISER / ANOUKAN", 1);
 	if (!window->mlx)
 		ft_exit(game, 1, "Error: window not found");
 	window->fpv = mlx_new_image(window->mlx, WIN_WIDTH, WIN_HEIGHT);

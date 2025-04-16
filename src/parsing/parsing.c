@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 15:06:01 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/30 19:15:04 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:55:42 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ t_data	parsing(char **args)
 		return (printf("Error: The file must have the .cub extension\n"),
 			exit(1), result);
 	if (!parser(args[1], &result))
-		return (free_data(&result), exit(1), result);
+		return (printf("Error: map invalid\n"), free_data(&result), exit(1),
+			result);
 	if (!wall_map(&result))
 		return (free_data(&result), exit(1), result);
 	if (!get_position_player(&result))

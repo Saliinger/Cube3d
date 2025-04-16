@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   alloc_map_size.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 14:55:51 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/30 19:17:42 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/16 17:52:22 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,19 @@
 
 static int	allocate_map(t_data *data, int size)
 {
+	int	i;
+
 	if (size == 0)
 		return (0);
 	data->map = malloc(sizeof(char *) * (size + 1));
 	if (!data->map)
 		return (0);
+	i = 0;
+	while (i < size + 1)
+	{
+		data->map[i] = NULL;
+		i++;
+	}
 	return (1);
 }
 
@@ -42,8 +50,8 @@ static int	count_map_lines(int fd)
 
 int	alloc_map_size(char *file, t_data *data)
 {
-	int		fd;
-	int		line_count;
+	int	fd;
+	int	line_count;
 
 	fd = open(file, O_RDONLY);
 	if (fd < 0)
