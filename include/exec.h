@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/15 18:36:13 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 01:51:24 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@
 # include <stdbool.h>
 # include <stdlib.h>
 
-# define FOV 60
+# define FOV 360
 # define WIN_WIDTH 1920
 # define WIN_HEIGHT 1080
 

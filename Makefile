@@ -127,5 +127,6 @@ fclean:     clean
 	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary"
 
 re:         fclean all
+re_mac : 	fclean mac
 
-.PHONY:     all clean fclean re clone_libft libft
+.PHONY:     all clean fclean re clone_libft libft re_mac
