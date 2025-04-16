@@ -2,6 +2,6 @@ MLX42
 libft
 *.o
 a.out
-cube3d
+Cub3D
 .vscode
 .idea

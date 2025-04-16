@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jalbiser <jalbiser@student.42.fr>          +#+  +:+       +#+        */
+/*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 15:25:45 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/01/30 20:02:47 by jalbiser         ###   ########.fr       */
+/*   Updated: 2025/04/16 18:16:23 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,11 @@ int	handle_key_match(char *line, t_key *keys, int keys_i)
 
 static int	cleanup_and_exit(char *line, char *dup_line, int fd)
 {
+	while (line != NULL)
+	{
+		free(line);
+		line = get_next_line(fd);
+	}
 	free(line);
 	free(dup_line);
 	close(fd);
