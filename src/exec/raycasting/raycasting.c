@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/15 18:23:23 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:18:02 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ float	inter_y(t_game *game, float angle)
 	float	y_step;
 
 	angle = normalize_angle(angle);
-	y_step = TILE_SIZE;
-	x_step = TILE_SIZE / tan(angle);
-	h_y = floor(game->player->y / TILE_SIZE) * TILE_SIZE;
+	y_step = 32;
+	x_step = 32 / tan(angle);
+	h_y = floor(game->player->y / 32) * 32;
 	pixel = inter_check(angle, &h_y, &y_step, 1);
 	h_x = game->player->x + (h_y - game->player->y) / tan(angle);
 	if ((unit_circle(angle, 'y') && x_step > 0) || (!unit_circle(angle, 'y')
@@ -49,9 +49,9 @@ float	inter_x(t_game *game, float angle)
 	float	y_step;
 
 	angle = normalize_angle(angle);
-	x_step = TILE_SIZE;
-	y_step = TILE_SIZE * tan(angle);
-	v_x = floor(game->player->x / TILE_SIZE) * TILE_SIZE;
+	x_step = 32;
+	y_step = 32 * tan(angle);
+	v_x = floor(game->player->x / 32) * 32;
 	pixel = inter_check(angle, &v_x, &x_step, 0);
 	v_y = game->player->y + (v_x - game->player->x) * tan(angle);
 	if ((unit_circle(angle, 'x') && y_step < 0) || (!unit_circle(angle, 'x')
@@ -79,7 +79,7 @@ void	raycasting(t_game *game)
 	wall_y = 0;
 	game->rayon->angle = normalize_angle(game->player->angle - (game->fov_rad
 				/ 2));
-	while (x < WIN_WIDTH)
+	while (x < 1920)
 	{
 		game->rayon->axis = 0;
 		wall_y = inter_y(game, game->rayon->angle);
@@ -93,6 +93,6 @@ void	raycasting(t_game *game)
 		}
 		render(game, x);
 		x++;
-		game->rayon->angle += game->fov_rad / WIN_WIDTH;
+		game->rayon->angle += game->fov_rad / 1920;
 	}
 }

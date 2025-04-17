@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:18:22 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/16 16:23:18 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:17:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ void	on_cursor_move(double xpos, double ypos, void *param)
 	sens = (2.00 / 10000);
 	if (!game->cursor)
 		return ;
-	x_travel = xpos - WIN_WIDTH / 2;
+	x_travel = xpos - 1920 / 2;
 	game->player->angle += x_travel * sens;
 	if (game->player->angle > 2 * M_PI)
 		game->player->angle -= 2 * M_PI;
 	else if (game->player->angle < 0)
 		game->player->angle += 2 * M_PI;
-	mlx_set_mouse_pos(game->window->mlx, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	mlx_set_mouse_pos(game->window->mlx, 1920 / 2, 1080 / 2);
 	(void)ypos;
 }
 

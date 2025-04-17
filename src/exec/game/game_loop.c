@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:40:21 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 22:56:34 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:17:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	game_loop(void *param)
 
 	game = (t_game *)param;
 	mlx_delete_image(game->window->mlx, game->window->fpv);
-	game->window->fpv = mlx_new_image(game->window->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->window->fpv = mlx_new_image(game->window->mlx, 1920, 1080);
 	if (!game->window->fpv)
 		ft_exit(game, EXIT_FAILURE, "Error: mlx_new_image failed");
 	raycasting(game);

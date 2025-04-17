@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 16:03:44 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/15 18:32:26 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:18:02 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ double	get_x_o(mlx_texture_t *texture, t_game *game)
 	double	x_o;
 
 	if (game->rayon->axis == 1)
-		x_o = (int)fmodf((game->rayon->x_x * (texture->width / TILE_SIZE)),
+		x_o = (int)fmodf((game->rayon->x_x * (texture->width / 32)),
 				texture->width);
 	else
-		x_o = (int)fmodf((game->rayon->y_y * (texture->width / TILE_SIZE)),
+		x_o = (int)fmodf((game->rayon->y_y * (texture->width / 32)),
 				texture->width);
 	return (x_o);
 }
@@ -49,7 +49,7 @@ void	draw_wall(t_game *game, int ray)
 	pixels = (uint32_t *)texture->pixels;
 	factor = (double)texture->height / game->rayon->wall_height;
 	x_o = get_x_o(texture, game);
-	y_o = (game->rayon->top_pixel - (WIN_HEIGHT / 2) + (game->rayon->wall_height
+	y_o = (game->rayon->top_pixel - (1080 / 2) + (game->rayon->wall_height
 				/ 2)) * factor;
 	if (y_o < 0)
 		y_o = 0;

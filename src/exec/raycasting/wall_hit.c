@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:36 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/10 22:52:17 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:18:02 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	wall_hit(float x, float y, t_game *game)
 
 	if (x < 0 || y < 0)
 		return (0);
-	x_m = floor(x / TILE_SIZE);
-	y_m = floor(y / TILE_SIZE);
+	x_m = floor(x / 32);
+	y_m = floor(y / 32);
 	if (y_m >= game->window->map_height || x_m >= game->window->map_width)
 		return (0);
 	if (game->window->map[y_m] && x_m <= (int)ft_strlen(game->window->map[y_m]))

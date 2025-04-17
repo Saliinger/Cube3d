@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/28 15:48:50 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/15 18:33:17 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:17:50 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	draw_floor_ceiling(t_game *game, float ray, float t_pix, float b_pix)
 	ceiling = rgb_to_hex(game->data->ceiling[0], game->data->ceiling[1],
 			game->data->ceiling[2]);
 	i = b_pix;
-	while (i < WIN_HEIGHT)
+	while (i < 1080)
 		mlx_put_pixel(game->window->fpv, ray, i++, floor);
 	i = 0;
 	while (i < t_pix)
