@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 22:40:59 by jalbiser          #+#    #+#             */
-/*   Updated: 2025/04/17 02:20:23 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:21:36 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@
 # include <math.h>
 # include <stdbool.h>
 # include <stdlib.h>
-
-# define X_AXIS 1
-# define Y_AXIS 0
 
 typedef struct s_texture
 {
