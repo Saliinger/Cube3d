@@ -6,7 +6,7 @@
 /*   By: anoukan <anoukan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/27 20:49:32 by anoukan           #+#    #+#             */
-/*   Updated: 2025/04/17 02:18:02 by anoukan          ###   ########.fr       */
+/*   Updated: 2025/04/17 02:23:21 by anoukan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,11 +84,11 @@ void	raycasting(t_game *game)
 		game->rayon->axis = 0;
 		wall_y = inter_y(game, game->rayon->angle);
 		wall_x = inter_x(game, game->rayon->angle);
-		if (wall_x <= wall_y)
-			game->rayon->wall_distance = wall_x;
+		if (wall_y <= wall_x)
+			game->rayon->wall_distance = wall_y;
 		else
 		{
-			game->rayon->wall_distance = wall_y;
+			game->rayon->wall_distance = wall_x;
 			game->rayon->axis = 1;
 		}
 		render(game, x);
