@@ -123,7 +123,7 @@ clean:
 
 fclean:     clean
 	@$(MAKE) -C ./libft fclean
-	@ ${RM} ${NAME}
+	@ ${RM} -rf ${NAME}  ./MLX42 ./libft
 	@ echo "$(RED)Deleting $(CYAN)$(NAME) $(CLR_RMV)binary"
 
 re:         fclean all
